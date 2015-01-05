@@ -29,7 +29,7 @@ include "loggedin.php";
 				<a href = "project_and_asset_report.php">Project and Asset Report</a><br>
 				<a href = "asset_item_report.php">Asset Item Report</a><br>
 				<a href = "resource_report.php">Resource Report</a><br>
-				<a href = "functions/report.php">Projects Report</a><br>
+				<a href = "projects_report.php">Projects Report</a><br>
 				
 			</div> <!--end mainContent div tag--> 
 
