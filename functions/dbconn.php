@@ -5,7 +5,7 @@ function db_connect() {
     $hostname   = "localhost";
     $user_name  = "root";
     $user_pw    = "";
-    $user_db    = "pm1";
+    $user_db    = "1234";
 
     $conn = mysql_pconnect( $hostname, $user_name, $user_pw, 128 );
     if (!$conn) {
