@@ -58,7 +58,7 @@ if (!empty($_GET["e"])){
 						<td width = "50%" valign="top">
 				<h1>Log In:</h1>
 				<div class = "error"><?php echo $error_message ?></div>
-				<form method='post' action="login.php">
+				<form method='post' action="login_dev.php">
 
 				Username: <input type='text' name='username'><br>
 				Password: <input type='password' name='password'><br>
