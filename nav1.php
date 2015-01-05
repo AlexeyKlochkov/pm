@@ -44,6 +44,5 @@ foreach ($items as $val) {
 }
 $menu .= '
     </ul></div>';
-echo $menu;	
-
+echo $menu;
 ?>
