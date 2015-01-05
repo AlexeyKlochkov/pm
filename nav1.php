@@ -46,4 +46,5 @@ $menu .= '
     </ul><div id="Logout" style="left: 85%;position:absolute;bottom:20%;"><span style="color: white;">'.strtolower($_SESSION["system_username"]).' </span>
     <a href="loggedout.php"><img src="images/logout.ico" alt="Log out"></a></div></div>';
 echo $menu;
+
 ?>
