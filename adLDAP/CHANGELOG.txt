@@ -4,7 +4,7 @@ Written by Scott Barnett, Richard Hyland
 email: scott@wiggumworld.com, adldap@richardhyland.com
 http://adldap.sourceforge.net/
 
-1
+
 CHANGELOG
 -------------------------------------------------------------------------------------------
 
