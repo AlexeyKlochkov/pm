@@ -1,0 +1,4 @@
+update user set user_level = 30 where user_level = 1
+update user set user_level = 10 where user_level = 0
+update user set user_level = 20 where is_project_manager = 1
+
