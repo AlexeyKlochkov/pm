@@ -28,5 +28,5 @@ foreach ($res as $project){
              <td><a href='../bad_files.php?project_id=".$project["project_id"]."'>View</a></td></tr>";
         $i++;}
 }
-//echo "Count:".$i;
+echo "Count:".$i;
 ?>
