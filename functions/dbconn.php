@@ -2,7 +2,6 @@
 
 function db_connect() {
 
-    // defined in config_local.php
     $hostname   = "localhost";
     $user_name  = "root";
     $user_pw    = "";
