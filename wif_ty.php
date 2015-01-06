@@ -47,7 +47,6 @@ if (!empty($_GET["e"])){
 								<?php echo $message ?>
 							
 							</td>
-
 						</tr>
 					</table>
 					<br><br>
