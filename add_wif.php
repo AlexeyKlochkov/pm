@@ -17,11 +17,8 @@ $company_id = 2;
 
 $i=0;
 $desired_delivery_date = convert_datepicker_date($desired_delivery_date);
-
 $new_wif_id = insert_wif($wif_name, $company_id, $requester_name, $requester_email, $wif_type_id, $desired_delivery_date, $wif_description);
-
 $wif_code = "WIF-" . get_wif_type_abbrev($wif_type_id) . "-" . $new_wif_id;
-//print $wif_code;
 $update_success = update_wif_code($new_wif_id, $wif_code);
 $i=0;
 if(count($_FILES['filesToUpload']['name'])) {

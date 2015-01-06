@@ -84,8 +84,8 @@ $target_in_market_date = convert_datepicker_date($target_in_market_date);
 $expiration_date = convert_datepicker_date($expiration_date);
 
 $new_pif_id = insert_pif($project_name, $company_id, $version, $marketing_owner_id, $exec_sponsor_id, $business_unit_id, $product_id, $request_date, $desired_delivery_date, $target_in_market_date, $expiration_date, $budget, $cost_code, $project_description, $uopx_benefit, $uopx_risk,
-    $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs, $segment_quantity_potential_students, $segment_quantity_current_students,
-                            $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $user_id, $orig_pif_id,$background,$audience,$objectives,$core_message,$support_points,1,$required_elem);
+                         $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs, $segment_quantity_potential_students, $segment_quantity_current_students,
+                         $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $user_id, $orig_pif_id,$background,$audience,$objectives,$core_message,$support_points,1,$required_elem);
 
 //insert PIF code
 $business_unit_abbrev = get_business_unit_abbrev($business_unit_id);
@@ -116,7 +116,6 @@ if(empty($orig_pif_id)){
 }
 $update_success = update_pif_code($new_pif_id, $pif_code);
 
-
 //insert PIF assets
 foreach($_POST as $key=>$value)
 {
@@ -124,7 +123,6 @@ foreach($_POST as $key=>$value)
     $variable_value = $value;
     $first_four_characters = substr($variable_name, 0, 4);
     if ($first_four_characters == "pat-"){
-
         $arr_pat = explode("-", $variable_name);
         $pif_asset_type_id = $arr_pat[1];
         $pat_volume = $_POST["patvol-" . $pif_asset_type_id];

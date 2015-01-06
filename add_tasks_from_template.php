@@ -14,16 +14,12 @@ if (!empty($_POST["after_task"])){
 }
 $start_date = $_POST["start_date"];
 $user_id = $_POST["user_id"];
-//print $schedule_id . "-" . $schedule_template_id . "-" . $task_location;
-
 $max_display_num = get_max_display_order_schedule_task($schedule_id);
-
 $arr_schedule_template_tasks = get_schedule_template_tasks($schedule_template_id);
 $count_schedule_template_tasks = 0;
 if (!empty($arr_schedule_template_tasks)){
 	$count_schedule_template_tasks = count($arr_schedule_template_tasks);
 }
-
 
 if ($task_location == "end"){
 	$begin_display_num = $max_display_num + 1;
@@ -38,11 +34,8 @@ if ($task_location == "after_task"){
 	$begin_display_num = $after_task + 1;
 	$move_success = move_schedule_tasks($schedule_id, $begin_display_num, $count_schedule_template_tasks);
 }
-
+$new_schedule_task_id=0;
 $display_order_num = $begin_display_num;
-
-//print $count_schedule_template_tasks;
-
 if (!empty($arr_schedule_template_tasks)){
 	foreach ($arr_schedule_template_tasks as $task_row){
 		//$schedule_template_task_id = $task_row["schedule_template_task_id"];

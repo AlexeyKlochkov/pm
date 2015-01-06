@@ -13,20 +13,14 @@ if (!empty($_GET["e"])){
 	}
 }
 
-
 if (!empty($_GET["s"])){
 	$pif_approval_status_id = $_GET["s"];
 }else{
 	$pif_approval_status_id = 1;
 }
 
-//$quarter_select = get_quarter_select($campaign_quarter);
-
-
 $arr_pifs = get_pifs($company_id, $pif_approval_status_id);
-//print_r($arr_campaigns );
 $pif_table = "<table class = \"stats_table\" width = \"100%\"><tr><th>Project Brief Code</th><th>Project Brief Project Name</th><th>Version</th><th>Created</th><th>Submitted By</th><th>Status</th><th>Planned</th><th>Unplanned</th><th>Compliance</th>";
-
 
 if (!empty($arr_pifs)){
 	foreach ($arr_pifs as $pif_row){
@@ -39,11 +33,9 @@ if (!empty($arr_pifs)){
 			$project_code = "n/a";
 			$orig_pif_id = $pif_row["orig_pif_id"];
 			$aop_activity_type_id = $pif_row["aop_activity_type_id"];
-
 			$planned_checked = "";
 			$unplanned_checked = "";
 			$compliance_checked = "";
-			
 			if ($aop_activity_type_id == 1){
 				$planned_checked = "checked";
 			}
@@ -57,13 +49,10 @@ if (!empty($arr_pifs)){
 			}
 			
 			$project_id = $pif_row["project_id"];
-
 			$submitted_by = $pif_row["requester_first_name"] . " " . $pif_row["requester_last_name"];
 			//$campaign_code = $business_unit_abbrev . "-" . $campaign_quarter . substr($campaign_year,2,3);
 			$pif_table .= "<tr><td><a href = \"view_pif.php?p=" . $pif_id . "\" target = \"_blank\">" . $pif_code . "</a></td>";
-			
 			$pif_table .= "<td>" . $pif_project_name . "</td>";
-			//$pif_table .= "<td>" . $campaign_quarter . "</td>";
 			$pif_table .= "<td>" . $version . "</td>";
 			$pif_table .= "<td>" . convertMySQLdatetime_to_PHP($created_date) . "</td>";
 			$pif_table .= "<td>" . $submitted_by . "</td>";
@@ -91,7 +80,6 @@ if (!empty($arr_pifs)){
 				$history_section .= "<tr class = \"p-" . $pif_id . "-history\" style=\"display: none;\"><td>&nbsp;</td><td>no history logged</td></tr>";
 			}
 			//$pif_table .= $history_section ;
-			
 	}
 }else{
 	$pif_table .= "<tr><td colspan = \"7\">No results for this query</td></tr>";
@@ -161,10 +149,8 @@ $pif_status_select = get_pif_status_select($company_id, $pif_approval_status_id)
 		</div>
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

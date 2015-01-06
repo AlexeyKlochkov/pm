@@ -24,7 +24,6 @@ $thursday = Date("m/d/Y", strtotime("$monday -4 Day"));
 $friday = Date("m/d/Y", strtotime("$monday -3 Day"));
 $thursday = Date("m/d/Y", strtotime("$friday -1 Day"));
 $prev_friday = Date("m/d/Y", strtotime("$friday -1 Week"));
-
 $date_range_message = "";
 $current_checked = "";
 $choose_checked = "";

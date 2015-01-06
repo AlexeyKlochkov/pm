@@ -14,9 +14,7 @@ if($active == 2){
 
 $max_display_order =get_max_status($company_id, $active);
 $new_display_order = $max_display_order + 1;
-
 $active_success = activate_status($status_id, $active, $new_display_order);
-
 $move_status_success = move_project_statuses($company_id, $display_order, $old_active);
 
 if ($active_success == 1){

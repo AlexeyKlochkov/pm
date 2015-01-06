@@ -10,16 +10,14 @@ include "loggedin.php";
 <body>
 <div id = "page">
 	<div id = "main">
-			<div id = "logo">
-				<img src = "logo.png">
-			</div>
-
-		<?php 
-		include "nav1.php";
-		?> 
-		<!--container div tag--> 
-		<div id="container"> 
-			
+		<div id = "logo">
+			<img src = "logo.png">
+		</div>
+		<?php
+			include "nav1.php";
+		?>
+		<!--container div tag-->
+		<div id="container">
 			<div id="mainContent"> <!--mainContent div tag--> 
 				<h1>Admin Tools</h1>
 				<br>
@@ -31,13 +29,13 @@ include "loggedin.php";
 				<a href = "edit_asset_type_template.php">Asset Type Template - Edit</a><br>
 				<a href = "new_audience.php">Audiences</a><br>
 				<a href = "new_business_unit.php">Business Units</a><br>
-<?php 
-if ($_SESSION["user_level"] > 30){
-?>
+				<?php
+					if ($_SESSION["user_level"] > 30){
+				?>
 				<a href = "change_project_code.php">Change Project Code</a><br>
-<?php 
-}
-?>
+				<?php
+					}
+				?>
 				<a href = "image.php">Images</a><br>
 				<a href = "model.php">Models</a><br>
 				<a href = "new_phase.php">Phases</a><br>
@@ -52,7 +50,7 @@ if ($_SESSION["user_level"] > 30){
 				<br>
 				<b>Project Intake</b><br>
 				<a href = "new_aop.php">New Project Brief (AOP)</a><br>
-               		 	<a href = "new_up.php">New Project Brief (unplanned activity)</a><br>
+				<a href = "new_up.php">New Project Brief (unplanned activity)</a><br>
 				<a href = "pif_list.php">Review Open Project Briefs</a><br>
 				<a href = "pif_assign_aop.php">Assign AOP to Project Briefs</a><br>
 				<a href = "pif_count_report.php">Project Brief Count Report</a><br>
@@ -61,19 +59,12 @@ if ($_SESSION["user_level"] > 30){
 				<a href = "new_wif.php">New WIF</a><br>
 				<a href = "wif_list.php">WIF List</a><br>
 				<a href = "new_wif_type.php">WIF Types</a><br>
-				
-				
-				
-				
-			</div> <!--end mainContent div tag--> 
-
+			</div> <!--end mainContent div tag-->
 		</div>
 		<?php 
-		include "footer.php";
-		?> 
-
+			include "footer.php";
+		?>
 	</div>
-
 </div>
 </body>
 </html>

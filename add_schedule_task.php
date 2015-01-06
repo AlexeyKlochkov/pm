@@ -15,18 +15,15 @@ $progress = $_POST["progress"];
 $predecessor = $_POST["predecessor"];
 $assignee1 = $_POST["assignee1"];
 $assignee2 = $_POST["assignee2"];
-
 $max_display_num = get_max_display_order_schedule_task($schedule_id);
 
 //$display_order = $max_display_order + 1;
 
 $total_days = get_total_days_minus_weekends($start_date, $end_date);
-
 $daily_percentage = get_daily_percentage($total_days, $hours, $minutes);
 
 //done with calculations, convert these for MySQL
 $start_date = convert_datepicker_date($start_date);
-
 $end_date = convert_datepicker_date($end_date);
 
 if(empty($hours)){$hours = "0";}
@@ -37,7 +34,7 @@ $estimated_hours = $hours . ":" . $minutes . ":00";
 //figure out where the task is going.
 $num_tasks = $max_display_num;
 $task_location = $_POST["task_location"];
-$after_task = "";
+$after_task = 0;
 if (!empty($_POST["after_task"])){
 	$after_task = $_POST["after_task"];
 }

@@ -16,7 +16,4 @@ if (!empty($_POST["page"])){
 }
 
 $add_success = add_project_person($project_id, $user_id);
-
-//$location = "Location: manage_project.php?p=" . $project_id . "&showusers=1";
-
 header($location) ;

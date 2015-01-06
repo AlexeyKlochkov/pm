@@ -17,8 +17,6 @@ $task_id = $_POST["task_id"];
 $phase_id = $_POST["phase_id"];
 $project_manager_id = $_POST["project_manager_id"];
 $archived = $_POST["archived"];
-
-
 $redirect_page = $_POST["page"] . ".php";
 $day_worked = convert_datepicker_date($day);
 if (empty($hours)){

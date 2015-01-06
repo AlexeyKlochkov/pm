@@ -9,13 +9,9 @@ $orig_initials = $_POST["orig_initials"];
 $project_id = $_POST["project_id"];
 $employee_ids_in_view = $_POST["employee_ids_in_view"];
 $arr_employee_ids_in_view = explode(",", $employee_ids_in_view);
-
 $arr_current_initials = explode(", ", $orig_initials);
 $arr_current_assigned_employee_ids = array();
 $is_approval = 0;
-//print_r($arr_current_initials);
-//print $employee_ids_in_view;
-
 $arr_current_employees_assigned = get_assignees_by_stid($schedule_task_id);
 if (!empty($arr_current_employees_assigned)){
 	foreach ($arr_current_employees_assigned as $current_employee){
@@ -86,8 +82,6 @@ if (!empty($arr_added_users)){
 	}
 }
 
-
-
 //if people are already in the list, but are not in the added_users list, delete them.
 //if people are already assigned to this task, and they are part of the group that's currently being looked at (list of checkboxes), and they are not checked, they need to be deleted.
 //print_r ($arr_current_assigned_employee_ids);
@@ -102,9 +96,6 @@ if (!empty($arr_current_assigned_employee_ids)){
 		}
 	}
 }
-
-
-
 
 ?>
 

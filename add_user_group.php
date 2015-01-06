@@ -9,8 +9,6 @@ $user_group_name = $_POST["user_group_name"];
 
 $new_user_group_id = insert_user_group($company_id, $user_group_name, $created_by);
 
-//print $audit_id;
-
 if ($new_user_group_id <> 0){
 	$location = "Location: new_user_group.php?e=2";
 }else{
@@ -18,6 +16,3 @@ if ($new_user_group_id <> 0){
 }
 
 header($location) ;
-
-
-?>

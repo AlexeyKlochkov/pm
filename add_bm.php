@@ -33,7 +33,6 @@ $project_description=$_POST["wif_description"];
 $uopx_benefit ="";
 $uopx_risk="";
 $project_objective="";
-
 $segment_quantity_potential_students = 0;
 $segment_quantity_current_students = 0;
 $segment_quantity_employee = 0;

@@ -41,7 +41,6 @@ if (!empty($arr_pif)){
 	$pif_approval_status_id = $arr_pif[0]["pif_approval_status_id"];
 	$requester_id = $arr_pif[0]["requester_id"];
 	$requester = $arr_pif[0]["requester_first_name"] . " " . $arr_pif[0]["requester_last_name"];
-	
 	$segment_quantity_potential_students = $arr_pif[0]["segment_quantity_potential_students"];
 	$segment_quantity_current_students = $arr_pif[0]["segment_quantity_current_students"];
 	$segment_quantity_employee = $arr_pif[0]["segment_quantity_employee"];
@@ -49,7 +48,6 @@ if (!empty($arr_pif)){
 	$segment_quantity_alumni = $arr_pif[0]["segment_quantity_alumni"];
 	$aop_activity_type_id = $arr_pif[0]["aop_activity_type_id"];
 	$aop_activity_type_name = $arr_pif[0]["aop_activity_type_name"];
-	
 }
 $total_segment_reach = 0;
 

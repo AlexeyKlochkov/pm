@@ -29,5 +29,3 @@ if(empty($arr_user_info)){
 
 print "<br>" . $location;
 header('Location: ' . $location);
-
-?>

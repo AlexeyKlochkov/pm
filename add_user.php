@@ -33,5 +33,3 @@ if($add_success == 1){
 }
 
 header($location) ;
-
-?>

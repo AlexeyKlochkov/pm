@@ -3,7 +3,6 @@ include "loggedin.php";
 include "functions/dbconn.php";
 include "functions/queries.php";
 
-
 $schedule_template_id = $_POST["schedule_template_id"];
 $task_id = $_POST["task_id"];
 $manager_role_id = $_POST["manager_role_id"];
@@ -14,7 +13,6 @@ $total_hours = $_POST["hours"];
 $total_minutes = $_POST["minutes"];
 $predecessor = $_POST["predecessor"];
 $total_time = $total_hours . ":" . $total_minutes . ":00";
-
 $error = 0;
 //figure out the phase order.
 $max_display_order = get_max_schedule_template_task_display_order($schedule_template_id);

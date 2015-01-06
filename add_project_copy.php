@@ -133,7 +133,6 @@ if (!empty($arr_new_and_old_schedules)){
 				$display_order = $schedule_task_row["display_order"];
 				$daily_hours = $schedule_task_row["daily_hours"];
 				$predecessor = $schedule_task_row["predecessor"];
-
 				$new_schedule_task_id =  insert_schedule_task($new_schedule_id, $task_id, $start_date, $end_date, $estimated_hours, $task_manager_id, $progress, $display_order, $daily_hours, $user_id, $predecessor);
 				
 				//add schedule_task_assgnees now that you have new and old schedule_task_ids

@@ -24,15 +24,12 @@ $user_id = $_POST["user_id"];
 $business_unit_owner_id = $_POST["business_unit_owner_id"];
 $project_requester = $_POST["project_requester"];
 $aop_activity_type_id = $_POST["aop_activity_type_id"];
-
 $arr_business_code = get_business_code_by_campaign($campaign_id);
 $business_code = $arr_business_code[0]["business_unit_abbrev"];
 $error = 0;
 $start_date = convert_datepicker_date($start_date);
 $end_date = convert_datepicker_date($end_date);
-
 $new_project_id  = insert_project($campaign_id, $project_name, $product_id, $audience_id, $project_manager_id, $project_summary, $project_status_id, $start_date, $end_date, $cost_center, $media_budget, $production_budget, $approved_aop_activity, $upload_to_aps, $user_id, $business_unit_owner_id, $project_requester, $compliance_project, $aop_activity_type_id, $acd_id );
-
 $project_code = $business_code . "-" . $new_project_id;
 $insert_project_success = insert_project_code($new_project_id, $project_code);
 

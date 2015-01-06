@@ -5,7 +5,6 @@ include "functions/queries.php";
 
 $company_id = $_POST["company_id"];
 $schedule_template_name = $_POST["schedule_template_name"];
-
 $error = 0;
 //figure out the phase order.
 $new_schedule_template_id  = insert_schedule_template($company_id, $schedule_template_name);

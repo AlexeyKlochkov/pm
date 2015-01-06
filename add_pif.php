@@ -27,7 +27,6 @@ $segment_reach_employee = 0;
 $segment_reach_faculty = 0;
 $segment_reach_alumni = 0;
 $segment_reach_wfs = 0;
-
 $segment_quantity_potential_students = $_POST["segment_quantity_potential_students"];
 $segment_quantity_potential_students = str_replace(",", "", $segment_quantity_potential_students);
 $segment_quantity_current_students = $_POST["segment_quantity_current_students"];

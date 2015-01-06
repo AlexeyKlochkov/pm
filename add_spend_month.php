@@ -16,9 +16,6 @@ $spend_date = $spend_year . "-" . $spend_month . "-1";
 
 $insert_spend_success = insert_spend_month_percentage($spend_id, $spend_date, $percent_complete);
 
-
-
-
 if ($insert_spend_success <> 0){
 	$location = "Location: edit_spend.php?e=2&p=" . $project_id . "&s=" . $spend_id;
 }else{
