@@ -34,11 +34,9 @@ if (!empty($arr_prod_status_report)){
 			$pm_last_name = $prod_status_row["pm_last_name"];
 			$end_date = $prod_status_row["end_date"];
 			$project_status_name = $prod_status_row["project_status_name"];
-		
 			$prod_status_table .= "<tr>";
 			$prod_status_table .= "<td>" . $project_code . "</td>";
 			$prod_status_table .= "<td><a href = \"manage_project.php?p=" . $project_id . "\" target=\"_blank\">" . $project_name . "</a></td>";
-
 			$prod_status_table .= "<td>" . $product_name . "</td>";
 			$prod_status_table .= "<td>" . $project_status_name . "</td>";
 			$prod_status_table .= "<td align = \"right\">" .  $end_date. "</td>";
@@ -68,36 +66,30 @@ $prod_status_table .= "</table>";
 <body>
 <div id = "page">
 	<div id = "main">
-			<div id = "logo">
-				<img src = "logo.png">
-			</div>
-
+		<div id = "logo">
+			<img src = "logo.png">
+		</div>
 		<?php 
 		include "nav1.php";
 		?> 
 		<!--container div tag--> 
-		<div id="container"> 
-			
+		<div id="container">
 			<div id="mainContent"> <!--mainContent div tag--> 
 				<h1>Production Status Report <?php echo date("m-d-Y") ?></h1>
 				<form action = "export_production_status_report_csv.php" method="POST">
-				<input type = "submit" value = "export">
+					<input type = "submit" value = "export">
 				</form>
-
 				<?php echo $prod_status_table ?>
 				<br>
 				<form action = "export_production_status_report_csv.php" method="POST">
-				<input type = "submit" value = "export">
+					<input type = "submit" value = "export">
 				</form>
-			</div> <!--end mainContent div tag--> 
-
+			</div> <!--end mainContent div tag-->
 		</div>
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

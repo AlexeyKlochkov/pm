@@ -43,15 +43,11 @@ if (!empty($_GET["project_manager_id"])){
 	$project_manager_id = $_GET["project_manager_id"];
 }else{
 	if (empty($_GET["run"])){
-
 		if ($_SESSION["is_project_manager"] ==1){
 			$project_manager_id = $_SESSION["user_id"];
 		}
-
 	}
-
 }
-
 
 $arr_projects = get_projects_query($company_id, $project_id, $campaign_id, $product_id, $audience_id, $project_status_id, $project_manager_id, $active);
 
@@ -72,7 +68,6 @@ if (!empty($arr_projects)){
 			$project_table .= "<td>" . $project_code . "</td>";
 			$project_table .= "<td>" . $project_name . "</td>";
 			$project_table .= "<td>" . $campaign_code . "</td>";
-			
 			$project_table .= "<td>" . $product_name . "</td>";
 			//$project_table .= "<td>" . $audience_name . "</td>";
 			$project_table .= "<td>" . $project_status . "</td>";
@@ -168,26 +163,21 @@ $archive_select .= "</select>\n";
 				<?php echo $project_table  ?>
 				<br><br>
 				<form action = "export_projects.php" method="POST">
-				<input type = "hidden" name = "active" value = "<?php echo $active ?>">
-				<input type = "hidden" name = "project_id" value = "<?php echo $selected_project_id ?>">
-				<input type = "hidden" name = "campaign_id" value = "<?php echo $campaign_id ?>">
-				<input type = "hidden" name = "product_id" value = "<?php echo $product_id ?>">
-				<input type = "hidden" name = "audience_id" value = "<?php echo $audience_id ?>">
-				<input type = "hidden" name = "project_status_id" value = "<?php echo $project_status_id ?>">
-				<input type = "hidden" name = "project_manager_id" value = "<?php echo $project_manager_id ?>">
-				
-				<input type = "submit" value = "Export CSV File">
-
+					<input type = "hidden" name = "active" value = "<?php echo $active ?>">
+					<input type = "hidden" name = "project_id" value = "<?php echo $selected_project_id ?>">
+					<input type = "hidden" name = "campaign_id" value = "<?php echo $campaign_id ?>">
+					<input type = "hidden" name = "product_id" value = "<?php echo $product_id ?>">
+					<input type = "hidden" name = "audience_id" value = "<?php echo $audience_id ?>">
+					<input type = "hidden" name = "project_status_id" value = "<?php echo $project_status_id ?>">
+					<input type = "hidden" name = "project_manager_id" value = "<?php echo $project_manager_id ?>">
+					<input type = "submit" value = "Export CSV File">
 				</form>
-			</div> <!--end mainContent div tag--> 
-
+			</div> <!--end mainContent div tag-->
 		</div>
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

@@ -52,7 +52,6 @@ if(empty($_GET["ascdesc"])){
 	$ascdesc_new = "asc";
 }
 
-//print_r($arr_campaigns );
 $pif_table  = "<form action = \"update_pif_rank.php\" method = \"POST\"><table class = \"stats_table\" width = \"100%\"><tr>";
 if($pif_approval_status_id == 6){
 	$pif_table .= "<th><a href = \"pif_list.php?s=" . $pif_approval_status_id . "&sb=p.pif_rank&ascdesc=asc\">Rank</a></th>";
@@ -84,8 +83,7 @@ if (!empty($arr_pifs)){
 			$created_date = $pif_row["created_date"];
 			$project_code = "n/a";
 			$orig_pif_id = $pif_row["orig_pif_id"];
-             $pif_rank = $pif_row["pif_rank"];
-			
+			$pif_rank = $pif_row["pif_rank"];
 			$marketing_owner_last_name = $pif_row["marketing_owner_last_name"];
 			$aop_activity_type_name = $pif_row["aop_activity_type_name"];
 			$project_id = $pif_row["project_id"];
@@ -96,7 +94,6 @@ if (!empty($arr_pifs)){
 			
 			$submitted_by = $pif_row["requester_first_name"] . " " . $pif_row["requester_last_name"];
 			//$campaign_code = $business_unit_abbrev . "-" . $campaign_quarter . substr($campaign_year,2,3);
-
 			$pif_table .= "<tr>";
 			if($pif_approval_status_id == 6){
 				$pif_up_arrow = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -162,7 +159,6 @@ if($pif_approval_status_id == 6){
 	$pif_table .= "<tr><td align=\"right\"><input type = \"submit\" value = \"set rank\"></td><td colspan = \"12\">&nbsp<input type = \"hidden\" name = \"ascdesc\" value = \"" . $ascdesc . "\"><input type = \"hidden\" name = \"sortby\" value = \"" . $sortby . "\"></td>";
 }
 $pif_table .= "</table></form>";
-
 $pif_status_select = get_pif_status_select($company_id, $pif_approval_status_id);
 
 //print $pif_approval_status_id;

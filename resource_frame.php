@@ -4,7 +4,6 @@ include "functions/dbconn.php";
 include "functions/queries.php";
 include "functions/functions.php";
 
-
 $error_message = "";
 if (!empty($_GET["e"])){
 	$error_num = $_GET["e"];

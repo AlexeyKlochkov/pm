@@ -25,7 +25,6 @@ $month_name = get_month_abbrev($current_month);
 $start_month_year = $current_year . "-" . $current_month . "-01";
 $end_month_year = $start_month_year;
 
-
 $campaign_id = "";
 if (!empty($_GET["campaign_id"])){
 	$campaign_id = $_GET["campaign_id"];
@@ -33,12 +32,10 @@ if (!empty($_GET["campaign_id"])){
 
 if (!empty($_GET["start_month"])){
 	$start_month_year = $_GET["start_month"];
-	//print_r($arr_month_year);
 }
 
 if (!empty($_GET["end_month"])){
 	$end_month_year = $_GET["end_month"];
-	//print_r($arr_month_year);
 }
 
 
@@ -52,7 +49,6 @@ $arr_start_month = explode("-", $start_month_year);
 $start_month_abbrev = get_month_abbrev($arr_start_month[1]);
 $start_year = $arr_start_month[0];
 $start_month_year_title = $start_month_abbrev . "-" . $start_year;
-
 $arr_end_month = explode("-", $end_month_year);
 $end_month_abbrev = get_month_abbrev($arr_end_month[1]);
 $end_year = $arr_end_month[0];
@@ -70,7 +66,6 @@ $end_month_for_query = date("Y-m-d", strtotime("+1 month", $end_month_year_time)
 //print $end_month_for_query;
 
 $arr_aop_counts_by_month = get_project_aop_counts_by_month($company_id, $start_month_year , $end_month_for_query);
-
 $num_cancelled_projects = get_number_of_cancelled_proejcts($company_id, $start_month_year , $end_month_for_query);
 
 $project_total = 0;
@@ -107,7 +102,6 @@ if (!empty($arr_aop_counts_by_month)){
 }
 
 $aop_table .= "</table>";
-
 $arr_projects_by_month = get_project_counts_by_month($company_id, $start_month_year , $end_month_for_query);
 $projects_by_month_table = "<br><table class = \"stats_table\" width = \"30%\"><tr><th>Month</th><th>Project Count</th>";
 if (!empty($arr_projects_by_month)){
@@ -162,22 +156,18 @@ $spend_end_month_select = get_spend_month_select2($company_id, $end_month_year, 
 <body>
 <div id = "page">
 	<div id = "main">
-			<div id = "logo">
-				<img src = "logo.png">
-			</div>
-
+		<div id = "logo">
+			<img src = "logo.png">
+		</div>
 		<?php 
 		include "nav1.php";
 		?> 
 		<!--container div tag--> 
-		<div id="container"> 
-			
-			<div id="mainContent"> <!--mainContent div tag--> 
-				
-
+		<div id="container">
+			<div id="mainContent"> <!--mainContent div tag-->
 				<table class = "small_link" width = "40%">
-					<tr><form id = "sow_report" action = "project_and_asset_report.php" method = "GET">
-
+					<tr>
+						<form id = "sow_report" action = "project_and_asset_report.php" method = "GET">
 						<td>&nbsp;</td>
 						<td>From:<br><?php echo $spend_start_month_select ?></td>
 						<td>To:<br><?php echo $spend_end_month_select ?></td>
@@ -209,10 +199,8 @@ $spend_end_month_select = get_spend_month_select2($company_id, $end_month_year, 
 		</div>
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

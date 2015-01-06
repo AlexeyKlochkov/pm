@@ -41,7 +41,6 @@ foreach ($projects as $project) {
     $asset_num = get_assets_count($project["project_id"]);
     $arr_project = get_project_info($project["project_id"]);
     if (!empty($arr_project)) {
-
             $arr_current_variables = array($arr_project[0]["project_id"], $arr_project[0]["project_code"], $arr_project[0]["business_unit_name"], $arr_project[0]["project_name"], $arr_project[0]["project_requester"], $project["start_date"], $project["end_date"], $arr_project[0]["project_status_name"], $arr_project[0]["aop_activity_type_name"], $asset_num[0]["count"]);
             $prod_status_table .= "<tr>";
             $prod_status_table .= "<td>" . $arr_project[0]["project_id"] . "</td>";
@@ -55,11 +54,9 @@ foreach ($projects as $project) {
             $prod_status_table .= "<td>" . $arr_project[0]["aop_activity_type_name"] . "</td>";
             $prod_status_table .= "<td>" . $asset_num[0]["count"] . "</td>";
             $prod_status_table .= "</tr>";
-
     }
 }
 $prod_status_table .= "</table>";
-
 ?>
 <html>
 <head>
@@ -92,7 +89,6 @@ $prod_status_table .= "</table>";
         ?>
         <!--container div tag-->
         <div id="container">
-
             <div id="mainContent"> <!--mainContent div tag-->
                 <h1>Projects Report</h1>
                 <form action = 'functions/report.php?date=<?php echo $projectEndDate;?>' method="POST">
@@ -101,14 +97,11 @@ $prod_status_table .= "</table>";
                 Start Date:<br><input type = "text" name = "date" id="date" class="datepicker" size = "14" value = "<?php echo $projectEndDate ?>"><br>
                 <?php echo $prod_status_table ?>
             </div> <!--end mainContent div tag-->
-
         </div>
         <?php
         include "footer.php";
         ?>
-
     </div>
-
 </div>
 </body>
 </html>
