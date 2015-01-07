@@ -17,5 +17,3 @@ $location = "Location: manage_project.php?p=" . $project_id . "&showassets=1#ass
 
 
 header($location) ;
-
-?>

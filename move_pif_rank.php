@@ -30,7 +30,5 @@ if ($direction == "up"){
 }
 
 $location = "Location: pif_list.php?s=6&sb=p.pif_rank&ascdesc=asc";
-//print $company_id;
-header($location) ;
 
-?>
+header($location) ;

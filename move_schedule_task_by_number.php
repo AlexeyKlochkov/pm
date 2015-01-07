@@ -7,11 +7,6 @@ $schedule_id = $_POST["schedule_id"];
 $schedule_task_id = $_POST["schedule_task_id"];
 $move_after =  $_POST["after_task"];
 $orig_display_order =  $_POST["orig_display_order"];
-//$swap1 = $_GET["s1"];
-//$swap2 = $_GET["s2"];
-
-//print $schedule_id . "--" . $schedule_task_id . "--" . $move_after . "--" . $orig_display_order;
-
 $move_stuff = 1;
 
 //do nothing if they are the same
@@ -42,11 +37,7 @@ if ($move_stuff == 1){
 	//3. set everything greater than the orig_display_order minus 1
 		$update_success3 = move_schedule_tasks($schedule_id, ($orig_display_order+1), -1);
 	}
-	
-
 }
 $location = "Location: manage_tasks.php?s=" . $schedule_id;
 
 header($location) ;
-
-?>

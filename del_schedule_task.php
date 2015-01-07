@@ -17,7 +17,4 @@ $update_success = move_schedule_tasks($schedule_id, $display_order, -1);
 
 $location = "Location: manage_tasks.php?e=5&s=" . $schedule_id;
 
-
 header($location) ;
-
-?>

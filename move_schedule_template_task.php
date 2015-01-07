@@ -18,5 +18,3 @@ $update3 = update_schedule_template_tasks_order($schedule_template_id, 0, $swap2
 $location = "Location: edit_schedule_template.php?stid=" . $schedule_template_id;
 
 header($location) ;
-
-?>

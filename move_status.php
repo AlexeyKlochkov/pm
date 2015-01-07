@@ -18,5 +18,3 @@ $update3 = update_status_order($company_id, 0, $swap2);
 $location = "Location: new_status.php";
 //print $company_id;
 header($location) ;
-
-?>

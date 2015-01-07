@@ -16,18 +16,3 @@ if($object_type == "attaid"){
 if($object_type == "attgid"){
 	$update_success = update_asset_type_template_garnish_position($current_id, $x_offset, $y_offset);
 }
-
-
-//print $new_asset_id;
-
-//if ($update_success <> 0){
-	
-//	$location = "Location: manage_tasks.php?e=2&s=" . $schedule_id;
-//}else{
-//	$location = "Location: manage_tasks.php?e=1&s=" . $schedule_id;
-//}
-
-//header($location) ;
-
-
-?>

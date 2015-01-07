@@ -5,7 +5,6 @@ $company_id =$_SESSION["company_id"];
 $arr_pif = get_pif_info($pif_id);
 if (!empty($arr_pif)){
 	$pif_code = $arr_pif[0]["pif_code"];
-	$version = $arr_pif[0]["version"];
 	$request_date = convert_mysql_to_datepicker($arr_pif[0]["request_date"]);
 	$pif_project_name = $arr_pif[0]["pif_project_name"];
 	$desired_delivery_date = convert_mysql_to_datepicker($arr_pif[0]["desired_delivery_date"]);
@@ -23,23 +22,17 @@ if (!empty($arr_pif)){
 	$uopx_benefit = $arr_pif[0]["uopx_benefit"];
 	$uopx_risk = $arr_pif[0]["uopx_risk"];
 	$project_objective = $arr_pif[0]["project_objective"];
-	$estimated_total_reach = $arr_pif[0]["estimated_total_reach"];
 	$segment_reach_potential_students = $arr_pif[0]["segment_reach_potential_students"];
 	$segment_reach_current_students = $arr_pif[0]["segment_reach_current_students"];
 	$segment_reach_employee = $arr_pif[0]["segment_reach_employee"];
 	$segment_reach_faculty = $arr_pif[0]["segment_reach_faculty"];
 	$segment_reach_alumni = $arr_pif[0]["segment_reach_alumni"];
-	$segment_reach_wfs = $arr_pif[0]["segment_reach_wfs"];
-	$created_date = $arr_pif[0]["created_date"];
 	$exec_sponsor = $arr_pif[0]["exec_sponsor_first_name"] . " " . $arr_pif[0]["exec_sponsor_last_name"];
-	$marketing_owner_id = $arr_pif[0]["marketing_owner_id"];
 	$marketing_owner = $arr_pif[0]["marketing_owner_first_name"] . " " . $arr_pif[0]["marketing_owner_last_name"];
 	$line_of_business = $arr_pif[0]["business_unit_name"];
 	$line_of_business_id = $arr_pif[0]["business_unit_id"];
 	$product_name = $arr_pif[0]["product_name"];
-	$product_id = $arr_pif[0]["product_id"];
 	$pif_approval_status_id = $arr_pif[0]["pif_approval_status_id"];
-	$requester_id = $arr_pif[0]["requester_id"];
 	$requester = $arr_pif[0]["requester_first_name"] . " " . $arr_pif[0]["requester_last_name"];
 	$segment_quantity_potential_students = $arr_pif[0]["segment_quantity_potential_students"];
 	$segment_quantity_current_students = $arr_pif[0]["segment_quantity_current_students"];
@@ -138,7 +131,7 @@ $email_html .= "
 <title>Project Brief Approval</title>
 <style>
 #mainContent {
-    margin: 0 0 0 0px; 
+    margin: 0 0 0 0;
     padding: 0 20px 20px 20px; 
 	z-index: 0; 
 	font-family: 'Arial', sans-serif !important;
@@ -183,7 +176,7 @@ $email_html .= "
 	font-weight: bold; 
 	font-size: 13px;
 	font-family: 'Arial', sans-serif !important;
-	margin: 0px 0px 0px 0px;
+	margin: 0 0 0 0;
 }
 .pif_code { 
 	font-weight: bold; 

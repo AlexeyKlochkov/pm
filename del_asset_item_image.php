@@ -18,5 +18,3 @@ if ($del_success == 1){
 $location = "Location: asset_item_specsheet.php?p=". $project_id . "&aiid=" . $asset_item_id . "&atid=" . $asset_type_id;
 
 header($location) ;
-
-?>

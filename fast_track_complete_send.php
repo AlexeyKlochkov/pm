@@ -29,5 +29,3 @@ if ($min_incomplete_schedule_task_id == 0){
 $location = "Location: manage_project.php?p=" . $project_id . "&show_schedules=1#schedules";
 
 header($location) ;
-
-?>

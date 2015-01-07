@@ -96,9 +96,3 @@ if (!empty($arr_asset_item_report)){
 download_send_headers("Asset_Item_Report" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_asset_item);
 die();
-
-
-
-
-
-?>

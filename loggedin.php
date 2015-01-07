@@ -17,5 +17,3 @@ if (empty($_SESSION["user_id"])){
 	date_default_timezone_set('America/Los_Angeles');
 	
 }
-
-?>

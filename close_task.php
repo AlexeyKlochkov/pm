@@ -31,5 +31,3 @@ if ($is_current_fast_track == 1){
 $location = "Location: manage_project.php?p=" . $project_id . "&show_schedules=1#schedules";
 
 header($location) ;
-
-?>

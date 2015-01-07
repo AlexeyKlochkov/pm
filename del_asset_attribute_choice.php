@@ -20,5 +20,3 @@ $location = "Location: new_asset_attribute.php?aaid=" . $asset_attribute_id;
 
 
 header($location) ;
-
-?>

@@ -15,5 +15,3 @@ $arr_campaigns = get_campaign_query($company_id, $campaign_id, $business_unit_id
 download_send_headers("data_export_" . date("Y-m-d") . ".csv");
 echo array2csv($arr_campaigns);
 die();
-
-?>

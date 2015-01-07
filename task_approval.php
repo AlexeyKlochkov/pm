@@ -31,7 +31,6 @@ if (!empty($_POST["stid"])){
 
 $arr_user_info = get_user_info($user_id);
 $user_full_name = $arr_user_info[0]["first_name"] . " " . $arr_user_info[0]["last_name"];
-
 $arr_project = get_project_info_by_schedule_task($schedule_task_id);
 $project_id = $arr_project[0]["project_id"];
 $project_name = $arr_project[0]["project_name"];
@@ -49,7 +48,6 @@ $approval_notes = $arr_project[0]["approval_notes"];
 $campaign_company_id = $arr_project[0]["company_id"];
 $approval_file_id = $arr_project[0]["approval_file_id"];
 $directory = "project_files/" . $project_code . "/";
-
 $approve_text =  "I (<b>" . $user_full_name . "</b>) approve <b>" . $task_name . "</b>.";
 $unapprove_text = "This task is <b>NOT approved</b>.";
 $approval_type_text = "Please indicate whether you approve or do not approve task <b>" . $task_name . "</b>.";
@@ -81,10 +79,7 @@ $header_table .= "<tr><th align=\"left\">Task:</th><td>" . $task_name . "</td></
 $header_table .= "<tr><th align=\"left\">Task Manager:</th><td>" . $task_manager_name . "</td></tr>";
 $header_table .= "<tr><th align=\"left\">Approver:</th><td>" . $user_full_name  . "</td></tr>";
 $header_table .= "</table>";
-
 $project_file_table = "<table class = \"budget\">";
-
-
 $file_count = 0;
 $arr_files = get_project_files_by_type($project_id, "CB", 1);
 if (!empty($arr_files)){
@@ -156,42 +151,33 @@ if (!empty($arr_files)){
 if ($file_count == 0){
 	$project_file_table .= "<tr><th colspan = \"2\">No project files.</th></tr>";
 }
-
 $project_file_table .= "</table>";
-
 $not_approved_checked = "";
 if ($is_approved ==2){
 	$not_approved_checked = "checked";
 }
-
 ?>
 <html>
 <head>
 <link href='style.css' rel='stylesheet' type='text/css' />
 <link href='js/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' type='text/css' />
-
 <title>Task Approval</title>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
 <script type="text/javascript" src="js/jquery.validate.js"></script> 
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <script>
+<script>
   $(document).ready(function(){
-    
-	$( "#task_approval" ).validate({
-  rules: {
-    task_rate: {
-      required: false,
-      number: true
-    }
-  }
-});
-	
-	
-	
+	  $( "#task_approval" ).validate({
+  		rules: {
+    			task_rate: {
+      				required: false,
+      				number: true
+    			}
+		}
+	});
   });
-  
-  </script>
 
+</script>
 </head>
 <body>
 <div id = "page">

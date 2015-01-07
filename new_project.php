@@ -76,7 +76,7 @@ $(document).ready(function(){
 	
 	if(typeof cost_center_code === 'undefined'){
 		cost_center_code = "";
-	};
+	}
 	
     $( "#cost_center" ).val( cost_center_code );
 	

@@ -17,7 +17,4 @@ if ($del_success == 1){
 
 $location = "Location: image.php?i=" . $image_id;
 
-
 header($location) ;
-
-?>

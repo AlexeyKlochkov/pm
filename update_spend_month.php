@@ -16,7 +16,4 @@ if ($update_success <> 0){
 	$location = "Location: edit_spend.php?e=1&p=" . $project_id . "&s=" . $spend_id;
 }
 
-
 header($location) ;
-
-?>

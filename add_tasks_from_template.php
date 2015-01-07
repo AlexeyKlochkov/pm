@@ -73,6 +73,3 @@ if ($new_schedule_task_id <> 0){
 }
 
 header($location) ;
-
-
-?>

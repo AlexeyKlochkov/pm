@@ -30,12 +30,4 @@ if ($get_count_schedules_in_a_phase == 0){
 
 }
 
-
-
-
-
-
-
 header($location) ;
-
-?>

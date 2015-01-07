@@ -1163,7 +1163,7 @@ $js_all_states_array .= "];";
 	function hide_all_files(){
 		$(".file_section").hide();
 		$(".file_nav_link").removeClass("file_nav_selected"); 
-	};
+	}
 	
 	$( ".update_aps_product_id" ).click(function() {
 		var asset_item_id = $(this).attr("aiid");

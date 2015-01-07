@@ -49,7 +49,7 @@ $project_manager_id = "";
 if (!empty($_GET["project_manager_id"])){
 	$project_manager_id = $_GET["project_manager_id"];
 }
-//print $project_manager_id;
+
 $phase_id = "";
 if (!empty($_GET["phase_id"])){
 	$phase_id = $_GET["phase_id"];
@@ -61,9 +61,6 @@ if (!empty($_GET["task_id"])){
 }
 
 $arr_tasks = get_task_list($company_id, $project_id, $campaign_id, $phase_id, $project_manager_id, $task_id, $user_id, $active_flag);
-
-//print_r($arr_projects);
-
 $task_table = "<table width = \"100%\" class = \"stats_table\"><tr><th>Campaign</th><th>Project</th><th>IPM</th><th>Schedule </th><th>Phase</th><th>#</th><th>Task</th><th>Total Time</th><th>Add Time</th><th>Task<br>Complete?</th><th>&nbsp;</th></tr>";
 if (!empty($arr_tasks)){
 	foreach ($arr_tasks as $task_row){
@@ -109,14 +106,10 @@ $campaign_select = get_campaign_code_select($company_id, $campaign_id);
 $campaign_select = str_replace("Please select", "All", $campaign_select );
 $project_code_select = get_project_code_select($company_id, $selected_project_id);
 $project_code_select = str_replace("Please select", "All", $project_code_select );
-//$business_unit_select = get_business_unit_select($company_id, $business_unit_id);
-
 $task_select =  get_task_select($company_id, $task_id);
 $task_select = str_replace("Please Select", "All", $task_select );
-
 $project_manager_select =  get_project_manager_select($company_id, $project_manager_id);
 $project_manager_select = str_replace("Please select", "All", $project_manager_select );
-
 $phase_select =  get_phase_select($company_id, $phase_id);
 $phase_select = str_replace("Please select", "All", $phase_select );
 

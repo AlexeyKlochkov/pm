@@ -11,9 +11,6 @@ $business_unit_owner_id = $_POST["business_unit_owner_id"];
 $active = $_POST["active"];
 
 $update_success = update_business_unit($business_unit_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $active, $business_unit_owner_id);
-
-//print $audit_id;
-
 if ($update_success <> 0){
 	$location = "Location: edit_business_unit.php?e=2&b=" . $business_unit_id;
 }else{
@@ -21,6 +18,3 @@ if ($update_success <> 0){
 }
 
 header($location) ;
-
-
-?>

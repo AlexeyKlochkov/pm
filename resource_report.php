@@ -315,7 +315,7 @@ $( "#resource" ).submit(function( event ) {
   if(all_or_dates=="all"){
 	if($("#user").val()==''){
 		event.preventDefault();
-	};
+	}
 	
   }
 });

@@ -16,18 +16,13 @@ if (empty($campaign_active)){
 }else{
 	$active = 1;
 }
-
 $error = 0;
-
 $update_campaign = update_campaign($campaign_id, $business_unit_id, $campaign_description, $campaign_quarter, $campaign_year, $campaign_budget, $user_id, $active );
 
 if ($update_campaign == 0){
 	//dupe error
 	$error = 2;
 }
-
-//print $audit_id;
-
 if ($error == 0){
 	$location = "Location: campaigns.php";
 
@@ -36,6 +31,3 @@ if ($error == 0){
 }
 
 header($location) ;
-
-
-?>

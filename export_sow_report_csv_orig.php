@@ -71,9 +71,3 @@ if (!empty($arr_spend_report)){
 download_send_headers("SOW_Report" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_spend);
 die();
-
-
-
-
-
-?>

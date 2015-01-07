@@ -57,7 +57,3 @@ if ($username != NULL && $password != NULL){
 }
 print "<br>" . $location;
 header('Location: ' . $location);
-
-
-
-?>

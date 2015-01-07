@@ -15,7 +15,4 @@ if ($del_success == 1){
 
 $location = "Location: new_task.php?e=" . $error;
 
-
 header($location) ;
-
-?>

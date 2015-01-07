@@ -16,7 +16,6 @@ $po_number = $_POST["po_number"];
 $invoice_number = $_POST["invoice_number"];
 $percent_complete = $_POST["percent_complete"];
 $cost_expense_account = $_POST["cost_expense_account"];
-
 $update_success = update_spend($spend_id, $vendor_id, $spend_amount, $spend_type, $asset_id, $notes, $po_number, $invoice_number, $percent_complete, $cost_expense_account, $vendor_other);
 
 if ($update_success <> 0){
@@ -24,8 +23,4 @@ if ($update_success <> 0){
 }else{
 	$location = "Location: edit_spend.php?e=1&p=" . $project_id . "&s=" . $spend_id;
 }
-
-
 header($location) ;
-
-?>

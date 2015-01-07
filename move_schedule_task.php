@@ -18,5 +18,3 @@ $update3 = update_schedule_task_order($schedule_id, 0, $swap2);
 $location = "Location: manage_tasks.php?s=" . $schedule_id;
 
 header($location) ;
-
-?>

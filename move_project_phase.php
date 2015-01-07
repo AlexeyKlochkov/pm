@@ -18,7 +18,4 @@ $update3 = update_project_phase_specific_display($project_id, 0, $swap2);
 
 $location = "Location: manage_schedules.php?p=" . $project_id;
 
-
 header($location) ;
-
-?>

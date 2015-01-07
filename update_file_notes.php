@@ -20,8 +20,4 @@ if ($update_success == 1){
 }
 
 $location = "Location: manage_project.php?show_files=1&show" . $file_type. "=1&p=" . $project_id . "#files";
-
-
 header($location) ;
-
-?>

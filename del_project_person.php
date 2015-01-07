@@ -24,9 +24,4 @@ if ($del_success == 1){
 	$error = 1;
 }
 
-
-
-
 header($location) ;
-
-?>

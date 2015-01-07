@@ -52,5 +52,3 @@ $location = "Location: manage_tasks.php?s=" . $schedule_id . "&p=" . $project_id
 
 
 header($location) ;
-
-?>

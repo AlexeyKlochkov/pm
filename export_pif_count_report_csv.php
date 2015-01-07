@@ -161,9 +161,3 @@ array_push($arr_pif_report_output, $arr_grand_total2);
 download_send_headers("PIF_Report" . $date_range_message . ".csv");
 echo array2csv2($arr_pif_report_output);
 die();
-
-
-
-
-
-?>

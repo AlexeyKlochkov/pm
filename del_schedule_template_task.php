@@ -15,10 +15,6 @@ if ($del_success == 1){
 	$error = 1;
 }
 
-
 $location = "Location: edit_schedule_template.php?stid=" . $schedule_template_id;
 
-
 header($location) ;
-
-?>

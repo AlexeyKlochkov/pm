@@ -25,8 +25,4 @@ $user_id = $_SESSION["user_id"];
 $company_id = $_SESSION["company_id"];
 $user_full_name = $_SESSION["user_full_name"];
 
-
 date_default_timezone_set('America/Los_Angeles');
-
-//print_r($arr_user_info);
-?>

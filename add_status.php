@@ -18,6 +18,3 @@ if ($insert_success <> 0){
 }
 
 header($location) ;
-
-
-?>

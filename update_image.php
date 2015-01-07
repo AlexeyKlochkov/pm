@@ -112,13 +112,11 @@ $image_usage_category = substr($image_usage_category, 0, -1);
 $high_resolution_location = substr($high_resolution_location, 0, -1);
 $low_resolution_location = substr($low_resolution_location, 0, -1);
 $meta_data_list = substr($meta_data_list, 0, -1);
-//print $meta_data_list;
 $arr_current_meta_data = explode(",", $current_meta_data);
 $arr_incoming_meta_data_list = explode(",", $meta_data_list);
 //move through the incoming meta data and insert rows for new meta data if they are not there.
 if (!empty($arr_incoming_meta_data_list)){
 	foreach ($arr_incoming_meta_data_list as $incoming_meta_data_id){
-		//print $incoming_meta_data_id;
 		if(!in_array($incoming_meta_data_id, $arr_current_meta_data)){
 			//this meta tag is not in the current set, so add it.
 			$insert_success = add_meta_data_to_image($image_id, $incoming_meta_data_id);
@@ -129,7 +127,6 @@ if (!empty($arr_incoming_meta_data_list)){
 //move through the current meta data and delete items that are not in the incoming meta data.
 if (!empty($arr_current_meta_data)){
 	foreach ($arr_current_meta_data as $current_meta_data_id){
-		//print $incoming_meta_data_id;
 		if(!in_array($current_meta_data_id, $arr_incoming_meta_data_list)){
 			//this meta tag is in current set, but it's not in the incoming set, so they've unchecked it. Delete it.
 			$insert_success = del_image_meta_data($image_id, $current_meta_data_id);
@@ -147,7 +144,6 @@ if(empty($image_id)){
 }else{
 	$update_success = update_image($image_id, $width, $height, $file_size, $resolution, $stock_ref_code, $image_stock_name, $stock_quote_id, $stock_or_photographer, $rep_or_stock_house, $photographer_name, $rights_managed_type, $royalty_free_type, $image_media_rights, $image_media_rights_other, $image_notes, $image_usage_start, $image_usage_end, $unlimited_usage, $image_territory, $image_territory_other, $release_received, $release_type, $image_exclusivity, $exclusivity_notes, $image_usage_category, $image_usage_category_other, $original_project_code, $original_project_manager, $original_art_buyer, $posting_to_asset_library, $high_resolution_location, $low_resolution_location, $image_needs_retouching, $image_has_been_replaced, $active);
 }
-//print $audit_id;
 
 if ($update_success <> 0){
 	$location = "Location: image.php?i=" . $image_id;
@@ -156,6 +152,3 @@ if ($update_success <> 0){
 }
 
 header($location) ;
-
-
-?>

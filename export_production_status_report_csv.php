@@ -26,5 +26,3 @@ if (!empty($arr_prod_status_variables)){
 download_send_headers("Production_Status_Report" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_prod_status);
 die();
-
-?>

@@ -33,14 +33,12 @@ foreach($_POST as $key=>$value)
 	$variable_name = $key;
 	$variable_value = $value;
 	$first_two_characters = substr($variable_name, 0, 2);
-	//print $first_three_characters . "<br>";
 	if ($first_two_characters == "MR"){
 		$media_rights .= $value . ",";
 	}
 	if ($first_two_characters == "UC"){
 		$model_usage_category .= $value . ",";
 	}
-	
 }
 $media_rights = substr($media_rights, 0, -1);
 $model_usage_category = substr($model_usage_category, 0, -1);
@@ -55,8 +53,6 @@ if(empty($model_id)){
 }else{
 	$update_success = update_model($model_id, $model_name, $model_email, $model_address, $model_phone, $model_notes, $model_gender, $model_is_minor, $model_territory, $model_territory_other, $model_usage_category, $model_usage_category_other, $model_start_date, $model_end_date, $representation_type, $agency_id, $model_released, $duration_type, $media_rights, $media_rights_other);
 }
-//print $audit_id;
-
 if ($update_success <> 0){
 	$location = "Location: model.php?m=" . $model_id;
 }else{
@@ -64,6 +60,3 @@ if ($update_success <> 0){
 }
 
 header($location) ;
-
-
-?>

@@ -36,5 +36,3 @@ function deleteAll($directory, $empty = false) {
 } 
 $directory = "project_files/SEA-16";
 deleteAll($directory);
-
-?>

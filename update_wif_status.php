@@ -29,8 +29,6 @@ if ($wif_status_id == 2){
 	$project_summary = $description;
 	$wif_code = $arr_wif_info[0]["wif_code"];
 	$asset_type_id = $arr_wif_info[0]["asset_type_id"];
-	//print_r($arr_wif_info);
-	
 	//add the project, set the status to 4, deploy
 	$new_project_id = insert_project($campaign_id, $wif_name, $product_id, 0, $project_manager_id, $project_summary, 4, $request_date, $desired_delivery_date, 0, 0, 0, 0, 0, $user_id, 0, $requester_name, 0, 2, 0 );
 	$business_unit_abbrev = get_business_unit_abbrev_from_campaign_id($campaign_id);
@@ -38,9 +36,7 @@ if ($wif_status_id == 2){
 	$insert_code_success = insert_project_code($new_project_id, $project_code);
 	$insert_project_id_success = update_wif_project_id($wif_id, $new_project_id);
 	//// send an email to the requester showing the WIF info with no modify link
-	
-	
-	
+
 	//add PM to project
 	$add_user_success = add_project_person($new_project_id, $project_manager_id);
 
@@ -129,6 +125,3 @@ if ($update_success == 0){
 }
 
 header($location) ;
-
-
-?>

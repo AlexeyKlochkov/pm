@@ -24,15 +24,12 @@ if (!empty($_GET["p"])){
 }
 
 //$quarter_select = get_quarter_select($campaign_quarter);
-
-
 $arr_pif = get_pif_info($pif_id);
 if (!empty($arr_pif)){
 	$pif_code = $arr_pif[0]["pif_code"];
 	$version = $arr_pif[0]["version"];
 	$request_date = convert_mysql_to_datepicker($arr_pif[0]["request_date"]);
 	$pif_project_name = $arr_pif[0]["pif_project_name"];
-	
 	$pif_project_name = str_replace("\"", "'", $pif_project_name);
 	$desired_delivery_date = convert_mysql_to_datepicker($arr_pif[0]["desired_delivery_date"]);
 	$target_in_market_date = convert_mysql_to_datepicker($arr_pif[0]["target_in_market_date"]);
@@ -68,7 +65,6 @@ if (!empty($arr_pif)){
 	$pif_approval_status_id = $arr_pif[0]["pif_approval_status_id"];
 	$requester_id = $arr_pif[0]["requester_id"];
 	$requester = $arr_pif[0]["requester_first_name"] . " " . $arr_pif[0]["requester_last_name"];
-	
 	$segment_quantity_potential_students = $arr_pif[0]["segment_quantity_potential_students"];
 	$segment_quantity_current_students = $arr_pif[0]["segment_quantity_current_students"];
 	$segment_quantity_employee = $arr_pif[0]["segment_quantity_employee"];
@@ -79,11 +75,9 @@ if (!empty($arr_pif)){
 	
 }
 $total_segment_reach = 0;
-
 if (empty($aop_activity_type_name)){
 	$aop_activity_type_name = "AOP type unassigned";
 }
-
 $str_segment = "<div class =\"pif_media_table\"><table width = \"300\" border = \"0\"><tr><th>Segment</th><th>Reach</th></tr>";
 if ($segment_reach_potential_students == 1){
 	$str_segment .= "<tr><td>Potential Students</td><td>" . $segment_quantity_potential_students . "</td></tr>";
@@ -134,9 +128,7 @@ $pif_asset_list .= "<tr><td align=\"right\">Total:</td><td colspan = \"2\">" . $
 $pif_status_select = get_pif_status_select2($company_id, $pif_approval_status_id);
 $project_manager_select = get_project_manager_select($company_id, 0);
 $aop_activity_type_select = get_aop_activity_select($company_id, $aop_activity_type_id);
-
 //get user list
-
 $arr_users = get_users_for_project2(0);
 //print_r($arr_users);
 $user_table = "<div id = \"add_people\"><table width = \"250\" class = \"people\">";
@@ -170,9 +162,7 @@ $aop_activity_type_select = get_aop_activity_select($company_id, $aop_activity_t
 	$(".pif_approval_form").hide();
 
     $( "#status1" ).change(function() {
-	 
 	  var selected_status = $("#status1").val();
-	   
 	   if (selected_status == 3){
 		//alert( selected_status );
 		$(".pif_approval_form").show();
@@ -195,8 +185,6 @@ $aop_activity_type_select = get_aop_activity_select($company_id, $aop_activity_t
 		}
 	  }
 	});
-	
-	
   });
   </script>
 </head>
@@ -456,10 +444,8 @@ if ($_SESSION["user_level"] >25){
 		</div>
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

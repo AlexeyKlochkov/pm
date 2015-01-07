@@ -36,5 +36,3 @@ if ($status == 1){
 }
 
 header($location) ;
-
-?>

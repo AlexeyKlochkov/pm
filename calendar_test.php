@@ -14,7 +14,7 @@ function draw_calendar($month,$year){
 	$days_in_month = date('t',mktime(0,0,0,$month,1,$year));
 	$days_in_this_week = 1;
 	$day_counter = 0;
-	$dates_array = array();
+
 
 	/* row for week one */
 	$calendar.= '<tr class="calendar-row">';
@@ -69,4 +69,3 @@ echo draw_calendar(7,2009);
 
 echo '<h2>August 2009</h2>';
 echo draw_calendar(8,2009);
-?>

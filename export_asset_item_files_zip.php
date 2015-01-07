@@ -12,4 +12,3 @@ $zip_file_name="project_files/Asset_Item_Export_" . date("Y-m-d") . ".zip";
 $file_path=dirname(__FILE__).'/';
 
 zipFilesDownload($fileNames,$zip_file_name);
-?>

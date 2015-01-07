@@ -14,11 +14,9 @@ if (!empty($arr_wif)){
 	$wif_type_name = $arr_wif[0]["wif_type_name"];
 	$wif_type_abbrev = $arr_wif[0]["wif_type_abbrev"];
 	$description = $arr_wif[0]["description"];
-	
 }
 
 $email_html = "";
-
 $email_html .= "
 <html>
 <head>
@@ -156,5 +154,3 @@ $email_html .= "
 
 return $email_html;
 }
-
-?>

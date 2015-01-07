@@ -11,5 +11,3 @@ $_SESSION["company_id"] = 2;
 $_SESSION["user_full_name"] = "Jimbo Jones";
 $_SESSION["is_admin"] =0;
 $_SESSION["is_project_manager"] = 1;
-
-?>

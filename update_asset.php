@@ -22,14 +22,9 @@ if(!empty($_POST["asset_for_aps"])){
 }else{
 	$asset_for_aps = 0;
 }
-
 $asset_start_date = convert_datepicker_date($_POST["asset_start_date"]);
 $asset_end_date = convert_datepicker_date($_POST["asset_end_date"]);
-
 $update_success = update_asset($asset_id, $asset_name, $asset_type_id, $asset_budget_media, $asset_budget_production, $asset_quantity, $asset_notes, $user_id, $asset_start_date, $asset_end_date, $asset_has_ge, $asset_for_aps);
-
-//print $new_asset_id;
-//print $project_id;
 if ($update_success == 0){
 	
 	$location = "Location: manage_project.php?e=7&p=" . $project_id . "&showassets=1#asset_" . $asset_id;
@@ -38,6 +33,3 @@ if ($update_success == 0){
 }
 
 header($location) ;
-
-
-?>

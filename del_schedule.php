@@ -17,7 +17,4 @@ if ($del_success2 <> 1){
 }
 $location = "Location: manage_schedules.php?p=" . $projcet_id . " &e=" . $error;
 
-
 header($location) ;
-
-?>

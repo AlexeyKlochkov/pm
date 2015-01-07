@@ -66,9 +66,3 @@ if (!empty($arr_projects)){
 download_send_headers("Project_Report_" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_all_projects);
 die();
-
-
-
-
-
-?>

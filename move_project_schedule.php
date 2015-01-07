@@ -20,5 +20,3 @@ $update3 = update_project_schedule_order($project_id, $phase_id, 0, $swap2);
 $location = "Location: manage_schedules.php?p=" . $project_id;
 
 header($location) ;
-
-?>

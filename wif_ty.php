@@ -23,29 +23,22 @@ if (!empty($_GET["e"])){
 <head>
 <link href='style.css' rel='stylesheet' type='text/css' />
 <link href='js/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' type='text/css' />
-
 <title>New WIF</title>
-
 </head>
 <body>
 <div id = "page">
 	<div id = "main">
-			<div id = "logo">
-				<img src = "logo.png">
-			</div>
-
-
+		<div id = "logo">
+			<img src = "logo.png">
+		</div>
 		<!--container div tag--> 
-		<div id="container"> 
-			
+		<div id="container">
 			<div id="mainContent"> <!--mainContent div tag--> 
 				<h1>Thank you</h1>
-				
 					<table border = "0" width = "90%">
 						<tr>
 							<td valign="top">
 								<?php echo $message ?>
-							
 							</td>
 						</tr>
 					</table>
@@ -55,16 +48,12 @@ if (!empty($_GET["e"])){
 					<br><br>
 					<br><br>
 					<br><br>
-			</div> <!--end mainContent div tag--> 
-				
+			</div> <!--end mainContent div tag-->
 		</div>
-		
 		<?php 
 		include "footer.php";
-		?> 
-
+		?>
 	</div>
-
 </div>
 </body>
 </html>

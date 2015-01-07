@@ -30,7 +30,6 @@ $items = array(
 );
 }
 
-
 $menu = '<div id = "navbar">
     <ul class="nav_ul">';
 foreach ($items as $val) {
@@ -47,4 +46,3 @@ $menu .= '
     <a href="loggedout.php"><img src="images/logout.ico" alt="Log out"></a></div></div>';
 echo $menu;	
 
-?>

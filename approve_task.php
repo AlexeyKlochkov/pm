@@ -38,5 +38,3 @@ if ($update_success <> 1){
 
 
 header($location) ;
-
-?>

@@ -16,7 +16,4 @@ if ($del_success == 1){
 
 $location = "Location: edit_user_group.php?e=" . $error . "&ug=" . $user_group_id;
 
-
 header($location) ;
-
-?>

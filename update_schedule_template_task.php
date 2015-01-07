@@ -14,10 +14,7 @@ $total_hours = $_POST["hours"];
 $total_minutes = $_POST["minutes"];
 $predecessor = $_POST["predecessor"];
 $total_time = $total_hours . ":" . $total_minutes . ":00";
-
 $update_success = update_schedule_template_task($schedule_template_tasks_id, $task_id, $manager_role_id, $assignee_role_id, $start_day, $end_day, $total_time, $predecessor);
-
-//print $audit_id;
 
 if ($update_success <> 0){
 	$location = "Location: edit_schedule_template_task.php?e=2&stid=" . $schedule_template_id . "&sttid=" . $schedule_template_tasks_id;
@@ -26,6 +23,3 @@ if ($update_success <> 0){
 }
 
 header($location) ;
-
-
-?>

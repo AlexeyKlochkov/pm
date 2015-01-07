@@ -18,5 +18,3 @@ $update3 = update_asset_attribute_choice_order($aset_attribute_id, 0, $swap2);
 $location = "Location: new_asset_attribute.php?aaid=" . $aset_attribute_id;
 
 header($location) ;
-
-?>

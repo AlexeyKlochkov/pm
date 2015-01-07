@@ -20,5 +20,3 @@ $location = "Location: asset_item_specsheet.php?u=3&p=" . $project_id . "&aiid="
 
 
 header($location) ;
-
-?>

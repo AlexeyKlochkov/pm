@@ -96,6 +96,3 @@ if ($send_success <> 1){
 }
 
 header($location) ;
-
-
-?>

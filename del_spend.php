@@ -16,7 +16,5 @@ if ($del_success == 1){
 
 $location = "Location: manage_project.php?p=" . $project_id . "#budget";
 
-
 header($location) ;
 
-?>

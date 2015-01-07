@@ -50,9 +50,3 @@ if (!empty($arr_schedule_tasks)){
 download_send_headers("Schedule_Report_S" . $schedule_id . "_" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_schedule);
 die();
-
-
-
-
-
-?>

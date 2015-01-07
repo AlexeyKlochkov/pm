@@ -54,9 +54,3 @@ if (!empty($arr_pifs)){
 download_send_headers("PIF_List_" . date("Y-m-d") . ".csv");
 echo array2csv2($arr_pif_export);
 die();
-
-
-
-
-
-?>

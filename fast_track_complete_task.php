@@ -41,5 +41,3 @@ if ($update_success == 0){
 }
 
 header($location) ;
-
-?>
