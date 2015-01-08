@@ -29,4 +29,3 @@ foreach ($res as $project){
         $i++;}
 }
 echo "Count:".$i;
-?>
