@@ -1,5 +1,5 @@
 <?php
-
+1
 function db_connect() {
 
     $hostname   = "localhost";
