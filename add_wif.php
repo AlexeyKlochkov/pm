@@ -21,16 +21,21 @@ $new_wif_id = insert_wif($wif_name, $company_id, $requester_name, $requester_ema
 $wif_code = "WIF-" . get_wif_type_abbrev($wif_type_id) . "-" . $new_wif_id;
 $update_success = update_wif_code($new_wif_id, $wif_code);
 $i=0;
-if(count($_FILES['filesToUpload']['name'])) {
+if (array_key_exists('filesToUpload',$_FILES)){
 	mkdir("wif_files/" . $wif_code, 0777);
-	foreach ($_FILES['filesToUpload']['name'] as $file) {
-		$img = "wif_files/" . $wif_code . "/" .$file;
-		//print $img;
-		move_uploaded_file($_FILES["filesToUpload"]["tmp_name"][$i], $img);
-		$wif_file_id = insert_wif_file($new_wif_id, $file);
-		$i++;
+	foreach ($_FILES['filesToUpload']['tmp_name'] as $file) {
+		if ($file) {
+			$img = "wif_files/" . $wif_code . "/" . $file;
+			if (move_uploaded_file($_FILES["filesToUpload"]["tmp_name"][$i], $img)){
+				$wif_file_id = insert_wif_file($new_wif_id, $file);
+			} else {
+				$errText="Cannot upload file".$file;
+			}
+			$i++;
+		}
 	}
 }
+
 
 $wif_html = get_wif_email($new_wif_id);
 
@@ -46,10 +51,9 @@ if (!empty($_POST["emergency_wif"])){
 
 
 if ($new_wif_id == 0){
-	
 	$location = "Location: wif_ty.php?e=1";
 }else{
 	$location = "Location: wif_ty.php?e=2&wc=" . $wif_code;
 }
 
-header($location) ;
+header($location);

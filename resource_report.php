@@ -20,7 +20,6 @@ $employee_id = "";
 if (!empty($_GET["employee_id"])){
 	$employee_id = $_GET["employee_id"];
 }
-
 $role_id = "";
 if (!empty($_GET["role_id"])){
 	$role_id = $_GET["role_id"];

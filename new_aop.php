@@ -203,9 +203,9 @@ $request_date = date("m/d/Y");
                                                 III. Messsaging
                                             </th>
                                         </tr>
-					<tr>
-        					<td  colspan = "2">Background<br><textarea class = "required" type = "text" name = "background" rows="6" cols = "140" maxlength="5000"></textarea></td>
-   					</tr>
+					                    <tr>
+        					                <td  colspan = "2">Background<br><textarea class = "required" type = "text" name = "background" rows="6" cols = "140" maxlength="5000"></textarea></td>
+   					                    </tr>
                                         <tr>
                                             <td>Core message<br><textarea class = "required" type = "text" name = "core_message" rows="6" cols = "60" maxlength="5000"></textarea></td>
                                             <td>Audience<br><textarea class = "required" type = "text" name = "audience" rows="6" cols = "60" maxlength="5000"></textarea></td>

@@ -376,6 +376,11 @@ if ($_SESSION["user_level"] >25){
 								<?php echo $project_objective ?>
 							</td>
 						</tr>
+							<input type="hidden" name="project_description" value="<?php echo $project_description?>">
+							<input type="hidden" name="uopx_benefit" value="<?php echo $uopx_benefit?>">
+							<input type="hidden" name="uopx_risk" value="<?php echo $uopx_risk?>">
+							<input type="hidden" name="project_objective	" value="<?php echo $project_objective?>">
+
                         <?php endif;?>
                         <?php if ($background!="" || $audience!="" || $objectives!="" || $core_message!="" || $support_points!=""):?>
                             <tr>
@@ -411,6 +416,11 @@ if ($_SESSION["user_level"] >25){
                                     <?php echo $support_points ?>
                                 </td>
                             </tr>
+							<input type="hidden" name="background" value="<?php echo $background?>">
+							<input type="hidden" name="audience" value="<?php echo $audience?>">
+							<input type="hidden" name="objectives" value="<?php echo $objectives?>">
+							<input type="hidden" name="core_message" value="<?php echo $core_message?>">
+							<input type="hidden" name="support_points" value="<?php echo $support_points?>">
                         <?php endif;?>
 						<?php
 						if (!isset($_GET["is_bm"]) || $_GET["is_bm"]!=1):?>
@@ -435,7 +445,7 @@ if ($_SESSION["user_level"] >25){
 									<?php echo $required_elem ?>
 								</td>
 							</tr>
-
+							<input type="hidden" name="required_elem" value="<?php echo $required_elem?>">
 						<?php endif;?>
 					</table>
 				</div>

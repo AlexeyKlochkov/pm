@@ -16,10 +16,39 @@ $target_in_market_date = $_POST["target_in_market_date"];
 $expiration_date = $_POST["expiration_date"];
 $budget = $_POST["budget"];
 $cost_code = $_POST["cost_code"];
-$project_description = $_POST["project_description"];
-$uopx_benefit = $_POST["uopx_benefit"];
-$uopx_risk = $_POST["uopx_risk"];
-$project_objective = $_POST["project_objective"];
+if (isset($_POST["project_description"])) {
+	$project_description = $_POST["project_description"];
+}else $project_description="";
+if (isset($_POST["uopx_benefit"])) {
+	$uopx_benefit = $_POST["uopx_benefit"];
+}else $uopx_benefit="";
+if (isset($_POST["uopx_risk"])) {
+	$uopx_risk = $_POST["uopx_risk"];
+}else $uopx_risk="";
+if (isset($_POST["project_objective"])) {
+	$project_objective = $_POST["project_objective"];
+}else $project_objective="";
+if (isset($_POST["background"])) {
+	$background = $_POST["background"];
+}else $background="";
+if (isset($_POST["audience"])) {
+	$audience = $_POST["audience"];
+}else $audience="";
+if (isset($_POST["objectives"])) {
+	$objectives = $_POST["objectives"];
+}else $objectives="";
+if (isset($_POST["core_message"])) {
+	$core_message = $_POST["core_message"];
+}else $core_message="";
+if (isset($_POST["support_points"])) {
+	$support_points = $_POST["support_points"];
+}else $support_points="";
+if (isset($_POST["required_elem"])) {
+	$required_elem = $_POST["required_elem"];
+}else $required_elem="";
+if (isset($_POST["aop_activity_type_id"])) {
+	$aop_activity_type_id = $_POST["aop_activity_type_id"];
+}else $aop_activity_type_id="";
 $estimated_total_reach = 0;
 $segment_reach_potential_students = 0;
 $segment_reach_current_students = 0;
@@ -79,12 +108,12 @@ $expiration_date = convert_datepicker_date($expiration_date);
 
 $new_pif_id = insert_pif($project_name, $company_id, $version, $marketing_owner_id, $exec_sponsor_id, $business_unit_id, $product_id, $request_date, $desired_delivery_date, $target_in_market_date, $expiration_date, $budget, $cost_code, $project_description, $uopx_benefit,
                         $uopx_risk, $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs, $segment_quantity_potential_students,
-                        $segment_quantity_current_students, $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $user_id, $orig_pif_id,"","","","","");
+                        $segment_quantity_current_students, $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $user_id, $orig_pif_id,$background,$audience,$objectives,$core_message,$support_points,$aop_activity_type_id,$required_elem);
 
 //insert PIF code
 $business_unit_abbrev = get_business_unit_abbrev($business_unit_id);
 
-$pif_code = "PIF_" . $business_unit_abbrev . "-" . $new_pif_id . "_V" . $version;
+$pif_code = "PB_" . $business_unit_abbrev . "-" . $new_pif_id . "_V" . $version;
 
 //if the business unit has not changed, and if we are updating an existing PIF, set old PIF to old and version the new one.
 if($orig_business_unit_id == $business_unit_id){

@@ -198,6 +198,7 @@ function get_projects_query($company_id, $project_id, $campaign_id, $product_id,
             join project_status ps on p.project_status_id = ps.project_status_id join user u on p.project_manager_id = u.user_id
             where c.company_id = :companyId". $project_string . $campaign_string . $product_string . $audience_string . $project_status_string . $project_manager_string . $active_string);
     $handle->bindValue(":companyId",$company_id,PDO::PARAM_INT);
+    if (!empty($project_id)) $handle->bindValue(":projectId",$project_id,PDO::PARAM_INT);
     if (!empty($campaign_id)) $handle->bindValue(":campaignId",$campaign_id,PDO::PARAM_INT);
     if (!empty($product_id)) $handle->bindValue(":productId",$product_id,PDO::PARAM_INT);
     if (!empty($audience_id)) $handle->bindValue(":audienceId",$audience_id,PDO::PARAM_INT);

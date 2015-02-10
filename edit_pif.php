@@ -24,13 +24,18 @@ if (!empty($_GET["pid"])){
 }
 
 $arr_pif = get_pif_info($pif_id);
-
 $pif_project_name = $arr_pif[0]["pif_project_name"];
 $marketing_owner_id = $arr_pif[0]["marketing_owner_id"];
 $exec_sponsor_id = $arr_pif[0]["exec_sponsor_id"];
 $business_unit_id = $arr_pif[0]["business_unit_id"];
 $product_id = $arr_pif[0]["product_id"];
 $pif_code = $arr_pif[0]["pif_code"];
+$required_elem=$arr_pif[0]["required_elem"];
+$background = $arr_pif[0]["background"];
+$audience = $arr_pif[0]["audience"];
+$objectives = $arr_pif[0]["objectives"];
+$core_message = $arr_pif[0]["core_message"];
+$support_points = $arr_pif[0]["support_points"];
 //$request_date = convert_mysql_to_datepicker($arr_pif[0]["request_date"]);
 $desired_delivery_date = convert_mysql_to_datepicker($arr_pif[0]["desired_delivery_date"]);
 $target_in_market_date = convert_mysql_to_datepicker($arr_pif[0]["target_in_market_date"]);
@@ -58,7 +63,7 @@ if(empty($orig_pif_id )){
 	$orig_pif_id = $pif_id;
 }
 $version = $arr_pif[0]["version"];
-
+$aop_activity_type_id = $arr_pif[0]["aop_activity_type_id"];
 $segment_quantity_potential_students = $arr_pif[0]["segment_quantity_potential_students"];
 $segment_quantity_current_students = $arr_pif[0]["segment_quantity_current_students"];
 $segment_quantity_employee = $arr_pif[0]["segment_quantity_employee"];
@@ -335,36 +340,17 @@ $offline_table .= "</table>";
                                     <tr>
                                         <th colspan = "2"><?php echo $cur_num; if ($cur_num=="IV") $cur_num="V"; else $cur_num="IV";?>. Messaging</th>
                                     </tr>
-                                    <tr>
-                                        <td colspan = "2">
-                                            <div class = "pif_review_title">Background:</div>
-                                            <?php echo $background ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan = "2">
-                                            <div class = "pif_review_title">Audience:</div>
-                                            <?php echo $audience ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan = "2">
-                                            <div class = "pif_review_title">Objectives:</div>
-                                            <?php echo $objectives ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan = "2">
-                                            <div class = "pif_review_title">Core message:</div>
-                                            <?php echo $core_message ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan = "2">
-                                            <div class = "pif_review_title">Support points:</div>
-                                            <?php echo $support_points ?>
-                                        </td>
-                                    </tr>
+									<tr>
+										<td  colspan = "2">Background<br><textarea class = "required" type = "text" name = "background" rows="6" cols = "140" maxlength="5000"><?php echo $background?></textarea></td>
+									</tr>
+									<tr>
+										<td>Core message<br><textarea class = "required" type = "text" name = "core_message" rows="6" cols = "60" maxlength="5000"><?php echo $core_message?></textarea></td>
+										<td>Audience<br><textarea class = "required" type = "text" name = "audience" rows="6" cols = "60" maxlength="5000"><?php echo $audience?></textarea></td>
+									</tr>
+									<tr>
+										<td>Objectives<br><textarea class = "required" type = "text" name = "objectives" rows="6" cols = "60" maxlength="5000"><?php echo $objectives?></textarea></td>
+										<td>Support Points<br><textarea class = "required" type = "text" name = "support_points" rows="6" cols = "60" maxlength="5000"><?php echo $support_points?></textarea></td>
+									</tr>
                                 <?php endif;?>
 								<tr>
 									<td colspan = "2">
@@ -469,16 +455,22 @@ $offline_table .= "</table>";
 									</td>
 								</tr>
 								<tr>
+									<td  colspan = "2">Required elements<br><textarea class = "required" type = "text" name = "required_elem" rows="6" cols = "130" maxlength="5000"><?php echo $required_elem?></textarea></td>
+									</td>
+								</tr>
+								<tr>
 									<td>
-									<input type = "hidden" name = "company_id" value = "<?php echo $company_id ?>">
-									<input type = "hidden" name = "version" value = "<?php echo $version ?>">
-									<input type = "hidden" name = "pif_id" value = "<?php echo $pif_id ?>">
-									<input type = "hidden" name = "old_pif_code" value = "<?php echo $pif_code ?>">
-									<input type = "hidden" name = "request_date" value = "<?php echo $request_date ?>">
-									<input type = "hidden" name = "orig_pif_id" value = "<?php echo $orig_pif_id ?>">
-									<input type = "hidden" name = "orig_business_unit_id" value = "<?php echo $business_unit_id ?>">
-									<input type = "submit" value = "Submit PIF"></td>
-									<td>&nbsp;</td>
+										<input type = "hidden" name = "project_description" value = "<?php echo $project_description ?>">
+										<input type = "hidden" name = "company_id" value = "<?php echo $company_id ?>">
+										<input type = "hidden" name = "version" value = "<?php echo $version ?>">
+										<input type = "hidden" name = "pif_id" value = "<?php echo $pif_id ?>">
+										<input type = "hidden" name = "old_pif_code" value = "<?php echo $pif_code ?>">
+										<input type = "hidden" name = "request_date" value = "<?php echo $request_date ?>">
+										<input type = "hidden" name = "orig_pif_id" value = "<?php echo $orig_pif_id ?>">
+										<input type = "hidden" name = "orig_business_unit_id" value = "<?php echo $business_unit_id ?>">
+										<input type = "hidden" name = "aop_activity_type_id" value = "<?php echo $aop_activity_type_id ?>">
+										<input type = "submit" value = "Submit PIF"></td>
+										<td>&nbsp;</td>
 								</tr>
 							</table></form>
 							</div>

@@ -20,6 +20,39 @@ $pif_code = $_POST["pif_code"];
 $marketing_owner_id = $_POST["marketing_owner_id"];
 $new_project_id = 0;
 $project_name = $_POST["project_name"];
+if (isset($_POST["project_description"])) {
+	$project_description = $_POST["project_description"];
+}else $project_description="";
+if (isset($_POST["uopx_benefit"])) {
+	$uopx_benefit = $_POST["uopx_benefit"];
+}else $uopx_benefit="";
+if (isset($_POST["uopx_risk"])) {
+	$uopx_risk = $_POST["uopx_risk"];
+}else $uopx_risk="";
+if (isset($_POST["project_objective"])) {
+	$project_objective = $_POST["project_objective"];
+}else $project_objective="";
+if (isset($_POST["background"])) {
+	$background = $_POST["background"];
+}else $background="";
+if (isset($_POST["audience"])) {
+	$audience = $_POST["audience"];
+}else $audience="";
+if (isset($_POST["objectives"])) {
+	$objectives = $_POST["objectives"];
+}else $objectives="";
+if (isset($_POST["core_message"])) {
+	$core_message = $_POST["core_message"];
+}else $core_message="";
+if (isset($_POST["support_points"])) {
+	$support_points = $_POST["support_points"];
+}else $support_points="";
+if (isset($_POST["required_elem"])) {
+	$required_elem = $_POST["required_elem"];
+}else $required_elem="";
+if (isset($_POST["aop_activity_type_id"])) {
+	$aop_activity_type_id = $_POST["aop_activity_type_id"];
+}else $aop_activity_type_id="";
 
 if ($pif_status == 3){
 	//if the project is approved, create a project
@@ -45,7 +78,7 @@ if ($pif_status == 3){
 		$approved_aop_activity = 1;
 	}
 
-	$new_project_id = insert_project($campaign_id, $project_name, $product_id, 0, $project_manager_id, $project_description, $project_status_id, $request_date, $desired_delivery_date, $cost_code, 0, $production_budget, $approved_aop_activity, 0, $user_id, $business_unit_owner_id, $requester_name, 0, $aop_activity_type_id, $acd_id );
+	$new_project_id = insert_project($campaign_id, $project_name, $product_id, 0, $project_manager_id, $project_description, $project_status_id, $request_date, $desired_delivery_date, $cost_code, 0, $production_budget, $approved_aop_activity, 0, $user_id, $business_unit_owner_id, $requester_name, 0, $aop_activity_type_id, $acd_id);
 	$pif_files=get_pif_file_by_id($pif_id);
 	$business_code = get_business_unit_abbrev($line_of_business_id);
 	//insert the project code
