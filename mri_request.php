@@ -13,7 +13,14 @@
     <script type="text/javascript" src="js/jquery.validate.js"></script>
 </head>
 <?php
+error_reporting(0);
+if (!isset($_SESSION)) { session_start(); }
 include_once "functions/dbconn.php";
+
+
+if ($_SESSION["isbm"]==1){
+    include "loggedin.php";
+}
 function getRequestTypes(){
     $link=dbConn();
     $result="<option id='0' disabled selected></option>";
@@ -56,13 +63,13 @@ function getStates(){
     $link = dbConn();
     $result="<option id='0' disabled selected></option>";
     $handle = $link->prepare("select * from state order by state_name asc");
-    $handle->bindColumn("id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("state_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("state_name",$name,PDO::PARAM_STR);
     $handle->bindColumn("state_abbrev",$abbrev,PDO::PARAM_STR);
     try {
         $handle->execute();
         while ($handle->fetch(PDO::FETCH_BOUND)) {
-            $result.="<option id='$id'>".$name."(".$abbrev.")</option>";
+            $result.="<option id='$id' title='$name' label='$name($abbrev)' value='$id'>".$name."(".$abbrev.")</option>";
         }
         return $result;
     } catch (Exception $e) {
@@ -74,13 +81,13 @@ function getSchools(){
     $link = dbConn();
     $result="<option id='0' disabled selected></option>";
     $handle = $link->prepare("select * from business_unit where active=1 order by business_unit_name asc");
-    $handle->bindColumn("id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
     $handle->bindColumn("business_unit_abbrev",$abbrev,PDO::PARAM_STR);
     try {
         $handle->execute();
         while ($handle->fetch(PDO::FETCH_BOUND)) {
-            $result.="<option id='$id'>".$name."(".$abbrev.")</option>";
+            $result.="<option id='$id' title='$name' label='$name($abbrev)' value='$id'>".$name."(".$abbrev.")</option>";
         }
         return $result;
     } catch (Exception $e) {
@@ -178,7 +185,7 @@ function getSchools(){
                     <div class="form-group" style="display: none;" id="SSMS1" title="request">
                         <label class="control-label col-sm-2" for="title">Title of program:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="title" id="title" placeholder="Enter title">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
                         </div>
                         <label class="control-label col-sm-2" for="state" id="state">State:</label>
                         <div class="col-sm-2" id="state">
@@ -245,7 +252,7 @@ function getSchools(){
                             <input type="text" class="form-control" id="info" name="info">
                         </div>
                     </div>
-                    <input type="text" style="display:none;" value="<?php echo $_POST["isBM"]?>" name="isBm">
+                    <input type="text" style="display:none;" value="<?php echo $_SESSION["isbm"]?>" name="isBm">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary">Submit</button>

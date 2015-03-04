@@ -1,5 +1,6 @@
 <?php 
 include "loggedin.php";
+$_SESSION["isbm"]=1;
 ?>
 <html>
 <head>
@@ -59,6 +60,10 @@ include "loggedin.php";
 				<a href = "new_wif.php">New WIF</a><br>
 				<a href = "wif_list.php">WIF List</a><br>
 				<a href = "new_wif_type.php">WIF Types</a><br>
+                <br>
+                <b>Marketing Intake</b><br>
+                <a href = "mri_request.php">New MRI</a><br>
+                <a href = "mri_list.php">MRI list</a><br>
 			</div> <!--end mainContent div tag-->
 		</div>
 		<?php 

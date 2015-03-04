@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "functions/dbconn.php";
 include "functions/queries.php";
 include "functions/functions.php";
@@ -6,6 +7,7 @@ date_default_timezone_set('America/Los_Angeles');
 //print $company_id;
 $error_message = "";
 $active_flag = 1;
+
 if (!empty($_GET["wif_type_id"])){
 	$wif_type = $_GET["wif_type_id"];
 	$arr_wif_type = explode("-", $wif_type);
@@ -17,6 +19,12 @@ if (!empty($_GET["wif_type_id"])){
 		$location = "Location: new_up.php";
 	}elseif ($is_web_request == 9 || $is_web_request == 10){
         $location = "Location: new_wif.php?wtid=" . $wif_type_id;
+    }elseif ($is_web_request == 11){
+        $_SESSION["isbm"]=1;
+        $location = "Location: mri_request.php" ;
+    }elseif ($is_web_request == 12){
+        $_SESSION["isbm"]=0;
+        $location = "Location: mri_request.php?isbm=0" ;
     }
 	header($location);
 	
