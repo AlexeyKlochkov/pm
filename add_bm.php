@@ -110,7 +110,9 @@ if(empty($orig_pif_id)){
 $update_success = update_pif_code($new_pif_id, $pif_code);
 
 
+$wif_html = get_wif_email($new_wif_id);
 
+$send_success = smtpmailer($requester_email, 'Thank you for your WIF submission', $wif_html ,'');
 
 //insert the PIF log
 $log_update_success = insert_pif_log($new_pif_id, $pif_code . " created.", "", $user_id);

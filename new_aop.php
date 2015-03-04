@@ -88,9 +88,7 @@ $request_date = date("m/d/Y");
                         }else{
                             $( "#e_" +  check_item).text( "" );
                         }
-
                     }
-
                 });
 
                 if (num_errors > 0){

@@ -20,7 +20,7 @@ if (!empty($_GET["pid"])){
 	$pif_id = $_GET["pid"];
 }else{
 	$location = "loggedout.php";
-	header(location);
+	header($location);
 }
 
 $arr_pif = get_pif_info($pif_id);

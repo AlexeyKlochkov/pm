@@ -176,6 +176,9 @@ if (!empty($_POST["send_email"])){
 			if (!empty($_POST["send_bm"])){
 				$bm_email =  get_user_email($marketing_owner_id);
 			}
+			if (!empty($_POST["send_pm"])){
+				$send_success2 = send_approved_email_to_pm($pif_id, $pif_code, $approver_notes, $pm_email, $requester_name, $approver_id, $pm_name, $project_code, $new_project_id, $project_name);
+			}
 			$send_success = send_other_pif_status_email($pif_id, $pif_code, $approver_notes, $requester_email, $requester_name, $approver_id, $bm_email, $status_name, $project_name, $requester_email);
 		}
 	}

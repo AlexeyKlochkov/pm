@@ -1,4 +1,4 @@
- <?php
+<?php
 include "functions/dbconn.php";
 include "functions/queries.php";
 include "functions/functions.php";
@@ -68,7 +68,6 @@ $wif_status_select = get_wif_type_select(2,0);
 
 							Please let us know how we can help you, by choosing one of the following services below.<br>
 							<br><?php echo $wif_status_select ?></h2><br>
-
 							</td>
 
 						</tr>
