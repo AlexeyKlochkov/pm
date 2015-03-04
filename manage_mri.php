@@ -1126,7 +1126,7 @@ $js_all_states_array .= "];";
 </div>
 
 <div id="popup1" class="popup">
-    <form id = "add_file" action = "add_file.php" method = "POST" enctype="multipart/form-data" class="budget">
+    <form id = "add_file" action = "add_mri_file.php" method = "POST" enctype="multipart/form-data" class="budget">
         <table border = "0">
             <tr>
                 <td>
@@ -1249,7 +1249,7 @@ $js_all_states_array .= "];";
 </div>
 
 <div id="popup4" class="popup">
-    <form id = "add_file" action = "add_file.php" method = "POST" enctype="multipart/form-data" class="budget">
+    <form id = "add_file" action = "add_mri_file.php" method = "POST" enctype="multipart/form-data" class="budget">
         <table border = "0">
             <tr>
                 <td>
