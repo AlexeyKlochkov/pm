@@ -64,6 +64,7 @@ $_SESSION["isbm"]=1;
                 <b>Marketing Intake</b><br>
                 <a href = "mri_request.php">New MRI</a><br>
                 <a href = "mri_list.php">MRI list</a><br>
+                <a href = "lob_list.php">LOB list</a><br>
 			</div> <!--end mainContent div tag-->
 		</div>
 		<?php 
