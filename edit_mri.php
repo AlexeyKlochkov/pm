@@ -205,7 +205,6 @@ $statuses=getStatuses($statusId);
         });
 
     </script>
-
 </head>
 <body>
 <div id = "page">
@@ -288,7 +287,7 @@ $statuses=getStatuses($statusId);
                             <td>Delivery Date</td>
                             <td><input type = "text" name = "delivery_date" class="required datepicker" value = "<?php echo $delivery_date ?>"></td>
                         </tr>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if (isset($due_date)):?>
                             <tr>
                                 <td>Due Date</td>

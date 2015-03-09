@@ -9,7 +9,7 @@ function getMriList(){
     $stmt->bindColumn('id', $id);
     $stmt->bindColumn('isBM', $isBm);
     $stmt->bindColumn('code', $code);
-    $stmt->bindColumn('status', $status);
+    $stmt->bindColumn('status_id', $status);
     $stmt->bindColumn('requester_name', $requesterName);
     $stmt->bindColumn('requester_mail', $requesterMail);
     $stmt->bindColumn('requester_phone', $requesterPhone);
@@ -54,14 +54,32 @@ function getRequestType($id){
     }
     return $result;
 }
+function getStatusName($id){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT name FROM MRI_statuses WHERE id=:id");
+    $handle->bindValue("id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("name",$name,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        if ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result=$name;
+        }
+        else $result = false;
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        $result = false;
+    }
+    return $result;
+}
 $mriList=getMriList();
 
 $wif_table = "<table class = \"budget\"><tr><th colspan = \"10\">Current MRIs</th></tr>\n";
-$wif_table .= "<tr><th>MRI Code</th><th>Type of request</th><th>Requested By</th></tr>\n";
+$wif_table .= "<tr><th>MRI Code</th><th>Type of request</th><th>Requested By</th><th>Status</th></tr>\n";
 if (!empty($mriList)){
     foreach ($mriList as $mri){
         $requestType=getRequestType($mri["request_type_id"]);
-        $wif_table .= "<tr><td><a href='manage_mri.php?id=".$mri['id']."'>" . $mri['code'] . "</td><td>" . $requestType. "</td><td>" . $mri['requester_name'] . "</td></td>";
+        $status=getStatusName($mri["status_id"]);
+        $wif_table .= "<tr><td><a href='manage_mri.php?id=".$mri['id']."'>" . $mri['code'] . "</td><td>" . $requestType. "</td><td>" . $mri['requester_name'] . "</td><td>" .$status . "</td></td>";
     }
 }
 

@@ -357,10 +357,10 @@ if (!empty($arr_project_files)){
 
         if ($file_type == "Legal"){
             if ($file_active == 1){
-                $legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+                $legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
                 $approval_document_select .= "<option value = \"" .  $project_file_id . "\">LEGAL - " . $file_name . "</option>\n";
             }else{
-                $legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+                $legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
 
             }
 
@@ -375,10 +375,10 @@ if (!empty($arr_project_files)){
 
 
             if ($file_active == 1){
-                $final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+                $final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
                 $approval_document_select .= "<option value = \"" .  $project_file_id . "\">FINAL - " . $file_name . "</option>\n";
             }else{
-                $final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+                $final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
 
             }
         }
@@ -410,10 +410,10 @@ if (!empty($arr_project_files)){
             }
             //add files to these containers
             if ($file_active == 1){
-                $round_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+                $round_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
                 $approval_document_select .= "<option value = \"" .  $project_file_id . "\">" . $file_type . " - " . $file_name . "</option>\n";
             }else{
-                $round_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+                $round_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
             }
 
             $prev_round = $current_round;
@@ -1217,7 +1217,7 @@ $js_all_states_array .= "];";
 </div>
 
 <div id="popup3" class="popup">
-    <form id = "edit_file_notes" action = "update_file_notes.php" method = "POST" class="budget">
+    <form id = "edit_file_notes" action = "update_file_notes_mri.php" method = "POST" class="budget">
         <table border = "0">
             <tr>
                 <td>

@@ -100,5 +100,5 @@ if ($error == 0){
     }
 
 }
-$location = "Location: manage_project.php?show_files=1&show" . $file_type. "=1&p=" . $project_id . "&fe=" . $error . "#files";
-//header($location) ;
+$location = "Location: manage_mri.php?id=" . $project_id;
+header($location) ;
