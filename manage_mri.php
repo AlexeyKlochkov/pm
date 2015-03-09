@@ -270,7 +270,7 @@ function getStatusName($id){
 
 function getProductName($id){
     $dbConnection = dbConn();
-    $stmt = $dbConnection->prepare("SELECT business_unit_name FROM business_unit WHERE business_unit_id=:id");
+    $stmt = $dbConnection->prepare("SELECT business_unit_name FROM business_unit WHERE business_unit_id=:id and is_mri=1");
     $stmt->bindValue('id', $id,PDO::PARAM_INT);
     $stmt->bindColumn('business_unit_name', $name,PDO::PARAM_STR);
     try {

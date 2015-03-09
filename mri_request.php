@@ -80,7 +80,7 @@ function getStates(){
 function getSchools(){
     $link = dbConn();
     $result="<option id='0' disabled selected></option>";
-    $handle = $link->prepare("select * from business_unit where active=1 order by business_unit_name asc");
+    $handle = $link->prepare("select * from business_unit where active=1 and is_mri=1 order by business_unit_name asc");
     $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
     $handle->bindColumn("business_unit_abbrev",$abbrev,PDO::PARAM_STR);
