@@ -26,6 +26,7 @@ $business_unit_abbrev = $arr_business_unit_info[0]["business_unit_abbrev"];
 $default_cost_code = $arr_business_unit_info[0]["default_cost_code"];
 $business_unit_owner_id = $arr_business_unit_info[0]["business_unit_owner_id"];
 $active = $arr_business_unit_info[0]["active"];
+$isMRI=$arr_business_unit_info[0]["is_mri"];
 
 $business_unit_owner_select = get_user_select($company_id, "business_unit_owner_id", "Please select", $business_unit_owner_id, 0);
 
@@ -33,6 +34,11 @@ if ($active == 1){
 	$active_checked = "checked";
 }else{
 	$active_checked = "";
+}
+if ($isMRI == 1){
+    $isMRIChecked = "checked";
+}else{
+    $isMRIChecked = "";
 }
 
 
@@ -106,6 +112,10 @@ if ($active == 1){
 									<td>Active:</td>
 									<td><input type = "checkbox" <?php echo $active_checked ?> name = "active" value = "1"></td>
 								</tr>
+                                <tr>
+                                    <td>Is MRI:</td>
+                                    <td><input type = "checkbox" <?php echo $isMRIChecked ?> name = "ismri" value = "1"></td>
+                                </tr>
 							</table></form>
 						
 						</td>

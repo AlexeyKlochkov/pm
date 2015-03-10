@@ -9,8 +9,9 @@ $business_unit_abbrev = $_POST["business_unit_abbrev"];
 $default_cost_code = $_POST["default_cost_code"];
 $business_unit_owner_id = $_POST["business_unit_owner_id"];
 $active = $_POST["active"];
+$isMRI=$_POST["ismri"];
 
-$update_success = update_business_unit($business_unit_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $active, $business_unit_owner_id);
+$update_success = update_business_unit($business_unit_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $active, $business_unit_owner_id,$isMRI);
 if ($update_success <> 0){
 	$location = "Location: edit_business_unit.php?e=2&b=" . $business_unit_id;
 }else{

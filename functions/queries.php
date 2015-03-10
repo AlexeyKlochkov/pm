@@ -1382,9 +1382,9 @@ function update_phase($phase_id, $phase_name, $active){
         return 1;
     }
 }
-function update_business_unit($business_unit_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $active, $business_unit_owner_id){
+function update_business_unit($business_unit_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $active, $business_unit_owner_id,$ismri){
     $dbConnection = dbConn();
-    $sql = "update business_unit set business_unit_name = :business_unit_name, business_unit_abbrev = :business_unit_abbrev, default_cost_code = :default_cost_code, business_unit_owner_id = :business_unit_owner_id, active = :active where business_unit_id = :business_unit_id";
+    $sql = "update business_unit set business_unit_name = :business_unit_name, business_unit_abbrev = :business_unit_abbrev, default_cost_code = :default_cost_code, business_unit_owner_id = :business_unit_owner_id, active = :active,is_mri=:ismri where business_unit_id = :business_unit_id";
     //print $sql;
 
     $stmt = $dbConnection->prepare($sql);
@@ -1393,6 +1393,7 @@ function update_business_unit($business_unit_id, $business_unit_name, $business_
     $stmt->bindParam(':business_unit_abbrev', $business_unit_abbrev);
     $stmt->bindParam(':default_cost_code', $default_cost_code);
     $stmt->bindParam(':active', $active);
+    $stmt->bindParam(':ismri', $ismri);
     $stmt->bindParam(':business_unit_owner_id', $business_unit_owner_id);
     if ($stmt->execute() === FALSE) {
         return 0;

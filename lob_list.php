@@ -12,7 +12,7 @@ include "loggedin.php";
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.validate.js"></script>
 </head>
 <script type="text/javascript">
@@ -55,6 +55,9 @@ include "loggedin.php";
                 }
             });
         });
+        $("#addLOB").click(function(){
+
+        });
     });
 </script>
 
@@ -71,8 +74,11 @@ include "loggedin.php";
         <div id="container">
             <div id="mainContent">
                 <h1>Line of Business</h1>
+                <button type="button" class="btn btn-primary" id="addLOB">Add Line of Business</button>
+                <br>
+                <br>
                 <form class="form-horizontal" role="form" action = "lob_list.php" method = "POST" enctype="multipart/form-data">
-
+                    <tr></tr>
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
@@ -82,10 +88,10 @@ include "loggedin.php";
                         </tr>
                         </thead>
                         <tbody>
+
                         <?php
                         include_once "functions/dbconn.php";
                         $link = dbConn();
-                        $result="<option id='0' disabled selected></option>";
                         $handle = $link->prepare("select * from business_unit order by business_unit_name asc");
                         $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
                         $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
@@ -103,11 +109,8 @@ include "loggedin.php";
                         <td><input id='mri' type='checkbox' name=$id $isMRIChecked></td>
                         </tr>";
                         }
-                        return $result;
                         } catch (Exception $e) {
                         echo 'Caught exception: ', $e->getMessage(), "\n";
-                        return false;
-
                         }?>
                         </tbody>
                     </table>
