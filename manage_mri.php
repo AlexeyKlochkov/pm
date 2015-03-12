@@ -945,7 +945,7 @@ $js_all_states_array .= "];";
                             $('#noneditable_'+name).text(val);
                         }
                         this.value=val  ;
-                        $('#noneditable_'+name).append( "<span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_'" + name + "></span>");
+                        $('#noneditable_'+name).append( "<span style='left:5px;' class='fa fa-pencil' id='noneditable_'" + name + "></span>");
                     }
                 });
                 $('#noneditable_'+name).show();
