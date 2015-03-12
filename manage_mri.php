@@ -1,5 +1,4 @@
 <?php
-
 include "functions/dbconn.php";
 include "functions/queries.php";
 include "functions/functions.php";
@@ -9,6 +8,132 @@ $project_manager_id = 0;
 $active_flag = 1;
 $is_user = 0;
 
+function getRequestType($selected){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT name FROM MRI_request_type where id=:selected");
+    $handle->bindValue(":selected",$selected,PDO::PARAM_INT);
+    $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
+    $handle->bindColumn("name",$name,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result = $name;
+            return $result;
+        }
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getReportType($selected){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT name FROM MRI_report_type WHERE id=:selected");
+    $handle->bindValue(":selected",$selected,PDO::PARAM_INT);
+    $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
+    $handle->bindColumn("name",$name,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+
+            $result = $name;
+            return $result;
+        }
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+
+function getState($selected){
+    $link = dbConn();
+
+    $handle = $link->prepare("select * from state where state_id=:id");
+    $handle->bindValue("id",$selected,PDO::PARAM_INT);
+    $handle->bindColumn("state_name",$name,PDO::PARAM_STR);
+    $handle->bindColumn("state_abbrev",$abbrev,PDO::PARAM_STR);
+    try {
+        $handle->execute();
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result =$name;
+            return $result;
+        }
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getStates($selected){
+    $link = dbConn();
+    $result="";
+    $handle = $link->prepare("select * from state order by state_name asc");
+    $handle->bindColumn("state_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("state_name",$name,PDO::PARAM_STR);
+    $handle->bindColumn("state_abbrev",$abbrev,PDO::PARAM_STR);
+    try {
+        $handle->execute();
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            if ($id==$selected){
+                $result.="<option id='$id' title='$name' label='$name' value='$id' selected>".$name."</option>";
+            }
+            else {
+                $result.="<option id='$id' title='$name' label='$name' value='$id'>".$name."</option>";
+            }
+        }
+
+        return $result;
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getSchools($selected){
+    $link = dbConn();
+    $result="<select class = \"required\" name = \"report_type\"><option value = \"\">Please select</option>";
+    $handle = $link->prepare("select * from business_unit where active=1 order by business_unit_name asc");
+    $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
+    $handle->bindColumn("business_unit_abbrev",$abbrev,PDO::PARAM_STR);
+    try {
+        $handle->execute();
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            if ($id==$selected){
+                $result.="<option id='$id' title='$name' label='$name' value='$id' selected>".$name."</option>";
+            }
+            else {
+                $result.="<option id='$id' title='$name' label='$name' value='$id'>".$name."</option>";
+            }
+        }
+        $result.="</select>";
+        return $result;
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getStatuses($selected){
+    $dbConnection = dbConn();
+    $result="";
+    $stmt = $dbConnection->prepare("SELECT * FROM MRI_statuses");
+    $stmt->bindColumn('id', $id,PDO::PARAM_INT);
+    $stmt->bindColumn('name', $name,PDO::PARAM_STR);
+    try {
+        $stmt->execute();
+        while ($stmt->fetch(PDO::FETCH_BOUND)) {
+
+            if ($id==$selected){
+                $result.="<option id='$id' title='$name' label='$name' value='$id' selected>".$name."</option>";
+            }
+            else {
+                $result.="<option id='$id' title='$name' label='$name' value='$id'>".$name."</option>";
+            }
+        }
+        $result.="</select>";
+        return $result;
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return false;
+    }
+}
 function getMri($id){
     $dbConnection = dbConn();
     $stmt = $dbConnection->prepare("SELECT * FROM MRI_common WHERE id=:id");
@@ -286,19 +411,86 @@ function getProductName($id){
     }
     return $result;
 }
-$project_table = "<table class = \"display1\">";
+$project_table = "<table class = \"table table-hover\">";
 if (!empty($arr_project)){
-
+    $requestType=getRequestType($arr_project[0]["request_type_id"]);
     $project_id = $arr_project[0]["id"];
     $project_code = $arr_project[0]["code"];
     $project_status = getStatusName($arr_project[0]["status_id"]);
     $project_requester = $arr_project[0]["requester_name"];
     $project_table .= "<tr><td class = \"left_header\">Line of Business:</td><td>" .$project_code."</td></tr>";
     if (isset($arr_project[0]["lob_id"])) {
-        $project_table .= "<tr><td class = \"left_header\">Product:</td><td>" . getProductName($arr_project[0]["lob_id"]) . "</td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Product:</td><td>" . getProductName($arr_project[0]["lob_id"]). "</td><</tr>";
     }
-    $project_table .= "<tr><td class = \"left_header\">Project Requester:</td><td>" . $project_requester . "</td></tr>";
-    $project_table .= "<tr><td class = \"left_header\">Current Status:</td><td>" . $project_status . "</td></tr>";
+    $project_table .= "<tr><td class = \"left_header\">Project Requester:</td><td id='noneditable_requester_name' title='$project_id' rel='requester_name' >" . $arr_project[0]["requester_name"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_requester_name'></span></td><td style='display:none;' id='editable_requester_name' title='$project_id'>
+        <input type='text' rel='requester_name' id='input_requester_name' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_name'] . "'></td></tr>";
+
+    $project_table .= "<tr><td class = \"left_header\">Requester email:</td><td id='noneditable_requester_mail' title='$project_id' rel='requester_mail' >" . $arr_project[0]["requester_mail"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_requester_mail'></span></td><td style='display:none;' id='editable_requester_mail' title='$project_id'>
+        <input type='text' rel='requester_mail' id='input_requester_mail' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_mail'] . "'></td></tr>";
+
+    $project_table .= "<tr><td class = \"left_header\">Requester phone:</td><td id='noneditable_requester_phone' title='$project_id' rel='requester_phone' >" . $arr_project[0]["requester_phone"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_requester_phone'></span></td><td style='display:none;' id='editable_requester_phone' title='$project_id'>
+        <input type='text' rel='requester_phone' id='input_requester_phone' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_phone'] . "'></td></tr>";
+
+    $project_table .=" <tr><td class = \"left_header\">Request type:</td><td>".$requestType."</td></tr>";
+    if (isset($arr_project[0]["report_type_id"])) {
+        $project_table .= "<tr><td class = \"left_header\">Type of report:</td><td>" . getReportType($arr_project[0]["report_type_id"]) . "</td></tr>";
+    }
+    if (isset($arr_project[0]["state_id"])) {
+        $states=getStates($arr_project[0]["state_id"]);
+        $project_table .= "<tr><td class = \"left_header\">State:</td><td id='noneditable_state_id' title='$project_id' rel='state_id' >" . getState($arr_project[0]["state_id"]) . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_state_id'></span></td>
+        <td style='display:none;' id='editable_state_id' title='$project_id'><select  rel='state_id' id='input_state_id' title='$project_id'>$states</select></td></tr>";
+    }
+    if (isset($arr_project[0]["title"])) {
+        $project_table .= "<tr><td class = \"left_header\">Title:</td><td id='noneditable_title' title='$project_id' rel='title' >" . $arr_project[0]["title"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_title'></span></td><td style='display:none;' id='editable_title' title='$project_id'>
+        <input type='text' rel='title' id='input_title' style='width:100%' title='$project_id' value='". $arr_project[0]['title'] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["codes"])) {
+        $project_table .= "<tr><td class = \"left_header\">SIP/SOC codes:</td><td id='noneditable_codes' title='$project_id' rel='codes' >" . $arr_project[0]["codes"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_codes'></span></td><td style='display:none;' id='editable_codes' title='$project_id'>
+        <input type='text' rel='codes' id='input_codes' style='width:100%' title='$project_id' value='". $arr_project[0]["codes"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["pic_name"])) {
+        $project_table .= "<tr><td class = \"left_header\">Project/Campaign name:</td><td id='noneditable_pic_name' title='$project_id' rel='pic_name' >" . $arr_project[0]["pic_name"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_pic_name'></span></td><td style='display:none;' id='editable_pic_name' title='$project_id'>
+        <input type='text' rel='pic_name' id='input_pic_name' style='width:100%' title='$project_id' value='". $arr_project[0]["pic_name"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["due_date"])) {
+        $project_table .= "<tr><td class = \"left_header\">Delivery date:</td><td>" . translate_mysql_todatepicker($arr_project[0]["due_date"]) . "</td></tr>";
+    }
+    if (isset($arr_project[0]["spec_claims"])) {
+        $project_table .= "<tr><td class = \"left_header\">List specific claims:</td><td id='noneditable_spec_claims' title='$project_id' rel='spec_claims' >" . $arr_project[0]["spec_claims"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_spec_claims'></span></td><td style='display:none;' id='editable_spec_claims' title='$project_id'>
+        <input type='text' rel='spec_claims' id='input_spec_claims' style='width:100%' title='$project_id' value='". $arr_project[0]["spec_claims"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["info"])) {
+        $project_table .= "<tr><td class = \"left_header\">Additional information:</td><td id='noneditable_info' title='$project_id' rel='info' >" . $arr_project[0]["info"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_info'></span></td><td style='display:none;' id='editable_info' title='$project_id'>
+        <input type='text' rel='info' id='input_info' style='width:100%' title='$project_id' value='". $arr_project[0]["info"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["request_description"])) {
+        $project_table .= "<tr><td class = \"left_header\">Research request description:</td><td id='noneditable_request_description' title='$project_id' rel='request_description' >" . $arr_project[0]["request_description"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_request_description'></span></td><td style='display:none;' id='editable_request_description' title='$project_id'>
+        <input type='text' rel='request_description' id='input_request_description' style='width:100%' title='$project_id' value='". $arr_project[0]["request_description"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["spec_questions"])) {
+        $project_table .= "<tr><td class = \"left_header\">Specific questions:</td><td id='noneditable_spec_questions' title='$project_id' rel='spec_questions' >" . $arr_project[0]["spec_questions"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_spec_questions'></span></td><td style='display:none;' id='editable_spec_questions' title='$project_id'>
+        <input type='text' rel='spec_questions' id='input_spec_questions' style='width:100%' title='$project_id' value='". $arr_project[0]["spec_questions"] . "'></td></tr>";
+    }
+    if (isset($arr_project[0]["sources"])) {
+        $project_table .= "<tr><td class = \"left_header\">Sources, if available:</td><td id='noneditable_sources' title='$project_id' rel='sources' >" . $arr_project[0]["sources"] . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_sources'></span></td><td style='display:none;' id='editable_sources' title='$project_id'>
+        <input type='text' rel='sources' id='input_sources' style='width:100%' title='$project_id' value='". $arr_project[0]["sources"] . "'></td></tr>";
+    }
+    $statuses=getStatuses($arr_project[0]["status_id"]);
+    $project_table .= "<tr><td class = \"left_header\">Current Status:</td><td id='noneditable_status_id' title='$project_id' rel='status_id' >" . $project_status . "
+        <span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_status_id'></span></td>
+        <td style='display:none;' id='editable_status_id' title='$project_id'><select  rel='status_id' id='input_status_id' title='$project_id'>$statuses</select></td></tr>";
     $pif_id = "";
     $pif_code = "";
     if ($_SESSION["user_level"] > 10 || (in_array($_SESSION["user_id"],$assignedUsers))){
@@ -682,14 +874,20 @@ if(!empty($arr_states)){
 $js_all_states_array .= "];";
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <title>Marketing Research Intake</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='style.css' rel='stylesheet' type='text/css' />
     <link href='js/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' type='text/css' />
-    <title>Manage Project</title>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+</head>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#spend_form").validate({
@@ -708,10 +906,50 @@ $js_all_states_array .= "];";
                 }
 
             });
-            //js states
+            $('[id^=noneditable_]').click(function(){
+                var name=this.getAttribute('rel');
+                $('#noneditable_'+name).hide();
+                $('#editable_'+name).show();
+                $('#input_'+name).focus();
+            });
 
+            $('[id^=input_]').blur(function(){
+                var id=this.getAttribute('title');
+                var name=this.getAttribute('rel');
+                var val=this.value;
+                var isSelect=false;
+                if ($(this).prop('tagName')=='SELECT'){
+                    isSelect=true;
+                    var selected=$(this).find('option:selected').attr('title');
+                }
 
-
+                else {}
+                var params = {
+                    request:"Update mri",
+                    id: id,
+                    field:name,
+                    value:val
+                };
+                $.ajax({
+                    url: 'mri_handler.php',
+                    global: false,
+                    type: "POST",
+                    data: params,
+                    dataType:"text",
+                    success: function (result) {
+                        if (isSelect){
+                            $('#noneditable_'+name).text(selected);
+                            }
+                        else {
+                            $('#noneditable_'+name).text(val);
+                        }
+                        this.value=val  ;
+                        $('#noneditable_'+name).append( "<span style='left:5px;' class='glyphicon glyphicon-pencil' id='noneditable_'" + name + "></span>");
+                    }
+                });
+                $('#noneditable_'+name).show();
+                $('#editable_'+name).hide();
+            });
             $('.state_click').click(function() {
 
                 var aaid = $(this).attr("aaid");
@@ -844,8 +1082,6 @@ $js_all_states_array .= "];";
                 $(".file_section").hide();
                 $(".file_nav_link").removeClass("file_nav_selected");
             }
-
-
 
         });
     </script>
@@ -988,8 +1224,7 @@ $js_all_states_array .= "];";
         }
     </script>
 
-</head>
-<body>
+<body style="background-color: #EFEFEF">
 <div id = "page">
     <div id = "main">
         <div id = "logo">
@@ -1016,7 +1251,6 @@ $js_all_states_array .= "];";
                                     <?php
                                     if ($_SESSION["user_level"] >= 20){
                                         ?>
-
                                         <a href = "edit_mri.php?id=<?php echo $project_id ?>">edit</a>
                                     <?php
                                     }
@@ -1027,16 +1261,13 @@ $js_all_states_array .= "];";
 
 
                     </div>
-                    <table width = "100%" border = "0">
+                    <table width = "40%" border = "0">
                         <tr>
                             <td valign="top"><!--project info-->
                                 <?php echo $project_table  ?><br>
                             </td>
                         </tr>
-                        <td colspan = "2">
-                            <div class = "error"><?php echo $approval_message ?></div>
-                            <?php echo $approval_table_top ?>
-                        </td>
+
                     </table>
                 </div><!--end section_area div tag-->
 
@@ -1063,15 +1294,11 @@ $js_all_states_array .= "];";
                         <div class = "error"><?php echo $file_error_message ?></div>
                         <div id = "file_nav">
                             <ul class="file_nav_ul">
-
-                                <li><a class = "file_nav_link" id = "legal_link" name = "legal" href = "#files">Legal</a></li>
+                                <li><a class = "file_nav_link file_nav_selected" id = "legal_link" name = "legal" href = "#files">Legal</a></li>
                                 <li><a class = "file_nav_link" id = "final_link" name = "final" href = "#files">Final</a></li>
                             </ul>
                         </div>
                         <div class = "file_container">
-
-
-
                             <div class = "file_section" id = "legal">
                                 <table class = "file_main" width = "80%">
                                     <tr>
@@ -1117,9 +1344,6 @@ $js_all_states_array .= "];";
             </div> <!--end mainContent div tag-->
 
         </div>
-        <?php
-        include "footer.php";
-        ?>
 
     </div>
 

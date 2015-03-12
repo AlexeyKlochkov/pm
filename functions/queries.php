@@ -2693,7 +2693,7 @@ function activate_audience($audience_id, $active){
 }
 function insert_business_unit($company_id, $business_unit_name, $business_unit_abbrev, $default_cost_code, $business_unit_owner_id){
     $dbConnection = dbConn();
-    $sql = "insert into business_unit (company_id, business_unit_name, business_unit_abbrev, default_cost_code, business_unit_owner_id, active) values (:company_id, :business_unit_name, :business_unit_abbrev, :default_cost_code, :business_unit_owner_id,1)";
+    $sql = "insert into business_unit (company_id, business_unit_name, business_unit_abbrev, default_cost_code, business_unit_owner_id, active,is_mri) values (:company_id, :business_unit_name, :business_unit_abbrev, :default_cost_code, :business_unit_owner_id,1,1)";
     //print $sql;
 
     $stmt = $dbConnection->prepare($sql);

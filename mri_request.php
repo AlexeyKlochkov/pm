@@ -23,7 +23,7 @@ if ($_SESSION["isbm"]==1){
 }
 function getRequestTypes(){
     $link=dbConn();
-    $result="<option id='0' disabled selected></option>";
+    $result="<option id='0' disabled selected ></option>";
     $handle=$link->prepare("SELECT * FROM MRI_request_type");
     $handle->bindColumn("id",$id,PDO::PARAM_INT);
     $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
@@ -203,7 +203,7 @@ function getSchools(){
                         </div>
                         <label class="control-label col-sm-2" for="due_date">Due date:</label>
                         <div class="col-sm-2">
-                            <input  class = "datepicker" type = "text" name = "due_date" value ="" readonly="readonly" required>
+                            <input  class = "datepicker" type = "text" name = "due_date" value ="" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="Subs1" title="request">
@@ -217,7 +217,7 @@ function getSchools(){
                         </div>
                         <label class="control-label col-sm-3" for="delivery_date">Desired delivery date:</label>
                         <div class="col-sm-3">
-                            <input  class = "datepicker" type = "text" name = "delivery_date" value ="" readonly="readonly" required>
+                            <input  class = "datepicker" type = "text" name = "delivery_date" value ="" readonly="readonly">
                         </div>
 
                         <br/><br/><br/>
@@ -229,27 +229,27 @@ function getSchools(){
                     <div class="form-group" style="display: none;" id="Subs2" title="request">
                         <label class="control-label col-sm-2" for="claims">List specific claims:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="claims" name="claims">
+                            <textarea id="claims" name="claims" rows="6" cols="48"></textarea>
                         </div>
                         <label class="control-label col-sm-2" for="sources">Sources, if available:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="sources" name="sources">
+                            <textarea id="sources" name="sources" rows="6" cols="48"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="AHR1" title="request">
                         <label class="control-label col-sm-2" for="research">Research request description:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="research" name="research">
+                            <textarea id="research" name="research" rows="6" cols="48"></textarea>
                         </div>
                         <label class="control-label col-sm-2" for="questions">Specific questions:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="questions" name="questions">
+                            <textarea id="questions" name="questions" rows="6" cols="48"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="Subs3" title="request">
                         <label class="control-label col-sm-2" for="info">Additional information:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="info" name="info">
+                            <textarea id="info" name="info" rows="12" cols="96"></textarea>
                         </div>
                     </div>
                     <input type="text" style="display:none;" value="<?php echo $_SESSION["isbm"]?>" name="isBm">

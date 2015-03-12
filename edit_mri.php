@@ -18,9 +18,9 @@ function getRequestTypes($selected){
             if ($id==$selected){
                 $result.="<option id='$id' title='$short' label='$name' value='$id' selected>".$name."</option>";
             }
-                else {
-                    $result.="<option id='$id' title='$short' label='$name' value='$id'>".$name."</option>";
-                }
+            else {
+                $result.="<option id='$id' title='$short' label='$name' value='$id'>".$name."</option>";
+            }
         }
         $result.="</select>";
         return $result;
@@ -266,7 +266,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (!is_null($codes)):?>
                             <tr>
-                                <td>Title:</td>
+                                <td>SIP/SOC codes:</td>
                                 <td><input type = "text" name = "codes" value = "<?php echo $codes ?>"></td>
                             </tr>
                         <?php endif;?>
@@ -308,7 +308,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (!is_null($description)):?>
                             <tr>
-                                <td>research request description:</td>
+                                <td>Research request description:</td>
                                 <td><input type = "text" name = "description" value = "<?php echo $description ?>"></td>
                             </tr>
                         <?php endif;?>
@@ -320,7 +320,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (!is_null($sources)):?>
                             <tr>
-                                <td>Sources, if available:</td>
+                                <td>f</td>
                                 <td><input type = "text" name = "claims" value = "<?php echo $sources ?>"></td>
                             </tr>
                         <?php endif;?>
