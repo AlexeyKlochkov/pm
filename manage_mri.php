@@ -505,7 +505,7 @@ if (!empty($arr_project)){
 
 }
 
-$project_table .= " </table><hr><div><span style='left:5px;' class='fa fa-pencil' id='noneditable_status_id'></span> - editable fields</div>";
+$project_table .= " </table><hr><div><span style='left:5px;' class='fa fa-pencil' id='noneditable_status_id'></span> - editable field</div>";
 
 
 
