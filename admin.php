@@ -6,7 +6,6 @@ $_SESSION["isbm"]=1;
 <head>
 <link href='style.css' rel='stylesheet' type='text/css' />
 <title>Admin Tools</title>
-<script type="text/javascript" src="jquery-1.7.2.js"></script> 
 </head>
 <body>
 <div id = "page">
@@ -66,7 +65,7 @@ $_SESSION["isbm"]=1;
                 <a href = "mri_list.php">MRI list</a><br>
 			</div> <!--end mainContent div tag-->
 		</div>
-		<?php 
+		<?php
 			include "footer.php";
 		?>
 	</div>
