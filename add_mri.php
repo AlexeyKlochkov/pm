@@ -95,6 +95,12 @@ function updateCode($id,$code){
         return false;
     }
 }
+function sendMail($to){
+    $subject='New MRI submission';
+    $message = "Test mri";
+    $headers =  'From:noreply@apollo.edu';
+    mail($to,$subject,$message,$headers);
+}
     $dbConnection = dbConn();
     $stmt = $dbConnection->prepare("INSERT INTO MRI_common (isBM,requester_name,requester_mail,requester_phone,request_type_id,report_type_id,state_id,title,
                                     due_date,codes,id,pic_name,delivery_date,spec_claims,sources,info,request_description,spec_questions,status_id) VALUES (
@@ -132,4 +138,41 @@ if ($result) {
     updateCode($result,$mriCode);
     $location = "Location: mri_ty.php?e=2";
 }
+function smtpmailer($to, $subject, $body, $altbody) {
+    require_once("phpmail/class.phpmailer.php");
+    global $error;
+    $mail = new PHPMailer();  // create a new object
+    $mail->IsSMTP(); // enable SMTP
+    $mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
+    //$mail->SMTPAuth = true;  // authentication enabled
+    //$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+    $mail->Host = 'mailrelay.apollogrp.edu';
+    $mail->Port = 25;
+    //$mail->Username = "loomis95650@gmail.com";
+    //$mail->Username = "uopx.pm@gmail.com";
+    //$mail->Password = "admin199";
+    $mail->SetFrom("mktgintake@apollogrp.edu", "Marketing Intake");
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+    $mail->AltBody = $altbody;
+    $mail->AddAddress($to);
+    $mail->IsHTML(true);
+    if(!$mail->Send()) {
+        $error = 'Mail error: '.$mail->ErrorInfo;
+        //print $error;
+        return 0;
+    } else {
+        $error = 'Message sent!';
+        return 1;
+    }
+}
+$subject="MRI submission";
+$body="<h2>Thank you for your submission!</h2>";
+$altbody="";
+if ($isBm){
+    $addr='http://'.$_SERVER["SERVER_NAME"].'/pm/manage_mri.php?id='.$lastId;
+    $body.="<p>You can view/edit your requests here:<a href=$addr>Link</a></p>";
+}
+smtpmailer($requesterMail,$subject,$body,$altbody);
+
 header ($location);
