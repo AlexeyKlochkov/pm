@@ -122,7 +122,7 @@ function getSchools(){
             $('#'+id+'2').find("input[type=text], textarea").val("");
             $('#'+id+'1').show();
             $('#'+id+'2').show();
-            if (iid=='2'){
+            if (iid=='2' || iid=='3'){
                 $('#state').prop('selectedIndex',0);
                 $('#state').hide();
                 $('#state1').prop('selectedIndex',0);

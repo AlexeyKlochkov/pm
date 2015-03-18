@@ -25,6 +25,8 @@ if (!empty($_GET["p"])){
 
 //$quarter_select = get_quarter_select($campaign_quarter);
 $arr_pif = get_pif_info($pif_id);
+$filelist=get_pif_file_by_id($pif_id);
+
 if (!empty($arr_pif)){
 	$pif_code = $arr_pif[0]["pif_code"];
 	$version = $arr_pif[0]["version"];
@@ -74,6 +76,12 @@ if (!empty($arr_pif)){
 	$aop_activity_type_name = $arr_pif[0]["aop_activity_type_name"];
 	
 }
+if (is_array($filelist)){
+    foreach ($filelist as $file){
+        $flist[]="pif_files/".$pif_code."/".$file["pif_file_name"];
+    }
+}
+
 $total_segment_reach = 0;
 if (empty($aop_activity_type_name)){
 	$aop_activity_type_name = "AOP type unassigned";
@@ -444,8 +452,21 @@ if ($_SESSION["user_level"] >25){
 									<div class = "pif_review_title">Required elements:</div>
 									<?php echo $required_elem ?>
 								</td>
-							</tr>
-							<input type="hidden" name="required_elem" value="<?php echo $required_elem?>">
+						</tr>
+                            <?php if (isset($flist)):?>
+                            <tr>
+                                <td colspan = "2">
+                                    <div class = "pif_files">Attached files:</div>
+                                    <?php
+                                    foreach($flist as $item){
+                                        echo "<a href=".$item.">".$item."</a>";
+                                        echo "<br>";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                                <?php endif;?>
+                            <input type="hidden" name="required_elem" value="<?php echo $required_elem?>">
 						<?php endif;?>
 					</table>
 				</div>
