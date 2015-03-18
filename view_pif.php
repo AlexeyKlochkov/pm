@@ -459,7 +459,7 @@ if ($_SESSION["user_level"] >25){
                                     <div class = "pif_files">Attached files:</div>
                                     <?php
                                     foreach($flist as $item){
-                                        echo "<a href=".$item.">".$item."</a>";
+                                        echo "<a href='".$item."'>".$item."</a>";
                                         echo "<br>";
                                     }
                                     ?>
