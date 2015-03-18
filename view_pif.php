@@ -76,9 +76,12 @@ if (!empty($arr_pif)){
 	$aop_activity_type_name = $arr_pif[0]["aop_activity_type_name"];
 	
 }
+$i=0;
 if (is_array($filelist)){
     foreach ($filelist as $file){
-        $flist[]="pif_files/".$pif_code."/".$file["pif_file_name"];
+        $flist[$i]["path"]="pif_files/".$pif_code."/".$file["pif_file_name"];
+        $flist[$i]["name"]=$file["pif_file_name"];
+        $i++;
     }
 }
 
