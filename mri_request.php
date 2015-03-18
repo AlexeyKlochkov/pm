@@ -10,7 +10,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
     <script type="text/javascript" src="js/jquery.validate.js"></script>
 </head>
 <?php
@@ -100,6 +102,10 @@ function getSchools(){
 <script type="text/javascript">
     $(document).ready(function(){
         $( ".datepicker" ).datepicker();
+        $('textarea').trumbowyg({
+            resetCss: true,
+            btns: ['bold', 'italic', '|', 'insertImage']
+        });
         $("#request_type").change(function(){
             var id = $(this).children(":selected").attr("title");
             $('div[title=request]').hide();
@@ -107,9 +113,11 @@ function getSchools(){
             $('#' + id + '1').find("input[type=text], textarea").val("");
             $('#' + id + '2').find("input[type=text], textarea").val("");
             $('#' + id + '3').find("input[type=text], textarea").val("");
+            $('#' + id + '4').find("input[type=text], textarea").val("");
             $('#' + id + '1').show();
             $('#' + id + '2').show();
             $('#' + id + '3').show();
+            $('#' + id + '4').show();
             if (id=="AHR"){
                 $('#Subs1').show();
                 $('#Subs3').show();
@@ -120,8 +128,10 @@ function getSchools(){
             var iid = $(this).children(":selected").attr("id");
             $('#'+id+'1').find("input[type=text], textarea").val("");
             $('#'+id+'2').find("input[type=text], textarea").val("");
+            $('#'+id+'3').find("input[type=text], textarea").val("");
             $('#'+id+'1').show();
             $('#'+id+'2').show();
+            $('#'+id+'3').show();
             if (iid=='2' || iid=='3'){
                 $('#state').prop('selectedIndex',0);
                 $('#state').hide();
@@ -165,24 +175,25 @@ function getSchools(){
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="request_type">Please choose type of request:</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <select class="form-control" id="request_type" name="request_type" required="required">
                                 <?php
                                 echo getRequestTypes();
                                 ?>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group" style="display: none;" id="UPLC1" title="request">
-                        <label class="control-label col-sm-2" for="report_type">Type of report:</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="report_type" name="report_type">
-                                <?php
-                                echo getReportTypes();
-                                ?>
-                            </select>
+                        <div class="form-group" style="display: none;" id="UPLC1" title="request">
+                            <label class="control-label col-sm-2" for="report_type">Type of report:</label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="report_type" name="report_type">
+                                    <?php
+                                    echo getReportTypes();
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                     </div>
+
                     <div class="form-group" style="display: none;" id="SSMS1" title="request">
                         <label class="control-label col-sm-2" for="title">Title of program:</label>
                         <div class="col-sm-4">
@@ -198,15 +209,18 @@ function getSchools(){
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="SSMS2" title="request">
-                        <label class="control-label col-sm-2" for="codes">CIP/SOC:</label>
-                        <div class="col-sm-4">
-                            <textarea id="codes" name="codes" rows="6" cols="55"></textarea>
-                        </div>
                         <label class="control-label col-sm-2" for="due_date">Desired Due Date:</label>
                         <div class="col-sm-2">
                             <input  class = "datepicker" type = "text" name = "due_date" value ="" readonly="readonly">
                         </div>
                     </div>
+                    <div class="form-group" style="display: none;" id="SSMS3" title="request">
+                        <label class="control-label col-sm-2" for="codes">CIP/SOC:</label>
+                        <div class="col-sm-8">
+                            <textarea id="codes" name="codes" rows="6" cols="55"></textarea>
+                        </div>
+                    </div>
+
                     <div class="form-group" style="display: none;" id="Subs1" title="request">
                         <label class="control-label col-sm-2" for="lob">LOB:</label>
                         <div class="col-sm-4" >
@@ -229,27 +243,31 @@ function getSchools(){
                     </div>
                     <div class="form-group" style="display: none;" id="Subs2" title="request">
                         <label class="control-label col-sm-2" for="claims">List specific claims:</label>
-                        <div class="col-sm-4">
-                            <textarea id="claims" name="claims" rows="6" cols="48"></textarea>
+                        <div class="col-sm-8">
+                            <textarea id="claims" name="claims" rows="8" cols="96"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group" style="display: none;" id="Subs4" title="request">
                         <label class="control-label col-sm-2" for="sources">Sources, if available:</label>
-                        <div class="col-sm-4">
-                            <textarea id="sources" name="sources" rows="6" cols="48"></textarea>
+                        <div class="col-sm-8">
+                            <textarea id="sources" name="sources" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="AHR1" title="request">
                         <label class="control-label col-sm-2" for="research">Research request description:</label>
-                        <div class="col-sm-4">
-                            <textarea id="research" name="research" rows="6" cols="48"></textarea>
+                        <div class="col-sm-8">
+                            <textarea id="research" name="research" rows="8" cols="96"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group" style="display: none;" id="AHR2" title="request">
                         <label class="control-label col-sm-2" for="questions">Specific questions:</label>
-                        <div class="col-sm-4">
-                            <textarea id="questions" name="questions" rows="6" cols="48"></textarea>
+                        <div class="col-sm-8">
+                            <textarea id="questions" name="questions" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="Subs3" title="request">
                         <label class="control-label col-sm-2" for="info">Additional information:</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-8">
                             <textarea id="info" name="info" rows="12" cols="96"></textarea>
                         </div>
                     </div>

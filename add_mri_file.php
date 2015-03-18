@@ -72,7 +72,7 @@ if ($_FILES['file']['size'] > $max_file_size){
 }
 
 if ($error == 0){
-    $logo_directory = "project_files/" . $project_code . "/";
+    $logo_directory = "mri_files/" . $project_code . "/";
     if (!file_exists($logo_directory)) {
         //if (is_writable($_SERVER['DOCUMENT_ROOT'] . $logo_directory)){
         mkdir($logo_directory);
