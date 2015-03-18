@@ -200,7 +200,7 @@ function getSchools(){
                     <div class="form-group" style="display: none;" id="SSMS2" title="request">
                         <label class="control-label col-sm-2" for="codes">CIP/SOC:</label>
                         <div class="col-sm-4">
-                            <textarea id="codes" name="codes" rows="6" cols="60"></textarea>
+                            <textarea id="codes" name="codes" rows="6" cols="55"></textarea>
                         </div>
                         <label class="control-label col-sm-2" for="due_date">Desired Due Date:</label>
                         <div class="col-sm-2">
