@@ -32,7 +32,7 @@ function getReportTypes($selected){
     try{
         $handle->execute();
         while ($handle->fetch(PDO::FETCH_BOUND)) {
-            $result=$short;
+            $result=$name;
         }
         return $result;
     }catch (Exception $e) {
