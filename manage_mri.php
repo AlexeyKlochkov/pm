@@ -492,10 +492,10 @@ if ($_SESSION["user_level"] > 30){
 //Put together file section
 
 
-$legal_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$legal_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$final_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$final_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$legal_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$legal_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$final_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$final_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
 $round_area = "";
 
 $arr_project_files = get_project_files($project_id);
@@ -512,7 +512,7 @@ if (!empty($arr_project_files)){
         $file_type = $file_row["file_type"];
         $file_active = $file_row["active"];
         $file_network_folder = $file_row["file_network_folder"];
-
+        $file_upload_date=$file_row["update_date"];
         $directory = "mri_files/" . $arr_project[0]["code"] . "/";
         $file_location = $directory. $file_name;
         $notes_field = $file_notes;
@@ -523,10 +523,10 @@ if (!empty($arr_project_files)){
 
         if ($file_type == "Legal"){
             if ($file_active == 1){
-                $legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
+                $legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
                 $approval_document_select .= "<option value = \"" .  $project_file_id . "\">LEGAL - " . $file_name . "</option>\n";
             }else{
-                $legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
+                $legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
 
             }
 
@@ -541,10 +541,10 @@ if (!empty($arr_project_files)){
 
 
             if ($file_active == 1){
-                $final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
+                $final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_mri.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">archive</a></td></tr>";
                 $approval_document_select .= "<option value = \"" .  $project_file_id . "\">FINAL - " . $file_name . "</option>\n";
             }else{
-                $final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
+                $final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_mri.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&id=" . $project_id ."\">activate</a></td></tr>";
 
             }
         }

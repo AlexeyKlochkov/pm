@@ -558,18 +558,18 @@ $spend_form .= "<td align=\"right\"><input type = \"hidden\" name = \"project_id
 $spend_form .= "</tr></table></form></div>\n";
 
 //Put together file section
-$PIF_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$PIF_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$CB_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$CB_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$legal_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$legal_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$studio_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$studio_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$financial_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$financial_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$final_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
-$final_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$PIF_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$PIF_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$CB_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$CB_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$legal_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$legal_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$studio_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$studio_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$financial_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$financial_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$final_current_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
+$final_archive_table = "<table class = \"file_list\" width = \"100%\"><tr><th align=\"left\">File</th><th align=\"left\">Upload date</th><th align=\"left\">Notes</th><th>&nbsp;</th></tr>\n";
 $round_area = "";
 
 $arr_project_files = get_project_files($project_id);
@@ -585,6 +585,7 @@ if (!empty($arr_project_files)){
 		$file_notes = $file_row["file_notes"];
 		$file_type = $file_row["file_type"];
 		$file_active = $file_row["active"];
+        $file_upload_date=$file_row["update_date"];
 		$file_network_folder = $file_row["file_network_folder"];
 		$file_asset_item_name = $file_row["asset_item_name"];
 		$directory = "project_files/" . $project_code . "/";
@@ -597,49 +598,49 @@ if (!empty($arr_project_files)){
 		
 		if ($file_type == "PIF"){
 			if ($file_active == 1){
-				$PIF_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$PIF_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">PIF - " . $file_name . "</option>\n"; 
 			}else{
-				$PIF_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$PIF_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		}
 		if ($file_type == "CB"){
 			if ($file_active == 1){
-				$CB_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$CB_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">CB - " . $file_name . "</option>\n"; 
 			}else{
-				$CB_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$CB_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		
 		}
 		if ($file_type == "Legal"){
 			if ($file_active == 1){
-				$legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$legal_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">LEGAL - " . $file_name . "</option>\n"; 
 			}else{
-				$legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$legal_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		
 		}
 		if ($file_type == "Studio"){
 			if ($file_active == 1){
-				$studio_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$studio_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">STUDIO - " . $file_name . "</option>\n"; 
 			}else{
-				$studio_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$studio_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		
 		}
 		if ($file_type == "Financial"){
 			if ($file_active == 1){
-				$financial_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$financial_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">FINANCIAL - " . $file_name . "</option>\n"; 
 			}else{
-				$financial_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$financial_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		
@@ -655,10 +656,10 @@ if (!empty($arr_project_files)){
 			}
 			
 			if ($file_active == 1){
-				$final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
+				$final_current_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a>" . $asset_item_name_string . $file_network_location_string  . "</td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $notes_field . "</td><td><a href =\"del_file.php?a=2&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">archive</a></td></tr>";
 				$approval_document_select .= "<option value = \"" .  $project_file_id . "\">FINAL - " . $file_name . "</option>\n"; 
 			}else{
-				$final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
+				$final_archive_table .= "<tr><td><a href = \"" . $file_location . "\" target = \"_blank\">" . $file_name . "</a></td></td><td>".date("m/d/Y H:m",strtotime($file_upload_date))."</td><td>" . $file_notes . "</td><td><a href =\"del_file.php?a=1&f=" . $file_type . "&pfid=" . $project_file_id . "&p=" . $project_id ."\">activate</a></td></tr>";
 			
 			}
 		}
