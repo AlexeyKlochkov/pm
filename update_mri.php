@@ -7,11 +7,6 @@ include "functions/functions.php";
 $requesterName=$_POST["requester_name"];
 $requesterMail=$_POST["requester_mail"];
 $requesterPhone=$_POST["requester_phone"];
-$requestType=$_POST["request_type"];
-if (isset($_POST["report_type"]) && ($_POST["report_type"]!="")) {
-    $reportType = $_POST["report_type"];
-}
-else $reportType=null;
 if (isset($_POST["title"]) && ($_POST["title"]!="")){
     $title=$_POST["title"];
 }
@@ -69,8 +64,8 @@ if (isset($_POST["isBm"])){
 }else $isBm=0;
 $mriId=$_POST["mri_id"];
 $dbConnection = dbConn();
-$stmt = $dbConnection->prepare("UPDATE MRI_common SET isBM=:isBm,requester_name=:requesterName,requester_mail=:requesterMail,requester_phone=:requesterPhone,request_type_id=:requestType,
-                                    report_type_id=:reportType,state_id=:state,title=:title,due_date=:dueDate,codes=:codes,lob_id=:lob,pic_name=:PIC,delivery_date=:deliveryDate,
+$stmt = $dbConnection->prepare("UPDATE MRI_common SET isBM=:isBm,requester_name=:requesterName,requester_mail=:requesterMail,requester_phone=:requesterPhone,
+                                    state_id=:state,title=:title,due_date=:dueDate,codes=:codes,lob_id=:lob,pic_name=:PIC,delivery_date=:deliveryDate,
                                     spec_claims=:claims,sources=:sources,info=:info,request_description=:research,spec_questions=:questions,status_id=:status
                                      WHERE id=:id");
 $stmt->bindValue(':id', $mriId,PDO::PARAM_INT);
@@ -78,8 +73,6 @@ $stmt->bindValue(':isBm', $isBm,PDO::PARAM_INT);
 $stmt->bindValue(':requesterName', $requesterName,PDO::PARAM_STR);
 $stmt->bindValue(':requesterMail', $requesterMail,PDO::PARAM_STR);
 $stmt->bindValue(':requesterPhone', $requesterPhone,PDO::PARAM_STR);
-$stmt->bindValue(':requestType', $requestType,PDO::PARAM_INT);
-$stmt->bindValue(':reportType', $reportType,PDO::PARAM_INT);
 $stmt->bindValue(':state', $state,PDO::PARAM_INT);
 $stmt->bindValue(':title', $title,PDO::PARAM_STR);
 $stmt->bindValue(':dueDate', $dueDate,PDO::PARAM_STR);

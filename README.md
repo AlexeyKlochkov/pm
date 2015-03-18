@@ -20,8 +20,3 @@ Installation
         ▪	Verify you are connecting to your local DB
 5.	Run the application by going to the app’s index page running on your local server. Login. Done.
 
-
-===========
-WIKI page
-===========
-http://23.21.161.0/wiki/index.php/Digital#

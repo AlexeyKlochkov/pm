@@ -422,17 +422,11 @@ if (!empty($arr_project)){
     if (isset($arr_project[0]["lob_id"])) {
         $project_table .= "<tr><td class = \"left_header\">Product:</td><td>" . getProductName($arr_project[0]["lob_id"]). "</td><</tr>";
     }
-    $project_table .= "<tr><td class = \"left_header\">Project Requester:</td><td id='noneditable_requester_name' title='$project_id' rel='requester_name' >" . $arr_project[0]["requester_name"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_requester_name'></span></td><td style='display:none;' id='editable_requester_name' title='$project_id'>
-        <input type='text' rel='requester_name' id='input_requester_name' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_name'] . "'></td></tr>";
+    $project_table .= "<tr><td class = \"left_header\">Project Requester:</td><td title='$project_id' rel='requester_name' >" . $arr_project[0]["requester_name"] . "</td></tr>";
 
-    $project_table .= "<tr><td class = \"left_header\">Requester email:</td><td id='noneditable_requester_mail' title='$project_id' rel='requester_mail' >" . $arr_project[0]["requester_mail"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_requester_mail'></span></td><td style='display:none;' id='editable_requester_mail' title='$project_id'>
-        <input type='text' rel='requester_mail' id='input_requester_mail' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_mail'] . "'></td></tr>";
+    $project_table .= "<tr><td class = \"left_header\">Requester email:</td><td title='$project_id' rel='requester_mail' >" . $arr_project[0]["requester_mail"] . "</td></tr>";
 
-    $project_table .= "<tr><td class = \"left_header\">Requester phone:</td><td id='noneditable_requester_phone' title='$project_id' rel='requester_phone' >" . $arr_project[0]["requester_phone"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_requester_phone'></span></td><td style='display:none;' id='editable_requester_phone' title='$project_id'>
-        <input type='text' rel='requester_phone' id='input_requester_phone' style='width:100%' title='$project_id' value='". $arr_project[0]['requester_phone'] . "'></td></tr>";
+    $project_table .= "<tr><td class = \"left_header\">Requester phone:</td><td  title='$project_id' rel='requester_phone' >" . $arr_project[0]["requester_phone"] . "</td></tr>";
 
     $project_table .=" <tr><td class = \"left_header\">Request type:</td><td>".$requestType."</td></tr>";
     if (isset($arr_project[0]["report_type_id"])) {
@@ -440,57 +434,37 @@ if (!empty($arr_project)){
     }
     if (isset($arr_project[0]["state_id"])) {
         $states=getStates($arr_project[0]["state_id"]);
-        $project_table .= "<tr><td class = \"left_header\">State:</td><td id='noneditable_state_id' title='$project_id' rel='state_id' >" . getState($arr_project[0]["state_id"]) . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_state_id'></span></td>
-        <td style='display:none;' id='editable_state_id' title='$project_id'><select  rel='state_id' id='input_state_id' title='$project_id'>$states</select></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">State:</td><td title='$project_id' rel='state_id' >" . getState($arr_project[0]["state_id"]) . "</td></tr>";
     }
     if (isset($arr_project[0]["title"])) {
-        $project_table .= "<tr><td class = \"left_header\">Title:</td><td id='noneditable_title' title='$project_id' rel='title' >" . $arr_project[0]["title"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_title'></span></td><td style='display:none;' id='editable_title' title='$project_id'>
-        <input type='text' rel='title' id='input_title' style='width:100%' title='$project_id' value='". $arr_project[0]['title'] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Title:</td><td title='$project_id' rel='title' >" . $arr_project[0]["title"] . "</td></tr>";
     }
     if (isset($arr_project[0]["codes"])) {
-        $project_table .= "<tr><td class = \"left_header\">SIP/SOC codes:</td><td id='noneditable_codes' title='$project_id' rel='codes' >" . $arr_project[0]["codes"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_codes'></span></td><td style='display:none;' id='editable_codes' title='$project_id'>
-        <input type='text' rel='codes' id='input_codes' style='width:100%' title='$project_id' value='". $arr_project[0]["codes"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">CIP/SOC:</td><td title='$project_id' rel='codes' >" . $arr_project[0]["codes"] . "</td></tr>";
     }
     if (isset($arr_project[0]["pic_name"])) {
-        $project_table .= "<tr><td class = \"left_header\">Project/Campaign name:</td><td id='noneditable_pic_name' title='$project_id' rel='pic_name' >" . $arr_project[0]["pic_name"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_pic_name'></span></td><td style='display:none;' id='editable_pic_name' title='$project_id'>
-        <input type='text' rel='pic_name' id='input_pic_name' style='width:100%' title='$project_id' value='". $arr_project[0]["pic_name"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Project/Campaign name:</td><td title='$project_id' rel='pic_name' >" . $arr_project[0]["pic_name"] . "</td></tr>";
     }
     if (isset($arr_project[0]["due_date"])) {
-        $project_table .= "<tr><td class = \"left_header\">Delivery date:</td><td>" . translate_mysql_todatepicker($arr_project[0]["due_date"]) . "</td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Desired Due Date:</td><td title='$project_id' rel='due_date' >" . translate_mysql_todatepicker($arr_project[0]["due_date"]) . "</td></tr>";
     }
     if (isset($arr_project[0]["spec_claims"])) {
-        $project_table .= "<tr><td class = \"left_header\">List specific claims:</td><td id='noneditable_spec_claims' title='$project_id' rel='spec_claims' >" . $arr_project[0]["spec_claims"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_spec_claims'></span></td><td style='display:none;' id='editable_spec_claims' title='$project_id'>
-        <input type='text' rel='spec_claims' id='input_spec_claims' style='width:100%' title='$project_id' value='". $arr_project[0]["spec_claims"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">List specific claims:</td><td title='$project_id' rel='spec_claims' >" . $arr_project[0]["spec_claims"] . "</td></tr>";
     }
     if (isset($arr_project[0]["info"])) {
-        $project_table .= "<tr><td class = \"left_header\">Additional information:</td><td id='noneditable_info' title='$project_id' rel='info' >" . $arr_project[0]["info"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_info'></span></td><td style='display:none;' id='editable_info' title='$project_id'>
-        <input type='text' rel='info' id='input_info' style='width:100%' title='$project_id' value='". $arr_project[0]["info"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Additional information:</td><td title='$project_id' rel='info' >" . $arr_project[0]["info"] . "</td></tr>";
     }
     if (isset($arr_project[0]["request_description"])) {
-        $project_table .= "<tr><td class = \"left_header\">Research request description:</td><td id='noneditable_request_description' title='$project_id' rel='request_description' >" . $arr_project[0]["request_description"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_request_description'></span></td><td style='display:none;' id='editable_request_description' title='$project_id'>
-        <input type='text' rel='request_description' id='input_request_description' style='width:100%' title='$project_id' value='". $arr_project[0]["request_description"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Research request description:</td><td title='$project_id' rel='request_description' >" . $arr_project[0]["request_description"] . "</td></tr>";
     }
     if (isset($arr_project[0]["spec_questions"])) {
-        $project_table .= "<tr><td class = \"left_header\">Specific questions:</td><td id='noneditable_spec_questions' title='$project_id' rel='spec_questions' >" . $arr_project[0]["spec_questions"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_spec_questions'></span></td><td style='display:none;' id='editable_spec_questions' title='$project_id'>
-        <input type='text' rel='spec_questions' id='input_spec_questions' style='width:100%' title='$project_id' value='". $arr_project[0]["spec_questions"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Specific questions:</td><td title='$project_id' rel='spec_questions' >" . $arr_project[0]["spec_questions"] . "</td></tr>";
     }
     if (isset($arr_project[0]["sources"])) {
-        $project_table .= "<tr><td class = \"left_header\">Sources, if available:</td><td id='noneditable_sources' title='$project_id' rel='sources' >" . $arr_project[0]["sources"] . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_sources'></span></td><td style='display:none;' id='editable_sources' title='$project_id'>
-        <input type='text' rel='sources' id='input_sources' style='width:100%' title='$project_id' value='". $arr_project[0]["sources"] . "'></td></tr>";
+        $project_table .= "<tr><td class = \"left_header\">Sources, if available:</td><td title='$project_id' rel='sources' >" . $arr_project[0]["sources"] . "</td></tr>";
     }
     $statuses=getStatuses($arr_project[0]["status_id"]);
-    $project_table .= "<tr><td class = \"left_header\">Current Status:</td><td id='noneditable_status_id' title='$project_id' rel='status_id' >" . $project_status . "
-        <span style='left:5px;' class='fa fa-pencil' id='noneditable_status_id'></span></td>
-        <td style='display:none;' id='editable_status_id' title='$project_id'><select  rel='status_id' id='input_status_id' title='$project_id'>$statuses</select></td></tr>";
+    $project_table .= "<tr><td class = \"left_header\">Current Status:</td><td title='$project_id' rel='status_id' >" . $project_status . "</td></tr>";
     $pif_id = "";
     $pif_code = "";
     if ($_SESSION["user_level"] > 10 || (in_array($_SESSION["user_id"],$assignedUsers))){
@@ -505,7 +479,7 @@ if (!empty($arr_project)){
 
 }
 
-$project_table .= " </table><hr><div><span style='left:5px;' class='fa fa-pencil' id='noneditable_status_id'></span> - editable field</div>";
+$project_table .= " </table>";
 
 
 
@@ -890,6 +864,7 @@ $js_all_states_array .= "];";
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
     <script type="text/javascript">
+        $( ".datepicker" ).datepicker();
         $(document).ready(function(){
             $("#spend_form").validate({
                 rules: {

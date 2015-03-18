@@ -7,22 +7,16 @@ include "functions/functions.php";
 $error_message = "";
 function getRequestTypes($selected){
     $link=dbConn();
-    $result="<select class = \"required\" name = \"request_type\"><option value = \"\">Please select</option>";
-    $handle=$link->prepare("SELECT * FROM MRI_request_type");
-    $handle->bindColumn("id",$id,PDO::PARAM_INT);
+
+    $handle=$link->prepare("SELECT * FROM MRI_request_type WHERE id=:id");
+    $handle->bindValue(":id",$selected,PDO::PARAM_INT);
     $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
     $handle->bindColumn("name",$name,PDO::PARAM_STR);
     try{
         $handle->execute();
         while ($handle->fetch(PDO::FETCH_BOUND)) {
-            if ($id==$selected){
-                $result.="<option id='$id' title='$short' label='$name' value='$id' selected>".$name."</option>";
-            }
-            else {
-                $result.="<option id='$id' title='$short' label='$name' value='$id'>".$name."</option>";
-            }
+            $result = $name;
         }
-        $result.="</select>";
         return $result;
     }catch (Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -31,22 +25,15 @@ function getRequestTypes($selected){
 }
 function getReportTypes($selected){
     $link=dbConn();
-    $result="<select class = \"required\" name = \"report_type\"><option value = \"\">Please select</option>";
-    $handle=$link->prepare("SELECT * FROM MRI_report_type");
-    $handle->bindColumn("id",$id,PDO::PARAM_INT);
+    $handle=$link->prepare("SELECT * FROM MRI_report_type WHERE id=:id");
+    $handle->bindValue(":id",$selected,PDO::PARAM_INT);
     $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
     $handle->bindColumn("name",$name,PDO::PARAM_STR);
     try{
         $handle->execute();
         while ($handle->fetch(PDO::FETCH_BOUND)) {
-            if ($id==$selected){
-                $result.="<option id='$id' title='$short' label='$name' value='$id' selected>".$name."</option>";
-            }
-            else {
-                $result.="<option id='$id' title='$short' label='$name' value='$id'>".$name."</option>";
-            }
+            $result=$short;
         }
-        $result.="</select>";
         return $result;
     }catch (Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -181,10 +168,10 @@ if (!is_null($lobId)) {
     $lobs=getSchools($lobId);
 }
 if (!is_null($dueDate)) {
-    $delivery_date = translate_mysql_todatepicker($dueDate);
+    $due_date = translate_mysql_todatepicker($dueDate);
 }
 if (!is_null($deliveryDate)) {
-    $due_date = translate_mysql_todatepicker($deliveryDate);
+    $delivery_date = translate_mysql_todatepicker($deliveryDate);
 }
 $requestType=getRequestTypes($requestTypeId);
 $statuses=getStatuses($statusId);
@@ -228,7 +215,7 @@ $statuses=getStatuses($statusId);
 
                         <tr>
                             <td>Project Name</td>
-                            <td><input class = "required" type = "text" name = "project_name" value = "<?php echo $code ?>"></td>
+                            <td><input class = "required" type = "text" name = "project_name" value = "<?php echo $code ?>" disabled></td>
                         </tr>
                         <tr>
                             <td>MRI Requester Name:</td>
@@ -244,12 +231,12 @@ $statuses=getStatuses($statusId);
                         </tr>
                         <tr>
                             <td>Request type:</td>
-                            <td><?php echo $requestType ?></td>
+                            <td><input type = "text" value = "<?php echo $requestType ?>" disabled></td>
                         </tr>
                         <?php if (isset($reportType)):?>
                         <tr>
                             <td>Report type:</td>
-                            <td><?php echo $reportType ?></td>
+                            <td><input type = "text" value = "<?php echo $reportType ?>" disabled></td>
                         </tr>
                         <?php endif;?>
                         <?php if (isset($states)):?>
@@ -266,7 +253,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (!is_null($codes)):?>
                             <tr>
-                                <td>SIP/SOC codes:</td>
+                                <td>CIP/SOC:</td>
                                 <td><input type = "text" name = "codes" value = "<?php echo $codes ?>"></td>
                             </tr>
                         <?php endif;?>
@@ -290,7 +277,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (isset($due_date)):?>
                             <tr>
-                                <td>Due Date</td>
+                                <td>Desired Due Date</td>
                                 <td><input type = "text" name = "due_date" class="required datepicker" value = "<?php echo $due_date ?>"></td>
                             </tr>
                         <?endif;?>
@@ -320,7 +307,7 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <?php if (!is_null($sources)):?>
                             <tr>
-                                <td>f</td>
+                                <td>Sources, if available:</td>
                                 <td><input type = "text" name = "claims" value = "<?php echo $sources ?>"></td>
                             </tr>
                         <?php endif;?>

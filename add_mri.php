@@ -148,9 +148,6 @@ function smtpmailer($to, $subject, $body, $altbody) {
     //$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
     $mail->Host = 'mailrelay.apollogrp.edu';
     $mail->Port = 25;
-    //$mail->Username = "loomis95650@gmail.com";
-    //$mail->Username = "uopx.pm@gmail.com";
-    //$mail->Password = "admin199";
     $mail->SetFrom("mktgintake@apollogrp.edu", "Marketing Intake");
     $mail->Subject = $subject;
     $mail->Body = $body;
