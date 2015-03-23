@@ -28,6 +28,7 @@ $segment_reach_current_students = 0;
 $segment_reach_employee = 0;
 $segment_reach_faculty = 0;
 $segment_reach_alumni = 0;
+$segment_reach_other = 0;
 $segment_reach_wfs = 0;
 $project_description="";
 $uopx_benefit ="";
@@ -44,6 +45,8 @@ $segment_quantity_faculty = $_POST["segment_quantity_faculty"];
 $segment_quantity_faculty = str_replace(",", "", $segment_quantity_faculty);
 $segment_quantity_alumni = $_POST["segment_quantity_alumni"];
 $segment_quantity_alumni = str_replace(",", "", $segment_quantity_alumni);
+$segment_quantity_other = $_POST["segment_quantity_other"];
+$segment_quantity_other = str_replace(",", "", $segment_quantity_other);
 $segment_quantity_wfs = 0;
 
 
@@ -58,6 +61,8 @@ if(!empty($_POST["segment_reach_employee"])){
 }
 if(!empty($_POST["segment_reach_faculty"])){
     $segment_reach_faculty = 1;
+}if(!empty($_POST["segment_reach_other"])){
+    $segment_reach_other = 1;
 }
 if(!empty($_POST["segment_reach_alumni"])){
     $segment_reach_alumni = 1;
@@ -83,9 +88,12 @@ $desired_delivery_date = convert_datepicker_date($desired_delivery_date);
 $target_in_market_date = convert_datepicker_date($target_in_market_date);
 $expiration_date = convert_datepicker_date($expiration_date);
 
-$new_pif_id = insert_pif($project_name, $company_id, $version, $marketing_owner_id, $exec_sponsor_id, $business_unit_id, $product_id, $request_date, $desired_delivery_date, $target_in_market_date, $expiration_date, $budget, $cost_code, $project_description, $uopx_benefit, $uopx_risk,
-                         $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs, $segment_quantity_potential_students, $segment_quantity_current_students,
-                         $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $user_id, $orig_pif_id,$background,$audience,$objectives,$core_message,$support_points,null,$required_elem);
+$new_pif_id = insert_pif($project_name, $company_id, $version, $marketing_owner_id, $exec_sponsor_id, $business_unit_id, $product_id, $request_date, $desired_delivery_date,
+                         $target_in_market_date, $expiration_date, $budget, $cost_code, $project_description, $uopx_benefit, $uopx_risk,
+                         $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee,
+                         $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs, $segment_reach_other, $segment_quantity_potential_students, $segment_quantity_current_students,
+                         $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $segment_quantity_other, $user_id, $orig_pif_id,$background,
+                         $audience,$objectives,$core_message,$support_points,null,$required_elem);
 
 //insert PIF code
 $business_unit_abbrev = get_business_unit_abbrev($business_unit_id);

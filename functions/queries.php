@@ -3931,17 +3931,22 @@ function get_pif_asset_types($company_id, $active_flag){
     }
 }
 function insert_pif($pif_project_name, $company_id, $version, $marketing_owner_id, $exec_sponsor_id, $business_unit_id, $product_id, $request_date, $desired_delivery_date, $target_in_market_date,
-                    $expiration_date, $project_budget, $cost_code, $project_description, $uopx_benefit, $uopx_risk, $project_objective, $estimated_total_reach, $segment_reach_potential_students, $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty,
-                    $segment_reach_alumni, $segment_reach_wfs, $segment_quantity_potential_students, $segment_quantity_current_students, $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs, $requester_id, $orig_pif_id,
+                    $expiration_date, $project_budget, $cost_code, $project_description, $uopx_benefit, $uopx_risk, $project_objective, $estimated_total_reach, $segment_reach_potential_students,
+                    $segment_reach_current_students, $segment_reach_employee, $segment_reach_faculty, $segment_reach_alumni, $segment_reach_wfs,$segment_reach_other, $segment_quantity_potential_students,
+                    $segment_quantity_current_students, $segment_quantity_employee, $segment_quantity_faculty, $segment_quantity_alumni, $segment_quantity_wfs,$segment_quantity_other, $requester_id, $orig_pif_id,
                     $background,$audience,$objectives,$core_message,$support_points,$aop_activity_type_id,$required_elem,$is_bm=0){
     $dbConnection = dbConn();
-    $stmt = $dbConnection->prepare("INSERT INTO pif (company_id, version, business_unit_id, product_id, pif_project_name, requester_id, exec_sponsor_id, marketing_owner_id, request_date, desired_delivery_date, target_in_market_date, expiration_date,
-                                                    project_budget, cost_code, project_description, uopx_benefit, uopx_risk, project_objective, estimated_total_reach, segment_reach_potential_students, segment_reach_current_students, segment_reach_employee,
-                                                    segment_reach_faculty, segment_reach_alumni, segment_reach_wfs, segment_quantity_potential_students, segment_quantity_current_students, segment_quantity_employee, segment_quantity_faculty, segment_quantity_alumni,
-                                                    segment_quantity_wfs, created_date, pif_approval_status_id, orig_pif_id, background, audience, objectives, core_message, support_points,aop_activity_type_id,required_elem,is_bm) VALUES (:company_id, :version, :business_unit_id, :product_id,
-                                                    :pif_project_name, :requester_id, :exec_sponsor_id, :marketing_owner_id, :request_date, :desired_delivery_date, :target_in_market_date, :expiration_date, :project_budget, :cost_code, :project_description, :uopx_benefit,
-                                                    :uopx_risk, :project_objective, :estimated_total_reach, :segment_reach_potential_students, :segment_reach_current_students, :segment_reach_employee, :segment_reach_faculty, :segment_reach_alumni, :segment_reach_wfs,
-                                                    :segment_quantity_potential_students, :segment_quantity_current_students, :segment_quantity_employee, :segment_quantity_faculty, :segment_quantity_alumni, :segment_quantity_wfs, now(), 1, :orig_pif_id,
+    $stmt = $dbConnection->prepare("INSERT INTO pif (company_id, version, business_unit_id, product_id, pif_project_name, requester_id, exec_sponsor_id, marketing_owner_id, request_date,
+                                                    desired_delivery_date, target_in_market_date, expiration_date,project_budget, cost_code, project_description, uopx_benefit, uopx_risk,
+                                                    project_objective, estimated_total_reach, segment_reach_potential_students, segment_reach_current_students, segment_reach_employee,
+                                                    segment_reach_faculty, segment_reach_alumni, segment_reach_wfs,segment_reach_other, segment_quantity_potential_students, segment_quantity_current_students,
+                                                    segment_quantity_employee, segment_quantity_faculty, segment_quantity_alumni,segment_quantity_wfs,segment_quantity_other, created_date, pif_approval_status_id,
+                                                    orig_pif_id, background, audience, objectives, core_message, support_points,aop_activity_type_id,required_elem,is_bm) VALUES (:company_id, :version,
+                                                    :business_unit_id, :product_id,:pif_project_name, :requester_id, :exec_sponsor_id, :marketing_owner_id, :request_date, :desired_delivery_date,
+                                                    :target_in_market_date, :expiration_date, :project_budget, :cost_code, :project_description, :uopx_benefit,:uopx_risk, :project_objective,
+                                                    :estimated_total_reach, :segment_reach_potential_students, :segment_reach_current_students, :segment_reach_employee, :segment_reach_faculty,
+                                                    :segment_reach_alumni, :segment_reach_wfs,:segment_quantity_potential_students, :segment_quantity_current_students, :segment_quantity_employee,
+                                                    :segment_quantity_faculty, :segment_quantity_alumni, :segment_quantity_wfs, now(), 1, :orig_pif_id,
                                                     :background, :audience, :objectives, :coreMessage, :supportPoints, :aop_activity_type_id, :required_elem,:is_bm)");
     $stmt->bindParam(':pif_project_name', $pif_project_name);
     $stmt->bindParam(':company_id', $company_id);
@@ -3969,12 +3974,14 @@ function insert_pif($pif_project_name, $company_id, $version, $marketing_owner_i
     $stmt->bindParam(':segment_reach_faculty', $segment_reach_faculty);
     $stmt->bindParam(':segment_reach_alumni', $segment_reach_alumni);
     $stmt->bindParam(':segment_reach_wfs', $segment_reach_wfs);
+    $stmt->bindParam(':segment_reach_other', $segment_reach_other);
     $stmt->bindParam(':segment_quantity_potential_students', $segment_quantity_potential_students);
     $stmt->bindParam(':segment_quantity_current_students', $segment_quantity_current_students);
     $stmt->bindParam(':segment_quantity_employee', $segment_quantity_employee);
     $stmt->bindParam(':segment_quantity_faculty', $segment_quantity_faculty);
     $stmt->bindParam(':segment_quantity_alumni', $segment_quantity_alumni);
     $stmt->bindParam(':segment_quantity_wfs', $segment_quantity_wfs);
+    $stmt->bindParam(':segment_quantity_other', $segment_quantity_other);
     $stmt->bindParam(':orig_pif_id', $orig_pif_id);
     $stmt->bindParam(':background', $background);
     $stmt->bindParam(':audience', $audience);

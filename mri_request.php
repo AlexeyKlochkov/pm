@@ -26,7 +26,7 @@ if ($_SESSION["isbm"]==1){
 }
 function getRequestTypes(){
     $link=dbConn();
-    $result="<option id='0' disabled selected ></option>";
+    $result="<option id='0' disabled selected >Please select</option>";
     $handle=$link->prepare("SELECT * FROM MRI_request_type");
     $handle->bindColumn("id",$id,PDO::PARAM_INT);
     $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
@@ -45,7 +45,7 @@ function getRequestTypes(){
 
 function getReportTypes(){
     $link=dbConn();
-    $result="<option id='0' disabled selected></option>";
+    $result="<option id='0' disabled selected>Please select</option>";
     $handle=$link->prepare("SELECT * FROM MRI_report_type");
     $handle->bindColumn("id",$id,PDO::PARAM_INT);
     $handle->bindColumn("short_name",$short,PDO::PARAM_STR);
@@ -64,7 +64,7 @@ function getReportTypes(){
 
 function getStates(){
     $link = dbConn();
-    $result="<option id='0' disabled selected></option>";
+    $result="<option id='0' disabled selected>Please select</option>";
     $handle = $link->prepare("select * from state order by state_name asc");
     $handle->bindColumn("state_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("state_name",$name,PDO::PARAM_STR);
@@ -82,7 +82,7 @@ function getStates(){
 }
 function getSchools(){
     $link = dbConn();
-    $result="<option id='0' disabled selected></option>";
+    $result="<option id='0' disabled selected>Please select</option>";
     $handle = $link->prepare("select * from business_unit where active=1 and is_mri=1 order by business_unit_name asc");
     $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
@@ -102,9 +102,7 @@ function getSchools(){
 <script type="text/javascript">
     $(document).ready(function(){
         $( ".datepicker" ).datepicker();
-        $('textarea').trumbowyg({
-            resetCss: true,
-            btns: ['bold', 'italic', '|', 'insertImage']
+        $("[id='wysiwyg']").trumbowyg({
         });
         $("#request_type").change(function(){
             var id = $(this).children(":selected").attr("title");
@@ -217,7 +215,7 @@ function getSchools(){
                     <div class="form-group" style="display: none;" id="SSMS3" title="request">
                         <label class="control-label col-sm-2" for="codes">CIP/SOC:</label>
                         <div class="col-sm-8">
-                            <textarea id="codes" name="codes" rows="6" cols="55"></textarea>
+                            <textarea id="nonwysiwyg" name="codes" rows="6" cols="55"></textarea>
                         </div>
                     </div>
 
@@ -244,31 +242,31 @@ function getSchools(){
                     <div class="form-group" style="display: none;" id="Subs2" title="request">
                         <label class="control-label col-sm-2" for="claims">List specific claims:</label>
                         <div class="col-sm-8">
-                            <textarea id="claims" name="claims" rows="8" cols="96"></textarea>
+                            <textarea id="wysiwyg" name="claims" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="Subs4" title="request">
                         <label class="control-label col-sm-2" for="sources">Sources, if available:</label>
                         <div class="col-sm-8">
-                            <textarea id="sources" name="sources" rows="8" cols="96"></textarea>
+                            <textarea id="wysiwyg" name="sources" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="AHR1" title="request">
                         <label class="control-label col-sm-2" for="research">Research request description:</label>
                         <div class="col-sm-8">
-                            <textarea id="research" name="research" rows="8" cols="96"></textarea>
+                            <textarea id="wysiwyg" name="research" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="AHR2" title="request">
                         <label class="control-label col-sm-2" for="questions">Specific questions:</label>
                         <div class="col-sm-8">
-                            <textarea id="questions" name="questions" rows="8" cols="96"></textarea>
+                            <textarea id="wysiwyg" name="questions" rows="8" cols="96"></textarea>
                         </div>
                     </div>
                     <div class="form-group" style="display: none;" id="Subs3" title="request">
                         <label class="control-label col-sm-2" for="info">Additional information:</label>
                         <div class="col-sm-8">
-                            <textarea id="info" name="info" rows="12" cols="96"></textarea>
+                            <textarea id="wysiwyg" name="info" rows="12" cols="96"></textarea>
                         </div>
                     </div>
                     <input type="text" style="display:none;" value="<?php echo $_SESSION["isbm"]?>" name="isBm">

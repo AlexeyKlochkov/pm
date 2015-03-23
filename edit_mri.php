@@ -254,7 +254,7 @@ $statuses=getStatuses($statusId);
                         <?php if (!is_null($codes)):?>
                             <tr>
                                 <td>CIP/SOC:</td>
-                                <td><input type = "text" name = "codes" value = "<?php echo $codes ?>"></td>
+                                <td><textarea name = "codes"><?php echo $codes ?></textarea></td>
                             </tr>
                         <?php endif;?>
                         <?php if (isset($lobs)):?>

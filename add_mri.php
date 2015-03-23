@@ -103,7 +103,7 @@ function sendMail($to){
 }
     $dbConnection = dbConn();
     $stmt = $dbConnection->prepare("INSERT INTO MRI_common (isBM,requester_name,requester_mail,requester_phone,request_type_id,report_type_id,state_id,title,
-                                    due_date,codes,id,pic_name,delivery_date,spec_claims,sources,info,request_description,spec_questions,status_id) VALUES (
+                                    due_date,codes,lob_id,pic_name,delivery_date,spec_claims,sources,info,request_description,spec_questions,status_id) VALUES (
                                     :isBm,:requesterName,:requesterMail,:requesterPhone,:requestType,:reportType,:state,:title,:dueDate,:codes,:lob,
                                     :PIC,:deliveryDate,:claims,:sources,:info,:research,:questions,1
                                     )");

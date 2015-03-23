@@ -280,6 +280,15 @@ $request_date = date("m/d/Y");
                             <div class = "error" id = "e_sra"></div>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <input type = "checkbox" name = "segment_reach_other" value = "1"  class = "checkvalue" id = "cv_sro"> Other
+                        </td>
+                        <td>
+                            <input class = "number" type = "text" name = "segment_quantity_other" size = "10" maxlength="12"  id = "v_sro"  number>
+                            <div class = "error" id = "e_sro"></div>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </td>
