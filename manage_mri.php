@@ -418,38 +418,40 @@ if (!empty($arr_project)){
     $project_code = $arr_project[0]["code"];
     $project_status = getStatusName($arr_project[0]["status_id"]);
     $project_requester = $arr_project[0]["requester_name"];
-    $project_table .= "<tr><td class = \"left_header\">Line of Business:</td><td>" .$project_code."</td></tr>";
+    $project_table .=" <tr><td class = \"left_header\">Request type:</td><td>".$requestType."</td></tr>";
     if (isset($arr_project[0]["lob_id"])) {
-        $project_table .= "<tr><td class = \"left_header\">Product:</td><td>" . getProductName($arr_project[0]["lob_id"]). "</td><</tr>";
+        $project_table .= "<tr><td class = \"left_header\">Line of Business:</td><td>" . getProductName($arr_project[0]["lob_id"]). "</td></tr>";
     }
-    $project_table .= "<tr><td class = \"left_header\">Project Requester:</td><td title='$project_id' rel='requester_name' >" . $arr_project[0]["requester_name"] . "</td></tr>";
-
+    if (isset($arr_project[0]["report_type_id"])) {
+        $project_table .= "<tr><td class = \"left_header\">Report type:</td><td>" . getReportType($arr_project[0]["report_type_id"]) . "</td></tr>";
+    }
+    $project_table .= "<tr><td class = \"left_header\">Status:</td><td title='$project_id' rel='status_id' >" . $project_status . "</td></tr>";
+    if (isset($arr_project[0]["pic_name"])) {
+        $project_table .= "<tr><td class = \"left_header\">Project/Campaign name:</td><td title='$project_id' rel='pic_name' >" . $arr_project[0]["pic_name"] . "</td></tr>";
+    }
+    if (isset($arr_project[0]["delivery_date"])) {
+        $project_table .= "<tr><td class = \"left_header\">Desired delivery date:</td><td title='$project_id' rel='delivery_date' >" . translate_mysql_todatepicker($arr_project[0]["delivery_date"]) . "</td></tr>";
+    }
+    $project_table .= "<tr><td class = \"left_header\">Name of requester:</td><td title='$project_id' rel='requester_name' >" . $arr_project[0]["requester_name"] . "</td></tr>";
     $project_table .= "<tr><td class = \"left_header\">Requester email:</td><td title='$project_id' rel='requester_mail' >" . $arr_project[0]["requester_mail"] . "</td></tr>";
-
     $project_table .= "<tr><td class = \"left_header\">Requester phone:</td><td  title='$project_id' rel='requester_phone' >" . $arr_project[0]["requester_phone"] . "</td></tr>";
 
-    $project_table .=" <tr><td class = \"left_header\">Request type:</td><td>".$requestType."</td></tr>";
-    if (isset($arr_project[0]["report_type_id"])) {
-        $project_table .= "<tr><td class = \"left_header\">Type of report:</td><td>" . getReportType($arr_project[0]["report_type_id"]) . "</td></tr>";
+    if (isset($arr_project[0]["due_date"])) {
+        $project_table .= "<tr><td class = \"left_header\">Desired delivery Date:</td><td title='$project_id' rel='due_date' >" . translate_mysql_todatepicker($arr_project[0]["due_date"]) . "</td></tr>";
     }
     if (isset($arr_project[0]["state_id"])) {
         $states=getStates($arr_project[0]["state_id"]);
         $project_table .= "<tr><td class = \"left_header\">State:</td><td title='$project_id' rel='state_id' >" . getState($arr_project[0]["state_id"]) . "</td></tr>";
     }
-    if (isset($arr_project[0]["title"])) {
-        $project_table .= "<tr><td class = \"left_header\">Title:</td><td title='$project_id' rel='title' >" . $arr_project[0]["title"] . "</td></tr>";
-    }
     if (isset($arr_project[0]["codes"])) {
         $project_table .= "<tr><td class = \"left_header\">CIP/SOC:</td><td title='$project_id' rel='codes' >" . $arr_project[0]["codes"] . "</td></tr>";
     }
-    if (isset($arr_project[0]["pic_name"])) {
-        $project_table .= "<tr><td class = \"left_header\">Project/Campaign name:</td><td title='$project_id' rel='pic_name' >" . $arr_project[0]["pic_name"] . "</td></tr>";
-    }
-    if (isset($arr_project[0]["due_date"])) {
-        $project_table .= "<tr><td class = \"left_header\">Desired Due Date:</td><td title='$project_id' rel='due_date' >" . translate_mysql_todatepicker($arr_project[0]["due_date"]) . "</td></tr>";
-    }
+
     if (isset($arr_project[0]["spec_claims"])) {
         $project_table .= "<tr><td class = \"left_header\">List specific claims:</td><td title='$project_id' rel='spec_claims' >" . $arr_project[0]["spec_claims"] . "</td></tr>";
+    }
+    if (isset($arr_project[0]["sources"])) {
+        $project_table .= "<tr><td class = \"left_header\">Sources, if available:</td><td title='$project_id' rel='sources' >" . $arr_project[0]["sources"] . "</td></tr>";
     }
     if (isset($arr_project[0]["info"])) {
         $project_table .= "<tr><td class = \"left_header\">Additional information:</td><td title='$project_id' rel='info' >" . $arr_project[0]["info"] . "</td></tr>";
@@ -460,11 +462,8 @@ if (!empty($arr_project)){
     if (isset($arr_project[0]["spec_questions"])) {
         $project_table .= "<tr><td class = \"left_header\">Specific questions:</td><td title='$project_id' rel='spec_questions' >" . $arr_project[0]["spec_questions"] . "</td></tr>";
     }
-    if (isset($arr_project[0]["sources"])) {
-        $project_table .= "<tr><td class = \"left_header\">Sources, if available:</td><td title='$project_id' rel='sources' >" . $arr_project[0]["sources"] . "</td></tr>";
-    }
     $statuses=getStatuses($arr_project[0]["status_id"]);
-    $project_table .= "<tr><td class = \"left_header\">Current Status:</td><td title='$project_id' rel='status_id' >" . $project_status . "</td></tr>";
+
     $pif_id = "";
     $pif_code = "";
     if ($_SESSION["user_level"] > 10 || (in_array($_SESSION["user_id"],$assignedUsers))){
@@ -1221,7 +1220,14 @@ $js_all_states_array .= "];";
                         <table width = "100%">
                             <tr>
                                 <td>
-                                    Project <?php echo $arr_project[0]["code"] ?>
+                                    Project <?php echo $arr_project[0]["code"] ?> -
+                                    <?php
+                                    if (isset($arr_project[0]["title"])){
+                                        echo $arr_project[0]["title"];
+                                    }else if (isset($arr_project[0]["pic_name"])){
+                                        echo $arr_project[0]["pic_name"];
+                                    }
+                                    ?>
                                 </td>
                                 <td align = "right">
                                     <?php
