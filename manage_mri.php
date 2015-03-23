@@ -985,7 +985,7 @@ $js_all_states_array .= "];";
             $('#add_spend').hide();
             $('#schedule_area').<?php echo $show_schedules ?>();
 
-            $('#file_area').<?php echo $show_files ?>();
+            //$('#file_area').<?php echo $show_files ?>();
 
 
 

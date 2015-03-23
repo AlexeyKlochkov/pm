@@ -190,7 +190,7 @@ $statuses=getStatuses($statusId);
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.validate.js"></script>
     <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
 </head>
     <script>
@@ -215,15 +215,15 @@ $statuses=getStatuses($statusId);
         <!--container div tag-->
         <div id="container">
 
-            <div id="mainContent"> <!--mainContent div tag-->
+            <div id="mainContent"  width = "40%"> <!--mainContent div tag-->
                 <h1>Edit <a href = "manage_mri.php?id=<?php echo $project_id  ?>">Project <?php echo $code ?></a></h1>
 
                 <div class = "error"><?php echo $error_message ?></div>
-                <form id = "project_form" action = "update_mri.php" method = "POST" >
-                    <table class = \"table table-hover\">
+                <form id = "project_form" action = "update_mri.php" method = "POST">
+                    <table class = "table table-hover">
                         <tr>
                             <td>Request type:</td>
-                            <td><input type = "text" value = "<?php echo $requestType ?>" disabled></td>
+                            <td><input style="width:40%;" type = "text" value = "<?php echo $requestType ?>" disabled></td>
                         </tr>
                         <?php if (isset($lobs)):?>
                         <tr>
@@ -234,7 +234,13 @@ $statuses=getStatuses($statusId);
                         <?php if (isset($reportType)):?>
                         <tr>
                             <td>Report type:</td>
-                            <td><input type = "text" value = "<?php echo $reportType ?>" disabled></td>
+                            <td><input style="width:40%;" type = "text" value = "<?php echo $reportType ?>" disabled></td>
+                        </tr>
+                        <?php endif;?>
+                        <?php if (!is_null($title)):?>
+                        <tr>
+                            <td>Title:</td>
+                            <td><input style="width:40%;" type = "text" name = "title" value = "<?php echo $title ?>"></td>
                         </tr>
                         <?php endif;?>
                         <tr>
@@ -244,7 +250,7 @@ $statuses=getStatuses($statusId);
                         <?php if (!is_null($PIC)):?>
                         <tr>
                             <td>Project/Campaign name:</td>
-                            <td><input type = "text" name = "PIC" value = "<?php echo $PIC ?>"></td>
+                            <td><input style="width:40%;" type = "text" name = "PIC" value = "<?php echo $PIC ?>"></td>
                         </tr>
                         <?php endif;?>
                         <?php if (isset($delivery_date)):?>
@@ -255,15 +261,15 @@ $statuses=getStatuses($statusId);
                         <?php endif;?>
                         <tr>
                             <td>MRI Requester Name:</td>
-                            <td><input type = "text" name = "requester_name" value = "<?php echo $requesterName ?>"></td>
+                            <td><input style="width:40%;" type = "text" name = "requester_name" value = "<?php echo $requesterName ?>"></td>
                         </tr>
                         <tr>
                             <td>MRI Requester Email:</td>
-                            <td><input type = "text" name = "requester_mail" value = "<?php echo $requesterMail ?>"></td>
+                            <td><input style="width:40%;" type = "text" name = "requester_mail" value = "<?php echo $requesterMail ?>"></td>
                         </tr>
                         <tr>
                             <td>MRI Requester Phone:</td>
-                            <td><input type = "text" name = "requester_phone" value = "<?php echo $requesterPhone ?>"></td>
+                            <td><input style="width:40%;" type = "text" name = "requester_phone" value = "<?php echo $requesterPhone ?>"></td>
                         </tr>
                         <?php if (isset($due_date)):?>
                         <tr>
@@ -280,15 +286,10 @@ $statuses=getStatuses($statusId);
                         <?php if (!is_null($codes)):?>
                         <tr>
                             <td>CIP/SOC:</td>
-                            <td><textarea name = "codes"><?php echo $codes ?></textarea></td>
+                            <td><textarea  rows="8" cols="48" name = "codes"><?php echo $codes ?></textarea></td>
                         </tr>
                         <?php endif;?>
-                        <?php if (!is_null($title)):?>
-                            <tr>
-                                <td>Title:</td>
-                                <td><input type = "text" name = "title" value = "<?php echo $title ?>"></td>
-                            </tr>
-                        <?php endif;?>
+
                         <?php if (!is_null($claims)):?>
                             <tr>
                                 <td>Special claims:</td>
