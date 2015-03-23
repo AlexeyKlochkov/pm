@@ -42,7 +42,9 @@ font-weight: bold;
 	margin: 0px 0px 15px 0px;
 
 }
-
+.nonborder tr td {
+    border: none;
+}
 #fp_number_list{
 	margin: 100px 0px 5px 0px;
 	padding:0px 0px 0px 0px;
