@@ -43,7 +43,7 @@ function getReportTypes($selected){
 
 function getStates($selected){
     $link = dbConn();
-    $result="<select class = \"required\" name = \"report_type\"><option value = \"\">Please select</option>";
+    $result="<select class = \"required\" name = \"report_type\"><option value = \"\" disabled>Please select</option>";
     $handle = $link->prepare("select * from state order by state_name asc");
     $handle->bindColumn("state_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("state_name",$name,PDO::PARAM_STR);
@@ -67,7 +67,7 @@ function getStates($selected){
 }
 function getSchools($selected){
     $link = dbConn();
-    $result="<select class = \"required\" name = \"report_type\"><option value = \"\">Please select</option>";
+    $result="<select class = \"required\" name = \"lob\"><option value = \"\" disabled>Please select</option>";
     $handle = $link->prepare("select * from business_unit where active=1 order by business_unit_name asc");
     $handle->bindColumn("business_unit_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("business_unit_name",$name,PDO::PARAM_STR);
@@ -91,7 +91,7 @@ function getSchools($selected){
 }
 function getStatuses($selected){
     $dbConnection = dbConn();
-    $result="<select class = \"required\" name = \"status\"><option value = \"\">Please select</option>";
+    $result="<select class = \"required\" name = \"status\"><option value = \"\" disabled>Please select</option>";
     $stmt = $dbConnection->prepare("SELECT * FROM MRI_statuses ");
     $stmt->bindColumn('id', $id,PDO::PARAM_INT);
     $stmt->bindColumn('name', $name,PDO::PARAM_STR);
@@ -176,24 +176,33 @@ if (!is_null($deliveryDate)) {
 $requestType=getRequestTypes($requestTypeId);
 $statuses=getStatuses($statusId);
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <title>Marketing Research Intake</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='style.css' rel='stylesheet' type='text/css' />
     <link href='js/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' type='text/css' />
-
-    <title>Edit Project</title>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
+</head>
     <script>
         $(document).ready(function(){
+            $("[id='wysiwyg']").trumbowyg({
+            });
             $("#project_form").validate();
             $( ".datepicker" ).datepicker();
         });
 
     </script>
-</head>
-<body>
+<body style="background-color: #EFEFEF">
 <div id = "page">
     <div id = "main">
         <div id = "logo">
@@ -210,13 +219,40 @@ $statuses=getStatuses($statusId);
                 <h1>Edit <a href = "manage_mri.php?id=<?php echo $project_id  ?>">Project <?php echo $code ?></a></h1>
 
                 <div class = "error"><?php echo $error_message ?></div>
-                <form id = "project_form" action = "update_mri.php" method = "POST">
-                    <table class = "form_table">
-
+                <form id = "project_form" action = "update_mri.php" method = "POST" >
+                    <table class = \"table table-hover\">
                         <tr>
-                            <td>Project Name</td>
-                            <td><input class = "required" type = "text" name = "project_name" value = "<?php echo $code ?>" disabled></td>
+                            <td>Request type:</td>
+                            <td><input type = "text" value = "<?php echo $requestType ?>" disabled></td>
                         </tr>
+                        <?php if (isset($lobs)):?>
+                        <tr>
+                            <td>Line of Business:</td>
+                            <td><?php echo $lobs ?></td>
+                        </tr>
+                        <?php endif;?>
+                        <?php if (isset($reportType)):?>
+                        <tr>
+                            <td>Report type:</td>
+                            <td><input type = "text" value = "<?php echo $reportType ?>" disabled></td>
+                        </tr>
+                        <?php endif;?>
+                        <tr>
+                            <td>Status</td>
+                            <td><?php echo $statuses ?></td>
+                        </tr>
+                        <?php if (!is_null($PIC)):?>
+                        <tr>
+                            <td>Project/Campaign name:</td>
+                            <td><input type = "text" name = "PIC" value = "<?php echo $PIC ?>"></td>
+                        </tr>
+                        <?php endif;?>
+                        <?php if (isset($delivery_date)):?>
+                        <tr>
+                            <td>Delivery Date</td>
+                            <td><input type = "text" name = "delivery_date" class="required datepicker" value = "<?php echo $delivery_date ?>"></td>
+                        </tr>
+                        <?php endif;?>
                         <tr>
                             <td>MRI Requester Name:</td>
                             <td><input type = "text" name = "requester_name" value = "<?php echo $requesterName ?>"></td>
@@ -229,21 +265,23 @@ $statuses=getStatuses($statusId);
                             <td>MRI Requester Phone:</td>
                             <td><input type = "text" name = "requester_phone" value = "<?php echo $requesterPhone ?>"></td>
                         </tr>
+                        <?php if (isset($due_date)):?>
                         <tr>
-                            <td>Request type:</td>
-                            <td><input type = "text" value = "<?php echo $requestType ?>" disabled></td>
+                            <td>Desired Due Date</td>
+                            <td><input type = "text" name = "due_date" class="required datepicker" value = "<?php echo $due_date ?>"></td>
                         </tr>
-                        <?php if (isset($reportType)):?>
-                        <tr>
-                            <td>Report type:</td>
-                            <td><input type = "text" value = "<?php echo $reportType ?>" disabled></td>
-                        </tr>
-                        <?php endif;?>
+                        <?endif;?>
                         <?php if (isset($states)):?>
                             <tr>
                                 <td>State:</td>
                                 <td><?php echo $states ?></td>
                             </tr>
+                        <?php endif;?>
+                        <?php if (!is_null($codes)):?>
+                        <tr>
+                            <td>CIP/SOC:</td>
+                            <td><textarea name = "codes"><?php echo $codes ?></textarea></td>
+                        </tr>
                         <?php endif;?>
                         <?php if (!is_null($title)):?>
                             <tr>
@@ -251,70 +289,36 @@ $statuses=getStatuses($statusId);
                                 <td><input type = "text" name = "title" value = "<?php echo $title ?>"></td>
                             </tr>
                         <?php endif;?>
-                        <?php if (!is_null($codes)):?>
-                            <tr>
-                                <td>CIP/SOC:</td>
-                                <td><textarea name = "codes"><?php echo $codes ?></textarea></td>
-                            </tr>
-                        <?php endif;?>
-                        <?php if (isset($lobs)):?>
-                            <tr>
-                                <td>State:</td>
-                                <td><?php echo $lobs ?></td>
-                            </tr>
-                        <?php endif;?>
-                        <?php if (!is_null($PIC)):?>
-                            <tr>
-                                <td>Project/Campaign name:</td>
-                                <td><input type = "text" name = "pic" value = "<?php echo $PIC ?>"></td>
-                            </tr>
-                        <?php endif;?>
-                        <?php if (isset($delivery_date)):?>
-                        <tr>
-                            <td>Delivery Date</td>
-                            <td><input type = "text" name = "delivery_date" class="required datepicker" value = "<?php echo $delivery_date ?>"></td>
-                        </tr>
-                        <?php endif;?>
-                        <?php if (isset($due_date)):?>
-                            <tr>
-                                <td>Desired Due Date</td>
-                                <td><input type = "text" name = "due_date" class="required datepicker" value = "<?php echo $due_date ?>"></td>
-                            </tr>
-                        <?endif;?>
                         <?php if (!is_null($claims)):?>
                             <tr>
                                 <td>Special claims:</td>
-                                <td><input type = "text" name = "claims" value = "<?php echo $claims ?>"></td>
+                                <td><textarea id="wysiwyg" name="claims" rows="8" cols="48"><?php echo $claims ?></textarea></td>
                             </tr>
+                        <?php endif;?>
+                        <?php if (!is_null($sources)):?>
+                        <tr>
+                            <td>Sources, if available:</td>
+                            <td><textarea id="wysiwyg" name="sources" rows="8" cols="48"><?php echo $sources ?></textarea></td>
+                        </tr>
                         <?php endif;?>
                         <?php if (!is_null($info)):?>
                             <tr>
                                 <td>Additional information:</td>
-                                <td><input type = "text" name = "info" value = "<?php echo $info ?>"></td>
+                                <td><textarea id="wysiwyg" name="info" rows="8" cols="48"><?php echo $info ?></textarea></td>
                             </tr>
                         <?php endif;?>
                         <?php if (!is_null($description)):?>
                             <tr>
                                 <td>Research request description:</td>
-                                <td><input type = "text" name = "description" value = "<?php echo $description ?>"></td>
+                                <td><textarea id="wysiwyg" name="research" rows="8" cols="48"><?php echo $description ?></textarea></td>
                             </tr>
                         <?php endif;?>
                         <?php if (!is_null($questions)):?>
                             <tr>
                                 <td>Specific questions:</td>
-                                <td><input type = "text" name = "claims" value = "<?php echo $questions ?>"></td>
+                                <td><textarea id="wysiwyg" name="questions" rows="8" cols="48"><?php echo $questions ?></textarea></td>
                             </tr>
                         <?php endif;?>
-                        <?php if (!is_null($sources)):?>
-                            <tr>
-                                <td>Sources, if available:</td>
-                                <td><input type = "text" name = "claims" value = "<?php echo $sources ?>"></td>
-                            </tr>
-                        <?php endif;?>
-                        <tr>
-                            <td>Status</td>
-                            <td><?php echo $statuses ?></td>
-                        </tr>
 
                         <tr>
                             <td>

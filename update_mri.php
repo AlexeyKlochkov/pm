@@ -59,17 +59,14 @@ if (isset($_POST["status"]) && ($_POST["status"]!="")){
     $status=$_POST["status"];
 }
 else $status=null;
-if (isset($_POST["isBm"])){
-    $isBm=$_POST["isBm"];
-}else $isBm=0;
+
 $mriId=$_POST["mri_id"];
 $dbConnection = dbConn();
-$stmt = $dbConnection->prepare("UPDATE MRI_common SET isBM=:isBm,requester_name=:requesterName,requester_mail=:requesterMail,requester_phone=:requesterPhone,
+$stmt = $dbConnection->prepare("UPDATE MRI_common SET requester_name=:requesterName,requester_mail=:requesterMail,requester_phone=:requesterPhone,
                                     state_id=:state,title=:title,due_date=:dueDate,codes=:codes,lob_id=:lob,pic_name=:PIC,delivery_date=:deliveryDate,
                                     spec_claims=:claims,sources=:sources,info=:info,request_description=:research,spec_questions=:questions,status_id=:status
                                      WHERE id=:id");
 $stmt->bindValue(':id', $mriId,PDO::PARAM_INT);
-$stmt->bindValue(':isBm', $isBm,PDO::PARAM_INT);
 $stmt->bindValue(':requesterName', $requesterName,PDO::PARAM_STR);
 $stmt->bindValue(':requesterMail', $requesterMail,PDO::PARAM_STR);
 $stmt->bindValue(':requesterPhone', $requesterPhone,PDO::PARAM_STR);
