@@ -206,7 +206,7 @@ $statuses=getStatuses($statusId);
 <div id = "page">
     <div id = "main">
         <div id = "logo">
-            <img src = "logo.png">
+            <a href="index.php"><img src = "logo.png"></a>
         </div>
 
         <?php
