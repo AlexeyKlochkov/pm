@@ -1203,7 +1203,7 @@ $js_all_states_array .= "];";
 <div id = "page">
     <div id = "main">
         <div id = "logo">
-            <img src = "logo.png">
+            <a href="index.php"><img src = "logo.png"></a>
         </div>
 
         <?php
@@ -1229,11 +1229,11 @@ $js_all_states_array .= "];";
                                     }
                                     ?>
                                 </td>
-                                <td align = "right">
+                                <td align = "center">
                                     <?php
                                     if ($_SESSION["user_level"] >= 20){
                                         ?>
-                                        <a href = "edit_mri.php?id=<?php echo $project_id ?>">edit</a>
+                                        <a href = "edit_mri.php?id=<?php echo $project_id ?>"><button class='btn btn-default'>edit</button></a>
                                     <?php
                                     }
                                     ?>
