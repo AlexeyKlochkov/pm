@@ -327,7 +327,7 @@ include "loggedin.php";
                                 <tr>
                                     <td>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="final_date" name="executive_date" >
+                                            <input class="datepicker" type="text" id="final_date" name="final_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
