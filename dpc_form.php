@@ -30,9 +30,11 @@ include "loggedin.php";
     var jd=0;
     function addRelease(){
         id++;
-        var child="<div class='form-group' id='release" + id  + "'><div class='col-sm-7'><input type='text' class='form-control' id='release' name='release[]' placeholder='Enter forms'></div><div class='col-sm-2'> <input class='datepicker' type='text' id='dpc-date-release' name='date[]'></div><div class='col-sm-1'><span class='glyphicon glyphicon-calendar' id='dpc-date-release-span'></span> </div> <div class='col-sm-2'> <a class='add_release' href='javascript:addRelease();' id='" + id  + "'>add</a> <a class='delete_release' href='javascript:deleteRelease("+id+");' id='" + id  + "'>delete</a> </div> </div>";
+        var child="<div class='form-group' id='release" + id  + "'><div class='col-sm-7'><input type='text' class='form-control' id='release' name='release[]' placeholder='Enter forms'></div><div class='col-sm-2'> <input class='datepicker' type='text' id='dpc-date-release"+id+"' name='date[]'></div><div class='col-sm-1'><span class='glyphicon glyphicon-calendar' id='dpc-date-release-span'></span> </div> <div class='col-sm-2'> <a class='add_release' href='javascript:addRelease();' id='" + id  + "'>add</a> <a class='delete_release' href='javascript:deleteRelease("+id+");' id='" + id  + "'>delete</a> </div> </div>";
         $('#release_parent').append(child);
-        $('.datepicker').datepicker();
+        $('.datepicker').each(function(){
+            $(this).datepicker();
+        });
         return false;
     }
     function deleteRelease(curId){
@@ -41,9 +43,11 @@ include "loggedin.php";
     }
     function addSME(){
         jd++;
-        var child="<div class='form-group' id='sme" + jd  + "'><div class='col-sm-7'><input type='text' class='form-control' id='sme' name='sme[]' placeholder='Enter SME'></div><div class='col-sm-2'> <input class='datepicker' type='text' id='dpc-date-release' name='sme_date[]'></div><div class='col-sm-1'><span class='glyphicon glyphicon-calendar' id='dpc-date-release-span'></span> </div> <div class='col-sm-2'> <a class='add_release' href='javascript:addSME();' id='" + jd  + "'>add</a> <a class='delete_release' href='javascript:deleteSME("+jd+");' id='" + jd  + "'>delete</a> </div> </div>";
+        var child="<div class='form-group' id='sme" + jd  + "'><div class='col-sm-7'><input type='text' class='form-control' id='sme' name='sme[]' placeholder='Enter SME'></div><div class='col-sm-2'> <input class='datepicker' type='text' id='sme-date"+jd+"' name='sme_date[]'></div><div class='col-sm-1'><span class='glyphicon glyphicon-calendar' id='dpc-date-release-span'></span> </div> <div class='col-sm-2'> <a class='add_release' href='javascript:addSME();' id='" + jd  + "'>add</a> <a class='delete_release' href='javascript:deleteSME("+jd+");' id='" + jd  + "'>delete</a> </div> </div>";
         $('#sme_parent').append(child);
-        $('.datepicker').datepicker();
+        $('.datepicker').each(function(){
+            $(this).datepicker();
+        });
         return false;
     }
     function deleteSME(curId){
@@ -51,7 +55,9 @@ include "loggedin.php";
         return false;
     }
     $(document).ready(function() {
-        $('.datepicker').datepicker();
+        $('.datepicker').each(function(){
+            $(this).datepicker();
+        });
         var flag=1;
         $('input:radio').change(function(){
            if ($(this).is(':checked') && $(this).val()=='0'){
@@ -59,11 +65,11 @@ include "loggedin.php";
            }
             else {
                $('input:radio').each(function(){
-                   if ($(this).is(':checked') && $(this).val()=='1') {
+                   if ($(this).is(':checked') && $(this).val()=='0') {
                        flag=0;
                    }
                });
-               if (flag == 0){
+               if (flag == 1){
                    $('#svp_table').hide();
                }
            }
@@ -152,7 +158,7 @@ include "loggedin.php";
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dpc-date" name="executive_date" >
+                                            <input class="datepicker" type="text" id="executive-date" name="executive_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -163,11 +169,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="executive" name="executive">Executive Dean approval
+                                                <input type="checkbox" id="dean" name="dean">Executive Dean approval
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dpc-date" name="dean_date" >
+                                            <input class="datepicker" type="text" id="dean-date" name="dean_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -178,11 +184,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="executive" name="executive">Cabinet approval
+                                                <input type="checkbox" id="cabinet" name="cabinet">Cabinet approval
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dpc-date" name="cabinet_date" >
+                                            <input class="datepicker" type="text" id="cabinet-date" name="cabinet_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -193,11 +199,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="executive" name="executive">SVP approval (production > $1M)
+                                                <input type="checkbox" id="svp" name="svp">SVP approval (production > $1M)
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dpc-date" name="svp_date" >
+                                            <input class="datepicker" type="text" id="svp-date" name="svp_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -225,10 +231,10 @@ include "loggedin.php";
                                     </div>
                                     <div class="form-group" id="sme0">
                                         <div class="col-sm-7">
-                                            <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter forms">
+                                            <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter SME">
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="datepicker" type="text" id="dpc-date-release" name="sme_date[]">
+                                            <input class="datepicker" type="text" id="sme-date" name="sme_date[]">
                                         </div>
                                         <div class="col-sm-1">
                                             <span class="glyphicon glyphicon-calendar" id="dpc-date-release-span" ></span>
@@ -321,7 +327,7 @@ include "loggedin.php";
                                 <tr>
                                     <td>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dpc-date" name="executive_date" >
+                                            <input class="datepicker" type="text" id="final_date" name="executive_date" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -336,6 +342,7 @@ include "loggedin.php";
                                 By signing this document, you certify that all releases/approvals/inputs have been received and assets are clear for release.
                             </p>
                         </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </div>
                 </form>
             </div>
