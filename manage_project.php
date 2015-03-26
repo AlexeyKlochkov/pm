@@ -63,6 +63,7 @@ if (!empty($_GET["fe"])){
 if (!empty($_GET["p"])){
 	$project_id = $_GET["p"];
 }else{
+
 		$location = "Location: loggedout.php";
 		header($location) ;
 }
@@ -457,8 +458,8 @@ if (!empty($arr_project)){
 
 
 }
-$project_table .= "<tr><td class = \"left_header\" valign = \"top\">Assets:</td><td>" . $asset_list  . "</td></tr>";	
-
+$project_table .= "<tr><td class = \"left_header\" valign = \"top\">Assets:</td><td>" . $asset_list  . "</td></tr>";
+$project_table .= "<tr><td class = \"left_header\" valign = \"top\">DPC form:</td><td><a href='dpc_form.php?id=".$project_id."'>Link</a></td></tr>";
 $project_table .= "</table>";
 
 $people_table = "<table width = \"250\" class = \"people\"><tr><td colspan = \"2\" class = \"mini_header\">Project People</td></tr>";

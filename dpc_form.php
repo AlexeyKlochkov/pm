@@ -9,6 +9,149 @@ include "loggedin.php";
  * Date: 3/24/15
  * Time: 1:53 PM
  */
+
+$projectId=$_GET["id"];
+function getDPC($projectId){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT * FROM dpc_common WHERE project_id=:projectId");
+    $handle->bindValue(":projectId",$projectId,PDO::PARAM_INT);
+    $handle->bindColumn("id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("name",$name,PDO::PARAM_STR);
+    $handle->bindColumn("date",$date,PDO::PARAM_STR);
+    $handle->bindColumn("is_sme",$isSME,PDO::PARAM_INT);
+    $handle->bindColumn("is_ald",$isALD,PDO::PARAM_INT);
+    $handle->bindColumn("file",$file,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        if ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result["id"]=$id;
+            $result["name"]=$name;
+            if (!is_null($date))
+                $result["date"]=date("m/d/Y" ,strtotime($date));
+            else $result["date"]=null;
+            $result["is_sme"]=$isSME;
+            $result["is_ald"]=$isALD;
+            $result["file"]=$file;
+        }
+        else $result=false;
+        return ($result);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getReleases($id){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT * FROM dpc_releases WHERE dpc_id=:dpc_id");
+    $handle->bindValue(":dpc_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("text",$text,PDO::PARAM_STR);
+    $handle->bindColumn("date",$date,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        $i=0;
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result[$i]["text"]=$text;
+            if (!is_null($date))
+                $result[$i]["date"]=date("m/d/Y" ,strtotime($date));
+            else $result[$i]["date"]=null;
+            $i++;
+        }
+        if ($i=0){
+            $result=false;
+        }
+        return ($result);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getSME($id){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT * FROM dpc_sme WHERE dpc_id=:dpc_id");
+    $handle->bindValue(":dpc_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("text",$text,PDO::PARAM_STR);
+    $handle->bindColumn("date",$date,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        $i=0;
+        while ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result[$i]["text"]=$text;
+            if (!is_null($date))
+                $result[$i]["date"]=date("m/d/Y" ,strtotime($date));
+            else $result[$i]["date"]=null;
+            $i++;
+        }
+        if ($i=0){
+            $result=false;
+        }
+        return ($result);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getApprovals($id){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT * FROM dpc_approvals WHERE dpc_id=:dpc_id");
+    $handle->bindValue(":dpc_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("executive",$executive,PDO::PARAM_STR);
+    $handle->bindColumn("dean",$dean,PDO::PARAM_STR);
+    $handle->bindColumn("cabinet",$cabinet,PDO::PARAM_STR);
+    $handle->bindColumn("svp",$svp,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        if ($handle->fetch(PDO::FETCH_BOUND)) {
+            if (!is_null($executive))
+                $result["executive"]=date("m/d/Y" ,strtotime($executive));
+            else $result["executive"]=null;
+            if (!is_null($dean))
+             $result["dean"]=date("m/d/Y" ,strtotime($dean));
+            else $result["dean"]=null;
+            if (!is_null($cabinet))
+                $result["cabinet"]=date("m/d/Y" ,strtotime($cabinet));
+            else $result["cabinet"]=null;
+            if (!is_null($svp))
+                $result["svp"]=date("m/d/Y" ,strtotime($svp));
+            else $result["svp"]=null;
+        }
+        else $result=false;
+        return ($result);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function getFile($id){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT f.name,f.date,f.notes FROM dpc_file as f INNER JOIN dpc_common as co ON co.file=f.id WHERE co.id=:dpc_id ");
+    $handle->bindValue(":dpc_id",$id,PDO::PARAM_INT);
+    $handle->bindColumn("notes",$notes,PDO::PARAM_STR);
+    $handle->bindColumn("date",$date,PDO::PARAM_STR);
+    $handle->bindColumn("name",$name,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        if ($handle->fetch(PDO::FETCH_BOUND)) {
+            $result["notes"]=$notes;
+            if (!is_null($date))
+                $result["date"]=date("m/d/Y" ,strtotime($date));
+            else $result["date"]=null;
+            $result["name"]=$name;
+        }
+        else $result=false;
+        return ($result);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+
+}
+$dpc=getDPC($projectId);
+if ($dpc) {
+    $releases = getReleases($dpc["id"]);
+    $sme = getSME($dpc["id"]);
+    $file = getFile($dpc["id"]);
+    $approvals=getApprovals($dpc["id"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -121,21 +264,53 @@ include "loggedin.php";
                                             <label for="release" class="col-sm-7">Please list consent/release forms</label>
                                             <label for="date" class="col-sm-2">Date</label>
                                         </div>
-                                        <div class="form-group" id="release0">
-                                            <div class="col-sm-7">
-                                                <input type="text" class="form-control" id="release" name="release[]" placeholder="Enter forms">
+
+                                        <?php
+                                        if ($dpc && $releases) :
+                                            foreach ($releases as $release):
+                                                $i=0;
+                                                ?>
+                                                <div class="form-group" id="release<?php echo $i;?>">
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" id="release"
+                                                               name="release[]" placeholder="Enter forms" value="<?php echo $release['text']?>">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input class="datepicker" type="text" id="dpc-date-release"
+                                                               name="date[]" value="<?php echo $release['date']?>">
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <span class="glyphicon glyphicon-calendar"
+                                                              id="dpc-date-release-span"></span>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <a class="add_release" href="javascript:addRelease();" id="<?php echo $i;?>">add</a>
+                                                        <a class="delete_release" href="javascript:deleteRelease(<?php echo $i;?>);"
+                                                           id="<?php echo $i;?>">delete</a>
+                                                    </div>
+                                                </div>
+                                            <?php $i++; endforeach;
+                                        else :?>
+                                            <div class="form-group" id="release0">
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="release"
+                                                           name="release[]" placeholder="Enter forms">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input class="datepicker" type="text" id="dpc-date-release"
+                                                           name="date[]">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                        <span class="glyphicon glyphicon-calendar"
+                                                              id="dpc-date-release-span"></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a class="add_release" href="javascript:addRelease();" id="0">add</a>
+                                                    <a class="delete_release" href="javascript:deleteRelease(0);"
+                                                       id="0">delete</a>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <input class="datepicker" type="text" id="dpc-date-release" name="date[]">
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <span class="glyphicon glyphicon-calendar" id="dpc-date-release-span" ></span>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <a class="add_release" href="javascript:addRelease();" id="0">add</a>
-                                                <a class="delete_release" href="javascript:deleteRelease(0);" id="0">delete</a>
-                                            </div>
-                                        </div>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -154,11 +329,11 @@ include "loggedin.php";
                                     <td id="approval_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="executive" name="executive">Executive approval
+                                                <input type="checkbox" id="executive" name="executive" <?php if ($dpc && $approvals && !is_null($approvals["executive"])) echo "checked";?>>Executive approval
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="executive-date" name="executive_date" >
+                                            <input class="datepicker" type="text" id="executive-date" name="executive_date" <?php if ($dpc && $approvals && !is_null($approvals["executive"])) echo "value='".$approvals["executive"]."'";?>>
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -169,11 +344,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="dean" name="dean">Executive Dean approval
+                                                <input type="checkbox" id="dean" name="dean" <?php if ($dpc && $approvals && !is_null($approvals["dean"])) echo "checked";?>>Executive Dean approval
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="dean-date" name="dean_date" >
+                                            <input class="datepicker" type="text" id="dean-date" name="dean_date" <?php if ($dpc && $approvals && !is_null($approvals["dean"])) echo "value='".$approvals["dean"]."'";?>>
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -184,11 +359,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="cabinet" name="cabinet">Cabinet approval
+                                                <input type="checkbox" id="cabinet" name="cabinet" <?php if ($dpc && $approvals && !is_null($approvals["cabinet"])) echo "checked";?>>Cabinet approval
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="cabinet-date" name="cabinet_date" >
+                                            <input class="datepicker" type="text" id="cabinet-date" name="cabinet_date" <?php if ($dpc && $approvals && !is_null($approvals["cabinet"])) echo "value='".$approvals["cabinet"]."'";?>>
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -199,11 +374,11 @@ include "loggedin.php";
                                     <td id="release_parent">
                                         <div class="checkbox col-sm-5">
                                             <label>
-                                                <input type="checkbox" id="svp" name="svp">SVP approval (production > $1M)
+                                                <input type="checkbox" id="svp" name="svp" <?php if ($dpc && $approvals && !is_null($approvals["svp"])) echo "checked";?>>SVP approval (production > $1M)
                                             </label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="svp-date" name="svp_date" >
+                                            <input class="datepicker" type="text" id="svp-date" name="svp_date" <?php if ($dpc && $approvals && !is_null($approvals["svp"])) echo "value='".$approvals["svp"]."'";?>>
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -229,6 +404,28 @@ include "loggedin.php";
                                         <label for="sme" class="col-sm-7">SME Input</label>
                                         <label for="date" class="col-sm-2">Date</label>
                                     </div>
+                                    <?php
+                                    if ($dpc && $sme) :
+                                    foreach ($sme as $value):
+                                    $i=0;
+                                    ?>
+                                    <div class="form-group" id="sme<?php echo $i;?>">
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter SME" value="<?php echo $value["text"]?>">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input class="datepicker" type="text" id="sme-date" name="sme_date[]" value="<?php echo $value["date"]?>">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span class="glyphicon glyphicon-calendar" id="dpc-date-release-span" ></span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a class="add_release" href="javascript:addSME();" id="<?php echo $i;?>">add</a>
+                                            <a class="delete_release" href="javascript:deleteSME(<?php echo $i;?>);" id="<?php echo $i;?>">delete</a>
+                                        </div>
+                                    </div>
+                                        <?php $i++; endforeach;
+                                    else :?>
                                     <div class="form-group" id="sme0">
                                         <div class="col-sm-7">
                                             <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter SME">
@@ -244,6 +441,7 @@ include "loggedin.php";
                                             <a class="delete_release" href="javascript:deleteSME(0);" id="0">delete</a>
                                         </div>
                                     </div>
+                                    <?php endif;?>
                                 </td>
                             </tr>
                             </tbody>
@@ -251,10 +449,10 @@ include "loggedin.php";
                         <div>
                             <div class="radio">
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_yes" name="sme_radio" value="1">Yes
+                                    <input type="radio" id="radio_yes" name="sme_radio" value="1" <?php if($dpc && $dpc["is_sme"]) echo "checked";?>>Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_no" name="sme_radio" value="0">No
+                                    <input type="radio" id="radio_no" name="sme_radio" value="0" <?php if($dpc && !$dpc["is_sme"]) echo "checked";?>>No
                                 </label>
                                 <label>
                                     Verify that SME's feedback was included in marketing material
@@ -262,17 +460,17 @@ include "loggedin.php";
                             </div>
                             <div class="radio">
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_yes" name="ald_radio" value="1">Yes
+                                    <input type="radio" id="radio_yes" name="ald_radio" value="1" <?php if($dpc && $dpc["is_ald"]) echo "checked";?>>Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_no" name="ald_radio" value="0">No
+                                    <input type="radio" id="radio_no" name="ald_radio" value="0" <?php if($dpc && !$dpc["is_ald"]) echo "checked";?>>No
                                 </label>
                                 <label>
                                     Verify that ALD/AEC feedback was included in marketing material
                                 </label>
                             </div>
                         </div>
-                        <table class="table table-condensed table-bordered" id="svp_table" style="display: none;">
+                        <table class="table table-condensed table-bordered" id="svp_table" style="<?php if($dpc && ($dpc["is_ald"] && $dpc["is_sme"]))  echo "display:none;"?>">
                             <thead>
                             <tr class="info">
                                 <th>
@@ -290,13 +488,13 @@ include "loggedin.php";
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-5">
-                                            <a href="#">some file</a>
+                                           <?php if ($dpc && $file) echo "<a href='dpc_files/dpc".$projectId."/".$file['name']."'>".$file['name']."</a>";?>
                                         </div>
                                         <div class="col-sm-3">
-                                            03/25/2014
+                                            <?php if ($dpc && $file) echo $file['date'];?>
                                         </div>
                                         <div class="col-sm-2">
-                                           Lorem ipsum
+                                            <?php if ($dpc && $file) echo $file['notes'];?>
                                         </div>
                                     </div>
                                     <input type="file">
@@ -319,7 +517,7 @@ include "loggedin.php";
                                     <td id="verification_parent">
                                         <div class="form-group">
                                         <div class="col-sm-9">
-                                            <input type="text" id="name" name="name" placeholder="Type name (in place of signature)" style="width:100%">
+                                            <input type="text" id="name" name="name" placeholder="Type name (in place of signature)" style="width:100%" value="<?php if ($dpc) echo $dpc["name"];?>">
                                         </div>
                                         </div>
                                     </td>
@@ -327,7 +525,7 @@ include "loggedin.php";
                                 <tr>
                                     <td>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="final_date" name="final_date" >
+                                            <input class="datepicker" type="text" id="final_date" name="final_date" value="<?php if ($dpc) echo $dpc["date"];?>" >
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
@@ -344,6 +542,7 @@ include "loggedin.php";
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
+                    <input type="text" style="display:none;" name="project_id" value="<?php echo $projectId?>">
                 </form>
             </div>
         </div>
