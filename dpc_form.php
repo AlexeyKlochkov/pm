@@ -147,6 +147,7 @@ function getFile($id){
 
 }
 $dpc=getDPC($projectId);
+$disabled="";
 if ($dpc) {
     $releases = getReleases($dpc["id"]);
     $sme = getSME($dpc["id"]);
