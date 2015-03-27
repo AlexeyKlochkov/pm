@@ -458,8 +458,32 @@ if (!empty($arr_project)){
 
 
 }
+function getDPCstatus($projectId){
+    $link=dbConn();
+    $handle=$link->prepare("SELECT status FROM dpc_common WHERE project_id=:projectId");
+    $handle->bindValue(":projectId",$projectId,PDO::PARAM_INT);
+    $handle->bindColumn("status",$id,PDO::PARAM_INT);
+    try{
+        $handle->execute();
+        if ($handle->fetch(PDO::FETCH_BOUND)) {
+            return ($id);
+        }else
+            return false;
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+
+}
+$status=getDPCstatus($project_id);
+if ($status && $status==1){
+    $stName="Certified";
+}
+else {
+    $stName="Pending";
+}
 $project_table .= "<tr><td class = \"left_header\" valign = \"top\">Assets:</td><td>" . $asset_list  . "</td></tr>";
-$project_table .= "<tr><td class = \"left_header\" valign = \"top\">DPC form:</td><td><a href='dpc_form.php?id=".$project_id."'>Link</a></td></tr>";
+$project_table .= "<tr><td class = \"left_header\" valign = \"top\">DPC form:</td><td><a href='dpc_form.php?id=".$project_id."'>".$stName."</a></td></tr>";
 $project_table .= "</table>";
 
 $people_table = "<table width = \"250\" class = \"people\"><tr><td colspan = \"2\" class = \"mini_header\">Project People</td></tr>";

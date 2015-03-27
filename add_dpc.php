@@ -79,8 +79,8 @@ function addDPCFile($name,$dpcId){
 }
 function addDPC($projectId,$name,$date,$is_sme,$is_ald){
     $link=dbConn();
-    $handle=$link->prepare("INSERT INTO dpc_common (project_id,name,date,is_sme,is_ald) VALUES (:project_id,:name,:date,:is_sme,:is_ald)
-                            ON DUPLICATE KEY UPDATE name=:name1,date=:date1,is_sme=:is_sme1,is_ald=:is_ald1");
+    $handle=$link->prepare("INSERT INTO dpc_common (project_id,name,date,is_sme,is_ald,status) VALUES (:project_id,:name,:date,:is_sme,:is_ald,1)
+                            ON DUPLICATE KEY UPDATE name=:name1,date=:date1,is_sme=:is_sme1,is_ald=:is_ald1,status=1");
     $handle->bindValue(":project_id",$projectId,PDO::PARAM_INT);
     $handle->bindValue(":name",$name,PDO::PARAM_STR);
     $handle->bindValue(":date",$date,PDO::PARAM_STR);
