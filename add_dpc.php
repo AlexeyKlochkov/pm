@@ -176,7 +176,7 @@ function addApprovals($dpc_id,$executive,$dean,$cabinet,$svp){
 }
 function addFileNotes($dpc_id,$fileNotes){
     $link=dbConn();
-    $handle=$link->prepare("UPDATE file SET notes=:notes where dpc_id=:dpc_id");
+    $handle=$link->prepare("UPDATE dpc_file SET notes=:notes where dpc_id=:dpc_id");
     $handle->bindValue(":dpc_id",$dpc_id,PDO::PARAM_INT);
     $handle->bindValue(":notes",$fileNotes,PDO::PARAM_STR);
     try{
