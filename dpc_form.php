@@ -281,7 +281,7 @@ if ($dpc) {
                                                 <div class="form-group" id="release<?php echo $i;?>">
                                                     <div class="col-sm-7">
                                                         <input type="text" class="form-control" id="release"
-                                                               name="release[]" placeholder="Enter forms" value="<?php echo $release['text']?>" <?php echo $disabled?>>
+                                                               name="release[]" placeholder="Enter forms" value="<?php echo $release['text']?>" <?php echo $disabled?> >
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <input class="datepicker" type="text" id="dpc-date-release"
@@ -303,11 +303,11 @@ if ($dpc) {
                                             <div class="form-group" id="release0">
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="release"
-                                                           name="release[]" placeholder="Enter forms" <?php echo $disabled?>>
+                                                           name="release[]" placeholder="Enter forms" <?php echo $disabled?> required="required">
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <input class="datepicker" type="text" id="dpc-date-release"
-                                                           name="date[]" <?php echo $disabled?>>
+                                                           name="date[]" <?php echo $disabled?> required="required">
                                                 </div>
                                                 <div class="col-sm-1">
                                                         <span class="glyphicon glyphicon-calendar"
@@ -439,10 +439,10 @@ if ($dpc) {
                                     else :?>
                                     <div class="form-group" id="sme0">
                                         <div class="col-sm-7">
-                                            <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter SME" <?php echo $disabled?>>
+                                            <input type="text" class="form-control" id="sme" name="sme[]" placeholder="Enter SME" <?php echo $disabled?> required="required">
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="datepicker" type="text" id="sme-date" name="sme_date[]" <?php echo $disabled?>>
+                                            <input class="datepicker" type="text" id="sme-date" name="sme_date[]" <?php echo $disabled?> required="required">
                                         </div>
                                         <div class="col-sm-1">
                                             <span class="glyphicon glyphicon-calendar" id="dpc-date-release-span" ></span>
@@ -462,10 +462,10 @@ if ($dpc) {
                         <div>
                             <div class="radio">
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_yes" name="sme_radio" value="1" <?php if($dpc && $dpc["is_sme"]) echo "checked";?> <?php echo $disabled?>>Yes
+                                    <input type="radio" id="radio_yes" name="sme_radio" value="1" <?php if($dpc && $dpc["is_sme"]) echo "checked";?> <?php echo $disabled?> required="required">Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_no" name="sme_radio" value="0" <?php if($dpc && !$dpc["is_sme"]) echo "checked";?> <?php echo $disabled?>>No
+                                    <input type="radio" id="radio_no" name="sme_radio" value="0" <?php if($dpc && !$dpc["is_sme"]) echo "checked";?> <?php echo $disabled?> required="required">No
                                 </label>
                                 <label>
                                     Verify that SME's feedback was included in marketing material
@@ -473,10 +473,10 @@ if ($dpc) {
                             </div>
                             <div class="radio">
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_yes" name="ald_radio" value="1" <?php if($dpc && $dpc["is_ald"]) echo "checked";?> <?php echo $disabled?>>Yes
+                                    <input type="radio" id="radio_yes" name="ald_radio" value="1" <?php if($dpc && $dpc["is_ald"]) echo "checked";?> <?php echo $disabled?> required="required">Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" id="radio_no" name="ald_radio" value="0" <?php if($dpc && !$dpc["is_ald"]) echo "checked";?> <?php echo $disabled?>>No
+                                    <input type="radio" id="radio_no" name="ald_radio" value="0" <?php if($dpc && !$dpc["is_ald"]) echo "checked";?> <?php echo $disabled?> required="required">No
                                 </label>
                                 <label>
                                     Verify that ALD/AEC feedback was included in marketing material
@@ -530,7 +530,7 @@ if ($dpc) {
                                     <td id="verification_parent">
                                         <div class="form-group">
                                         <div class="col-sm-9">
-                                            <input type="text" id="name" name="name" placeholder="Type name (in place of signature)" style="width:100%" value="<?php if ($dpc) echo $dpc["name"];?>" <?php echo $disabled?>>
+                                            <input type="text" id="name" name="name" placeholder="Type name (in place of signature)" style="width:100%" value="<?php if ($dpc) echo $dpc["name"];?>" <?php echo $disabled?> required="required">
                                         </div>
                                         </div>
                                     </td>
@@ -538,7 +538,7 @@ if ($dpc) {
                                 <tr>
                                     <td>
                                         <div class="col-sm-4">
-                                            <input class="datepicker" type="text" id="final_date" name="final_date" value="<?php if ($dpc) echo $dpc["date"];?>" <?php echo $disabled?>>
+                                            <input class="datepicker" type="text" id="final_date" name="final_date" value="<?php if ($dpc) echo $dpc["date"];?>" <?php echo $disabled?> required="required">
                                         </div>
                                         <div class="col-sm-2">
                                             <span class="glyphicon glyphicon-calendar"  id="dpc-date-span"></span>
