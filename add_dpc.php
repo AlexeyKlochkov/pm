@@ -55,22 +55,38 @@ else $isALD=0;
 $name=$_POST["name"];
 $finalDate=date('Y-m-d', strtotime($_POST["final_date"]));
 $project_id=$_POST["project_id"];
-$file=1;
-function addDPC($projectId,$name,$date,$is_sme,$is_ald,$file){
+$data = array();
+
+
+function addDPCFile($name,$dpcId){
     $link=dbConn();
-    $handle=$link->prepare("INSERT INTO dpc_common (project_id,name,date,is_sme,is_ald,file) VALUES (:project_id,:name,:date,:is_sme,:is_ald,:file)
-                            ON DUPLICATE KEY UPDATE name=:name1,date=:date1,is_sme=:is_sme1,is_ald=:is_ald1,file=:file1");
+    $handle=$link->prepare("INSERT INTO dpc_file (name,dpc_id) VALUES (:name,:dpc_id)
+                            ON DUPLICATE KEY UPDATE name=:name1");
+    $handle->bindValue(":dpc_id",$dpcId,PDO::PARAM_INT);
+    $handle->bindValue(":name",$name,PDO::PARAM_STR);
+    $handle->bindValue(":name1",$name,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        $fileId = $link->lastInsertId();
+        return ($fileId);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
+function addDPC($projectId,$name,$date,$is_sme,$is_ald){
+    $link=dbConn();
+    $handle=$link->prepare("INSERT INTO dpc_common (project_id,name,date,is_sme,is_ald) VALUES (:project_id,:name,:date,:is_sme,:is_ald)
+                            ON DUPLICATE KEY UPDATE name=:name1,date=:date1,is_sme=:is_sme1,is_ald=:is_ald1");
     $handle->bindValue(":project_id",$projectId,PDO::PARAM_INT);
     $handle->bindValue(":name",$name,PDO::PARAM_STR);
     $handle->bindValue(":date",$date,PDO::PARAM_STR);
     $handle->bindValue(":is_sme",$is_sme,PDO::PARAM_INT);
     $handle->bindValue(":is_ald",$is_ald,PDO::PARAM_INT);
-    $handle->bindValue(":file",$file,PDO::PARAM_INT);
     $handle->bindValue(":name1",$name,PDO::PARAM_STR);
     $handle->bindValue(":date1",$date,PDO::PARAM_STR);
     $handle->bindValue(":is_sme1",$is_sme,PDO::PARAM_INT);
     $handle->bindValue(":is_ald1",$is_ald,PDO::PARAM_INT);
-    $handle->bindValue(":file1",$file,PDO::PARAM_INT);
     try{
         $handle->execute();
         $dpcId = $link->lastInsertId();
@@ -156,8 +172,30 @@ function addApprovals($dpc_id,$executive,$dean,$cabinet,$svp){
     }
 }
 
-addDPC($project_id,$name,$finalDate,$isSME,$isALD,$file);
+addDPC($project_id,$name,$finalDate,$isSME,$isALD);
 $dpcId=getDPCId($project_id);
+$error = false;
+    $files = array();
+var_dump($_FILES);
+    $uploaddir = '/dpc_files/'.$project_id."/";
+if (!mkdir($uploaddir, 0777, true)) {
+    die('Failed to create folders...');
+}
+    foreach($_FILES as $file)
+    {
+        if(move_uploaded_file($file['tmp_name'], $uploaddir .basename($file['name'])))
+        {
+            $files[] = $uploaddir .$file['name'];
+            addDPCFile($file['name'],$dpcId);
+        }
+        else
+        {
+            $error = true;
+        }
+    }
+    $data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
+
+var_dump ($data);
 foreach ($release as $key=>$value){
     addRelease(($dpcId*10+$key),$dpcId,$value["name"],$value["date"]);
 }
@@ -166,4 +204,4 @@ foreach ($sme as $key=>$value){
 }
 addApprovals($dpcId,$executive,$dean,$cabinet,$svp);
 $location="Location: manage_project.php?p=".$project_id;
-header($location);
+//header($location);

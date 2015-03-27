@@ -123,7 +123,7 @@ function getApprovals($id){
 }
 function getFile($id){
     $link=dbConn();
-    $handle=$link->prepare("SELECT f.name,f.date,f.notes FROM dpc_file as f INNER JOIN dpc_common as co ON co.file=f.id WHERE co.id=:dpc_id ");
+    $handle=$link->prepare("SELECT f.name,f.date,f.notes FROM dpc_file as f WHERE f.dpc_id=:dpc_id ");
     $handle->bindValue(":dpc_id",$id,PDO::PARAM_INT);
     $handle->bindColumn("notes",$notes,PDO::PARAM_STR);
     $handle->bindColumn("date",$date,PDO::PARAM_STR);
@@ -232,10 +232,10 @@ if ($dpc) {
         <!--container div tag-->
         <div id="container">
             <div id="mainContent"  > <!--mainContent div tag-->
-                <form id="dpc_from" method="post" action="add_dpc.php">
+                <form id="dpc_from" method="post" action="add_dpc.php" enctype="multipart/form-data">
                     <h2 align="center">Digital Primary Control Form</h2>
                     <div class="dpc_form_text">
-                        <p style="margin-top:50px;" id="text">
+                        <p style="margin-top:30px;" id="text">
                             Primary control reviewers should reference this document throughout the life cycle of a project to track key requirement that
                             must be completed before approving marketing material for publishing.Please consult UOPX Standard Operating Procedure for full
                             process and requirements.Materials will not be released until the project managers (PM) have received this signed and dated Primary
@@ -494,10 +494,10 @@ if ($dpc) {
                                             <?php if ($dpc && $file) echo $file['date'];?>
                                         </div>
                                         <div class="col-sm-2">
-                                            <?php if ($dpc && $file) echo $file['notes'];?>
+                                            <input type="text" name="file_notes" value="<?php if ($dpc && $file) echo $file['notes'];?>">
                                         </div>
                                     </div>
-                                    <input type="file">
+                                    <input type="file" name="file" id="file">
                                 </td>
                             </tr>
                             </tbody>
