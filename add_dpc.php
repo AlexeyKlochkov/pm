@@ -200,4 +200,4 @@ foreach ($sme as $key=>$value){
 }
 addApprovals($dpcId,$executive,$dean,$cabinet,$svp);
 $location="Location: manage_project.php?p=".$project_id;
-//header($location);
+header($location);

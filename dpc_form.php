@@ -488,7 +488,7 @@ if ($dpc) {
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-5">
-                                           <?php if ($dpc && $file) echo "<a href='dpc_files/dpc".$projectId."/".$file['name']."'>".$file['name']."</a>";?>
+                                           <?php if ($dpc && $file) echo "<a href='dpc_files/".$projectId."/".$file['name']."'>".$file['name']."</a>";?>
                                         </div>
                                         <div class="col-sm-3">
                                             <?php if ($dpc && $file) echo $file['date'];?>
