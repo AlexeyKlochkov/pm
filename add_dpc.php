@@ -177,8 +177,8 @@ $dpcId=getDPCId($project_id);
 $error = false;
     $files = array();
 var_dump($_FILES);
-    $uploaddir = '/dpc_files/'.$project_id."/";
-if (!mkdir($uploaddir, 0777, true)) {
+    $uploaddir = 'dpc_files/'.$project_id."/";
+if (!mkdir($uploaddir)) {
     die('Failed to create folders...');
 }
     foreach($_FILES as $file)
