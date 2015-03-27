@@ -52,6 +52,9 @@ if (isset($_POST["ald_radio"]) && ($_POST["ald_radio"]=="1")){
     $isALD=1;
 }
 else $isALD=0;
+if (isset($_POST["file_notes"])){
+    $fileNotes=$_POST["file_notes"];
+}
 $name=$_POST["name"];
 $finalDate=date('Y-m-d', strtotime($_POST["final_date"]));
 $project_id=$_POST["project_id"];
@@ -171,6 +174,20 @@ function addApprovals($dpc_id,$executive,$dean,$cabinet,$svp){
         return false;
     }
 }
+function addFileNotes($dpc_id,$fileNotes){
+    $link=dbConn();
+    $handle=$link->prepare("UPDATE file SET notes=:notes where dpc_id=:dpc_id");
+    $handle->bindValue(":dpc_id",$dpc_id,PDO::PARAM_INT);
+    $handle->bindValue(":notes",$fileNotes,PDO::PARAM_STR);
+    try{
+        $handle->execute();
+        $dpcId = $link->lastInsertId();
+        return ($dpcId);
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        return false;
+    }
+}
 
 addDPC($project_id,$name,$finalDate,$isSME,$isALD);
 $dpcId=getDPCId($project_id);
@@ -192,6 +209,9 @@ if (!file_exists($uploaddir)) {
             $error = true;
         }
     }
+if (isset($fileNotes)){
+    addFileNotes($dpcId,$fileNotes);
+}
 foreach ($release as $key=>$value){
     addRelease(($dpcId*10+$key),$dpcId,$value["name"],$value["date"]);
 }
