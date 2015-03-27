@@ -176,10 +176,9 @@ addDPC($project_id,$name,$finalDate,$isSME,$isALD);
 $dpcId=getDPCId($project_id);
 $error = false;
     $files = array();
-var_dump($_FILES);
     $uploaddir = 'dpc_files/'.$project_id."/";
-if (!mkdir($uploaddir)) {
-    die('Failed to create folders...');
+if (!file_exists($uploaddir)) {
+    mkdir($uploaddir);
 }
     foreach($_FILES as $file)
     {
@@ -193,9 +192,6 @@ if (!mkdir($uploaddir)) {
             $error = true;
         }
     }
-    $data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
-
-var_dump ($data);
 foreach ($release as $key=>$value){
     addRelease(($dpcId*10+$key),$dpcId,$value["name"],$value["date"]);
 }
