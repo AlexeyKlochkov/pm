@@ -153,7 +153,7 @@ if ($dpc) {
     $sme = getSME($dpc["id"]);
     $file = getFile($dpc["id"]);
     $approvals=getApprovals($dpc["id"]);
-    if ($dpc["status"]==1){
+    if (($dpc["status"]==1) && ($_SESSION["user_level"]<20)){
         $disabled="disabled";
     }
     else {

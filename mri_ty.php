@@ -11,7 +11,7 @@ if (!empty($_GET["e"])){
         $message = "An error occurred.";
     }
     if ($error_num == 2){
-        $message = "Your Marketing Research intake has been received!";
+        $message = "Your Marketing Research Intake has been received!";
     }
 }
 ?>
