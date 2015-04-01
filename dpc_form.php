@@ -57,7 +57,7 @@ function getReleases($id){
             else $result[$i]["date"]=null;
             $i++;
         }
-        if ($i=0){
+        if ($i==0){
             $result=false;
         }
         return ($result);
