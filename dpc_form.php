@@ -144,10 +144,11 @@ function getFile($id){
         echo 'Caught exception: ',  $e->getMessage(), "\n";
         return false;
     }
-
 }
+
 $dpc=getDPC($projectId);
 $disabled="";
+$submit="Submit";
 if ($dpc) {
     $releases = getReleases($dpc["id"]);
     $sme = getSME($dpc["id"]);
@@ -158,6 +159,7 @@ if ($dpc) {
     }
     else {
         $disabled="";
+        $submit="Update";
     }
 }
 ?>
@@ -554,7 +556,7 @@ if ($dpc) {
                             </p>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default" <?php echo $disabled?>>Submit</button>
+                            <button type="submit" class="btn btn-default" <?php echo $disabled?>><?php echo $submit?></button>
                             <a href="manage_project.php?p=<?php echo $projectId;?>"><button class="btn btn-primary">Back to project</button></a>
                         </div>
                     </div>
