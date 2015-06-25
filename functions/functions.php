@@ -26,7 +26,7 @@ function get_campaign_select($company_id, $selected_id){
 
 function get_campaign_code_select($company_id, $selected_id){
 
-	$campaign_select = "<select class = \"required\" name = \"campaign_id\" id = \"campaign_select\" required='required'><option value = \"\">Please select</option>\n";
+	$campaign_select = "<select class = \"required\" name = \"campaign_id\" id = \"campaign_select\"><option value = \"\">Please select</option>\n";
 	$arr_campaigns = get_campaigns($company_id, 1);
 
 	if (!empty($arr_campaigns)){
@@ -116,7 +116,7 @@ function get_business_unit_select($company_id, $selected_id){
 
 
 function get_product_select($company_id, $selected_id){
-	$product_select = "<select class = \"required\" name = \"product_id\" required='required'><option value = \"\">Please select</option>\n";
+	$product_select = "<select class = \"required\" name = \"product_id\"><option value = \"\">Please select</option>\n";
 	$arr_products = get_products($company_id, 1);
 	if (!empty($arr_products)){
 		foreach ($arr_products as $product_row){
@@ -154,7 +154,7 @@ function get_audience_select($company_id, $selected_id){
 
 
 function get_project_manager_select($company_id, $selected_id){
-	$projet_manager_select = "<select class = \"required\" name = \"project_manager_id\" required='required'><option value = \"\">Please select</option>\n";
+	$projet_manager_select = "<select class = \"required\" name = \"project_manager_id\"><option value = \"\">Please select</option>\n";
 	$arr_pm = get_project_managers($company_id, 1);
 	if (!empty($arr_pm)){
 		foreach ($arr_pm as $pm_row){
